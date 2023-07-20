@@ -18,14 +18,17 @@ module.exports = {
         defaultLightHeaders: "#393E46",
         headerSearchBar: "rgba(0, 0, 0, 0.00)",
         defaultDarkHeaders: "#222831",
+        threadCard: "rgba(0, 0, 0, 0.15)",
+        active: "#00C2FF",
       },
       width: {
         defaultHeaderMobile: "360px",
       },
       height: {
         defaultHeaderMobile: "80px",
+        defaultMobileHeight: "640px",
       },
     },
   },
-  plugins: [],
+  plugins: [require("@tailwindcss/line-clamp")],
 };

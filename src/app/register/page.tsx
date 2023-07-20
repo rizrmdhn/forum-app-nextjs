@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function registerPage() {
+export default function RegisterPage() {
   return (
     <div className="container register-page">
       <div className="flex flex-col justify-center items-center w-full h-screen gap-8">

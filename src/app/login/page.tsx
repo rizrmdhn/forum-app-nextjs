@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function loginPage() {
+export default function LoginPage() {
   return (
     <div className="container login-page">
       <div className="flex flex-col justify-center items-center w-full h-screen gap-8">

@@ -3,7 +3,7 @@ import { MdFilterList, MdSearch } from "react-icons/md";
 
 export default function HeaderThreadPage() {
   return (
-    <div className="container header-thread-page flex flex-row justify-between items-center w-defaultHeaderMobile h-20 bg-defaultLightHeaders px-4">
+    <div className="container header-thread-page flex flex-row justify-between items-center w-screen h-20 bg-defaultLightHeaders px-4">
       <div className="icon cursor-pointer">
         <MdFilterList className="w-6 h-6 text-white"/>
       </div>
