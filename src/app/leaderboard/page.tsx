@@ -24,7 +24,7 @@ export default function LeaderboardPage() {
       {leaderboard.map((leaderboard: any) => (
         <div
           className='leaderboard-page__user__lists flex flex-row items-center justify-between gap-32 py-3 mx-12'
-          key={leaderboard.id}
+          key={leaderboard.user.id}
         >
           <div className='leaderboard-page__user__lists__user_container flex flex-row items-center gap-3'>
             <div className='user-avatar-container'>

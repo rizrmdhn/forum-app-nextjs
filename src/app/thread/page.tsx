@@ -19,7 +19,7 @@ export default function ThreadPage() {
   return (
     <>
       <HeaderThreadPage />
-      <div className='flex h-defaultMobileHeight flex-col items-center gap-8 overflow-y-auto px-8 py-12'>
+      <div className='flex h-defaultMobileHeight flex-col items-center gap-8 overflow-y-auto px-8 py-12 bg-light'>
         {thread.map((thread: any) => (
           <MobileThreadCard key={thread.id} {...thread} />
         ))}
