@@ -1,21 +1,33 @@
 'use client'
 import HeaderThreadPage from '@/components/HeaderThreadPage'
 import MobileThreadCard from '@/components/MobileThreadCard'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { useEffect } from 'react'
 import { asyncPopulateUsersAndThreads } from '@/states/shared/action'
 import useSelect from '@/hooks/useSelect'
 import MobileThreadCardLoading from '@/loadingComponent/MobileThreadCardLoading'
+import { asyncSetIsPreload } from '@/states/isPreload/action'
 
 export default function ThreadPage() {
   const thread = useSelect('thread')
   const isLoading = useSelect('isLoading')
+  const isPreload = useSelect('isPreload')
 
+  
   const dispatch = useDispatch()
 
   useEffect(() => {
+    dispatch(asyncSetIsPreload())
     dispatch(asyncPopulateUsersAndThreads())
   }, [dispatch])
+
+  if (isPreload) {
+    return (
+      <div className='flex h-screen items-center justify-center'>
+        <div className='h-32 w-32 animate-spin rounded-full border-b-2 border-t-2 border-gray-900'></div>
+      </div>
+    )
+  }
 
   return (
     <>

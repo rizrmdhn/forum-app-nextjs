@@ -1,6 +1,7 @@
 import { AnyAction } from "redux";
 import { hideLoading, showLoading } from 'react-redux-loading-bar';
 import api from "../../utils/api";
+import myToast from "@/components/myToast";
 
 enum ActionType {
     RECEIVE_AUTH_USER = 'RECEIVE_AUTH_USER',
@@ -44,26 +45,35 @@ function unsetAuthUserActionCreator(): UnsetAuthUserAction {
     };
 }
 
-function asyncSetAuthUser({email, password}: {
+function asyncSetAuthUser({email, password, router}: {
     email: string,
     password: string,
-}) {
+    router: any
+}): any {
     return async (dispatch: any) => {
         dispatch(showLoading());
         try {
-            const token = await api.login({email, password});
-            api.putAccessToken(token);
+            await api.login({email, password});
             const authUser = await api.getOwnProfile();
 
             dispatch(receiveAuthUserActionCreator(authUser));
+
+            router.push('/thread');
+            myToast.fire({
+                icon: 'success',
+                title: 'Login success'
+            });
         } catch (error: any) {
-            throw new Error(error);
+            myToast.fire({
+                icon: 'error',
+                title: error.message
+            });
         }
         dispatch(hideLoading());
     }
 }
 
-function asyncUnsetAuthUser() {
+function asyncUnsetAuthUser(): any {
     return async (dispatch: any) => {
         dispatch(showLoading());
         try {

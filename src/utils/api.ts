@@ -8,12 +8,12 @@ const api = (() => {
             ...options,
             headers: {
                 ...options.headers,
-                Authorization: `Bearer ${localStorage.getItem('token')}`
+                Authorization: `Bearer ${getAccessToken()}`
             }
         })
     }
 
-    function putAccessToken(token: string) {
+    function putAccessToken(token: any) {
         localStorage.setItem('accessToken', token)
     }
 
@@ -26,56 +26,74 @@ const api = (() => {
         email: string,
         password: string
     }) {
-        const response = await axios.post(`${baseUrl}/register`, {
+        await axios.post(`${baseUrl}/register`, {
             name,
             email,
             password
+        }).catch((error) => {
+            if (error.response) {
+                
+                const {message} = error.response.data
+
+                throw new Error(message)
+            }
+        }).then((response) => {
+            const {data}:any = response
+
+            const {status, message} = data
+
+            return {
+                status,
+                message
+            }
         })
-
-        const {status, message} = response.data
-
-        if (status !== 'success') {
-            throw new Error(message)
-        }
-
-        const {data: {user}} = response.data
-
-        return user
+            
     }
 
     async function login({email, password}: {
         email: string,
         password: string}) {
-        const response = await axios.post(`${baseUrl}/login`, {
+         await axios.post(`${baseUrl}/login`, {
             email,
             password
-        })
+        }).catch((error) => {
+            if (error.response) {
+                
+                const {message} = error.response.data
 
-        const {status, message} = response.data
+               throw new Error(message)
+            }
+        }).then((response) => {
 
-        if (status !== 'success') {
-            throw new Error(message)
+            const {data}:any = response
+
+            const {token} = data.data
+
+           
+            return putAccessToken(token)
+         })
         }
 
-        const {data: {token}} = response.data
-
-        return token
-        }
-
-        async function getOwnProfile() {
-            const response = await _fetchWithAuth(`${baseUrl}/profile`, {
+        async function getOwnProfile(): Promise<any>{
+            let users;
+        await _fetchWithAuth(`${baseUrl}/users/me`, {
                 method: 'GET'
+            }).catch((error) => {
+                if (error.response) {
+                    
+                    const {message} = error.response.data
+
+                    throw new Error(message)
+                }
+            }).then((response) => {
+                const {data}:any = response
+
+                const {data: {user}} = data
+
+                users = user
             })
 
-            const {status, message} = response.data
-
-            if (status !== 'success') {
-                throw new Error(message)
-            }
-
-            const {data: {user}} = response.data
-
-            return user
+            return users
         }
 
         async function getAllUsers() {

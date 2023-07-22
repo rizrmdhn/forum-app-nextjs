@@ -8,6 +8,7 @@ function useSelect(state: any) {
     const threadDetail = useSelector<any, any>((state: any) => state.threadDetail)
     const leaderboard = useSelector<any, any>((state: any) => state.leaderboard)
     const isLoading = useSelector<any, any>((state: any) => state.isLoading)
+    const isPreload = useSelector<any, any>((state: any) => state.isPreload)
 
     switch (state) {
         case 'showMenu':
@@ -24,6 +25,8 @@ function useSelect(state: any) {
             return leaderboard
         case 'isLoading':
             return isLoading
+        case 'isPreload':
+            return isPreload
     }
     
 }

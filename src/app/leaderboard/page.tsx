@@ -6,16 +6,28 @@ import Image from 'next/image'
 import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import Skeleton from 'react-loading-skeleton'
+import { asyncSetIsPreload } from '@/states/isPreload/action'
 
 export default function LeaderboardPage() {
   const isLoading = useSelect('isLoading')
   const leaderboard = useSelect('leaderboard')
+  const isPreload = useSelect('isPreload')
 
   const dispatch = useDispatch()
 
   useEffect(() => {
+    dispatch(asyncSetIsPreload())
     dispatch(asyncGetLeaderboard())
   }, [dispatch])
+
+
+  if (isPreload) {
+    return (
+      <div className='flex h-defaultMobileHeight items-center justify-center'>
+        <div className='h-32 w-32 animate-spin rounded-full border-b-2 border-t-2 border-gray-900'></div>
+      </div>
+    )
+  }
 
   return (
     <div className='leaderboard-page h-defaultMobileHeight bg-light'>

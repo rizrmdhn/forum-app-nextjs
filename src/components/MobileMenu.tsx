@@ -3,6 +3,7 @@ import useSelect from '@/hooks/useSelect'
 import Link from 'next/link'
 import { useDispatch } from 'react-redux'
 import { unsetShowMenuActionCreator } from '@/states/setShowMenu/action'
+import { asyncUnsetAuthUser } from '@/states/authUser/action'
 
 export default function MobileMenu() {
   const authUser = useSelect('authUser')
@@ -16,10 +17,15 @@ export default function MobileMenu() {
     }, 500)
   }
 
+  const onLogout = () => {
+    dispatch(asyncUnsetAuthUser())
+    closeMenu()
+  }
+
   const isUserLoogedIn = () => {
     if (authUser) {
       return (
-        <button className='mobile-menu-item__logout group flex w-32 items-center gap-3 px-4 py-1 hover:cursor-pointer' onClick={closeMenu}>
+        <button className='mobile-menu-item__logout group flex w-32 items-center gap-3 px-4 py-1 hover:cursor-pointer' onClick={onLogout}>
           <MdLogout className='h-6 w-6 text-white group-hover:text-active' />
           <p className='font-bold text-white group-hover:text-active'>Keluar</p>
         </button>

@@ -1,12 +1,11 @@
 'use client'
 
 import BottomNavigation from '@/components/BottomNavigation'
-import { useSelector } from 'react-redux'
-import { State as SetShowMenu } from '@/states/setShowMenu/reducer'
 import MobileMenu from '@/components/MobileMenu'
+import useSelect from '@/hooks/useSelect'
 
 export default function ThreadPageLayout({ children }: { children: React.ReactNode }) {
-  const showMenu = useSelector<any, any>((state: any) => state.showMenu)
+  const showMenu = useSelect('showMenu')
 
   return (
     <>

@@ -1,6 +1,7 @@
 import { AnyAction } from "redux";
 import { hideLoading, showLoading } from 'react-redux-loading-bar';
 import api from '../../utils/api';
+import myToast from "@/components/myToast";
 
 enum ActionType {
     RECEIVE_USER = 'RECEIVE_USER',
@@ -31,18 +32,27 @@ function receiveUserActionCreator(users: IUSER[]): ReceiveUserAction {
     };
 }
 
-function asyncRegisterUser({name, email, password}:
+function asyncRegisterUser({name, email, password, router}:
     {
         name: string,
         email: string,
         password: string,
-    }) {
+        router: any
+    }): any {
         return async (dispatch: any) => {
             dispatch(showLoading());
             try {
                 await api.register({name, email, password});
+                myToast.fire({
+                    icon: 'success',
+                    title: 'Register success'
+                })
+                router.push('/login');
             } catch (error: any) {
-                throw new Error(error);
+                myToast.fire({
+                    icon: 'error',
+                    title: error.message
+                })
             }
             dispatch(hideLoading());
         }
