@@ -1,6 +1,7 @@
 import { AnyAction } from "@reduxjs/toolkit";
 import { hideLoading, showLoading } from 'react-redux-loading-bar';
 import api from '../../utils/api';
+import { setIsLoadingActionCreator, unsetIsLoadingActionCreator } from "../isLoading/action";
 
 enum ActionType {
     RECEIVE_LEADERBOARD = 'RECEIVE_LEADERBOARD',
@@ -37,6 +38,7 @@ function receiveLeaderboardActionCreator(leaderboard: ILEADERBOARD[]): ReceiveLe
 function asyncGetLeaderboard(): any {
     return async (dispatch: any) => {
         dispatch(showLoading());
+        dispatch(setIsLoadingActionCreator());
         try {
             const leaderboard = await api.getLeaderboards();
             dispatch(receiveLeaderboardActionCreator(leaderboard));
@@ -44,6 +46,9 @@ function asyncGetLeaderboard(): any {
             throw new Error(error);
         }
         dispatch(hideLoading());
+        setTimeout(() => {
+            dispatch(unsetIsLoadingActionCreator())
+        }, 1000);
     }
 }
 

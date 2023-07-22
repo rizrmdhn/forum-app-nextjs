@@ -19,7 +19,7 @@ export default function DetailThread() {
 
   useEffect(() => {
     dispatch(asyncGetThreadsDetail(threadId))
-  }, [dispatch])
+  }, [dispatch, threadId])
 
   return (
     <div className='detail-thread-page flex h-defaultMobileHeight w-screen flex-col items-start gap-3 bg-light px-7 py-3'>
@@ -32,7 +32,7 @@ export default function DetailThread() {
           </div>
         )}
       </div>
-      <div className='detail-thread__content h-fit'>
+      <div className='detail-thread__content overflow-y-scroll'>
         <p className='text-sm font-normal text-black'>
           {isLoading ? (
             <Skeleton width={200} height={25} count={3} baseColor='#393E46' />
@@ -56,9 +56,7 @@ export default function DetailThread() {
             </button>
             <button className='detail-thread__action-button__share flex w-fit items-center gap-2 rounded bg-light p-1'>
               <MdOutlineModeComment className='h-5 w-5 text-black' />
-              <p className='text-sm font-normal text-black'>{
-                threadDetail?.comments.length
-              }</p>
+              <p className='text-sm font-normal text-black'>{threadDetail?.comments.length}</p>
             </button>
           </>
         )}
@@ -67,13 +65,15 @@ export default function DetailThread() {
         {isLoading ? (
           <Skeleton width={100} height={20} baseColor='#393E46' />
         ) : (
-          <p className='text-sm font-normal text-black'>116 Hari yang lalu</p>
+          <p className='text-sm font-normal text-black'>
+            {moment().diff(threadDetail?.createdAt, 'days') + ' hari yang lalu'}
+          </p>
         )}
         {isLoading ? (
           <Skeleton width={100} height={20} baseColor='#393E46' />
         ) : (
           <p className='text-sm font-normal text-black'>
-            Dibuat Oleh <span className='font-bold'>AzE</span>
+            Dibuat Oleh <span className='font-bold'>{threadDetail?.owner.name}</span>
           </p>
         )}
       </div>
