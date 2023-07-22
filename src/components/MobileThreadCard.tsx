@@ -1,57 +1,76 @@
-"use client"
+'use client'
 
-import Tags from "./Tags";
-import { useRouter } from "next/navigation";
-import {
-  MdThumbUp,
-  MdThumbUpOffAlt,
-  MdThumbDown,
-  MdOutlineThumbDownOffAlt,
-  MdOutlineShare,
-} from "react-icons/md";
+import moment from 'moment'
+import Tags from './Tags'
+import { useRouter } from 'next/navigation'
+import { MdThumbUp, MdThumbUpOffAlt, MdThumbDown, MdOutlineThumbDownOffAlt, MdOutlineModeComment } from 'react-icons/md'
+import { useSelector } from 'react-redux'
+import useSelect from '@/hooks/useSelect'
 
-export default function MobileThreadCard() {
-    const router = useRouter();
+type MobileThreadCardProps = {
+  id: string
+  title: string
+  body: string
+  category: string
+  createdAt: string
+  ownerId: string
+  upVotesBy: string[]
+  downVotesBy: string[]
+  totalComments: number
+}
 
+export default function MobileThreadCard({
+  id,
+  title,
+  body,
+  category,
+  createdAt,
+  ownerId,
+  upVotesBy,
+  downVotesBy,
+  totalComments,
+}: MobileThreadCardProps) {
+  const user = useSelect('user')
+
+  const router = useRouter()
+
+  const creatorName = user.find((user: any) => user.id === ownerId).name
   return (
-    <div className="mobile-thread-card flex flex-col items-start gap-2 px-7 py-3 bg-threadCard rounded-xl">
-      <div className="mobile-thread-card__tags">
-        <Tags tags="react" />
+    <div className='mobile-thread-card flex flex-col items-start gap-2 rounded-xl bg-threadCard px-7 py-3'>
+      <div className='mobile-thread-card__tags'>
+        <Tags tags={category} />
       </div>
-      <div className="mobile-thread-card__title hover:cursor-pointer hover:underline" onClick={()=> router.push('/thread/123')}>
-        <h3 className="text-2xl font-bold">Title</h3>
+      <div
+        className='mobile-thread-card__title line-clamp-2 hover:cursor-pointer hover:underline'
+        onClick={() => router.push(`/thread/${id}`)}
+      >
+        <h3 className='text-2xl font-bold'>{title}</h3>
       </div>
-      <div className="mobile-thread-card__content w-64 h-11 line-clamp-2 whitespace-normal text-left hyphens-auto">
-        <p className="text-sm">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam
-          voluptatum, quibusdam, quia, quos voluptates voluptatem exercitationem
-          quod voluptatibus quas doloribus quidem. Quisquam voluptatum,
-          quibusdam, quia, quos voluptates voluptatem exercitationem quod
-          voluptatibus quas doloribus quidem.
-        </p>
+      <div className='mobile-thread-card__content line-clamp-2 h-11 w-64 hyphens-auto whitespace-normal text-left'>
+        <p className='text-sm'>{body}</p>
       </div>
-      <div className="mobile-thread-card__footer flex flex-col justify-between items-start content-start gap-y-2 flex-wrap w-64 h-auto">
-        <div className="mobile-thread-card__footer__action__button flex justify-between items-center w-32">
-          <button className="mobile-thread-card__footer__action__button__like flex items-center gap-2">
-            <MdThumbUp className="w-6 h-6 text-black" />
-            <p>1</p>
+      <div className='mobile-thread-card__footer flex h-auto w-64 flex-col flex-wrap content-start items-start justify-between gap-y-2'>
+        <div className='mobile-thread-card__footer__action__button flex w-32 items-center justify-between'>
+          <button className='mobile-thread-card__footer__action__button__like mx-3 flex items-center gap-2'>
+            <MdThumbUpOffAlt className='h-6 w-6 text-black' />
+            <p>{upVotesBy.length}</p>
           </button>
-          <button className="mobile-thread-card__footer__action__button__dislike flex items-center gap-2">
-            <MdOutlineThumbDownOffAlt className="w-6 h-6 text-black" />
-            <p>1</p>
+          <button className='mobile-thread-card__footer__action__button__dislike mx-3 flex items-center gap-2'>
+            <MdOutlineThumbDownOffAlt className='h-6 w-6 text-black' />
+            <p>{downVotesBy.length}</p>
           </button>
-          <button className="mobile-thread-card__footer__action__button__share flex items-center gap-2">
-            <MdOutlineShare className="w-6 h-6 text-black" />
-            <p>2</p>
+          <button className='mobile-thread-card__footer__action__button__share mx-3 flex items-center gap-2'>
+            <MdOutlineModeComment className='h-6 w-6 text-black' />
+            <p>{totalComments}</p>
           </button>
         </div>
-        <div className="mobile-thread-card__footer__description flex flex-row justify-between items-center gap-9">
-          <p className="text-xs">116 hari lalu </p>
-          <p className="text-xs">
-            dibuat oleh <span className="font-bold">AzE</span>{" "}
+        <div className='mobile-thread-card__footer__description flex flex-row items-center justify-between gap-9'>
+          <p className='text-xs'>{moment().diff(createdAt, 'days')} hari lalu</p>
+          <p className='text-xs'>
+            dibuat oleh <span className='font-bold'>{creatorName}</span>{' '}
           </p>
         </div>
       </div>
     </div>
-  );
+  )
 }

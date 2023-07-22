@@ -32,7 +32,12 @@ export default function RegisterPage() {
           </button>
         </div>
         <div className="container had-an-account flex flex-rows justify-center items-center">
-            <p className="text-black font-normal text-xs">Sudah punya akun? <a href="/login" className="underline font-normal text-xs">Login</a></p>
+          <p className="text-black font-normal text-xs">
+            Sudah punya akun?{" "}
+            <a href="/login" className="underline font-normal text-xs">
+              Login
+            </a>
+          </p>
         </div>
       </div>
     </div>

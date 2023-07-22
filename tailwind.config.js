@@ -20,6 +20,8 @@ module.exports = {
         defaultDarkHeaders: "#222831",
         threadCard: "rgba(0, 0, 0, 0.15)",
         active: "#00C2FF",
+        detailThreadBg: "rgba(238, 238, 238, 0.93)",
+        detailBtnColor: "#323232",
       },
       width: {
         defaultHeaderMobile: "360px",

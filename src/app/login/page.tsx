@@ -25,7 +25,12 @@ export default function LoginPage() {
           </button>
         </div>
         <div className="container had-an-account flex flex-rows justify-center items-center">
-            <p className="text-black font-normal text-xs">Belum punya akun? <a href="/register" className="underline font-normal text-xs">Daftar disini</a></p>
+          <p className="text-black font-normal text-xs">
+            Belum punya akun?{" "}
+            <a href="/register" className="underline font-normal text-xs">
+              Daftar disini
+            </a>
+          </p>
         </div>
       </div>
     </div>
