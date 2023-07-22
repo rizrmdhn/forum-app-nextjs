@@ -9,8 +9,10 @@ import { MdThumbUp, MdThumbUpOffAlt, MdThumbDown, MdOutlineThumbDownOffAlt, MdOu
 import { useDispatch } from 'react-redux'
 import Skeleton from 'react-loading-skeleton'
 import moment from 'moment'
+import SubmitButton from '@/components/SubmitButton'
 
 export default function DetailThread() {
+  const authUser = useSelect('authUser')
   const threadDetail = useSelect('threadDetail')
   const isLoading = useSelect('isLoading')
 
@@ -81,18 +83,32 @@ export default function DetailThread() {
         <div className='detail-thread__comment-container__header flex items-center justify-between gap-8'>
           <p className='text-sm font-bold'>Beri komentar</p>
         </div>
-        <div className='detail-thread__comment-container__input mt-3 flex items-center justify-between gap-8'>
-          {isLoading ? (
-            <Skeleton width={150} height={20} baseColor='#393E46' />
-          ) : (
-            <p className='text-xs text-black'>
-              <Link href={'/login'} className='underline hover:font-bold'>
-                Login
-              </Link>{' '}
-              untuk memberi komentar
-            </p>
-          )}
-        </div>
+        {authUser ? (
+          <div className='detail-thread__comment-container__input mt-3 flex flex-col items-center justify-between gap-2'>
+            {isLoading ? (
+              <Skeleton width={150} height={20} baseColor='#393E46' />
+            ) : (
+              <>
+                <textarea className='h-14 w-full rounded border border-gray-400 px-3 text-xs' placeholder='Komentar' />
+                <SubmitButton />
+              </>
+            )}
+          </div>
+        ) : (
+          <div className='detail-thread__comment-container__input mt-3 flex items-center justify-between gap-8'>
+            {isLoading ? (
+              <Skeleton width={150} height={20} baseColor='#393E46' />
+            ) : (
+              <p className='text-xs text-black'>
+                <Link href={'/login'} className='underline hover:font-bold'>
+                  Login
+                </Link>{' '}
+                untuk memberi komentar
+              </p>
+            )}
+          </div>
+        )}
+
         <div className='detail-thread__comment-container mt-5'>
           {isLoading ? (
             <Skeleton width={75} height={20} baseColor='#393E46' />
@@ -146,9 +162,7 @@ export default function DetailThread() {
                   {isLoading ? (
                     <Skeleton width={250} height={25} count={3} baseColor='#393E46' className='my-2' />
                   ) : (
-                    `Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam voluptatum, quibusdam, voluptates,
-               quia voluptate quod quos voluptatibus quas quidem quibusdam, voluptates, quia voluptate quod quos
-               voluptatibus quas quidem.`
+                    comment.content
                   )}
                 </p>
               </div>

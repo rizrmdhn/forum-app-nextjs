@@ -7,13 +7,14 @@ import { asyncPopulateUsersAndThreads } from '@/states/shared/action'
 import useSelect from '@/hooks/useSelect'
 import MobileThreadCardLoading from '@/loadingComponent/MobileThreadCardLoading'
 import { asyncSetIsPreload } from '@/states/isPreload/action'
+import AddThreadButton from '@/components/AddThreadButton'
 
 export default function ThreadPage() {
+  const authUser = useSelect('authUser')
   const thread = useSelect('thread')
   const isLoading = useSelect('isLoading')
   const isPreload = useSelect('isPreload')
 
-  
   const dispatch = useDispatch()
 
   useEffect(() => {
@@ -47,6 +48,7 @@ export default function ThreadPage() {
             ))}
           </>
         )}
+        {isLoading ? null : authUser ? <AddThreadButton /> : null}
       </div>
     </>
   )
