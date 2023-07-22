@@ -5,6 +5,8 @@ import Tags from './Tags'
 import { MdThumbUp, MdThumbUpOffAlt, MdThumbDown, MdOutlineThumbDownOffAlt, MdOutlineModeComment } from 'react-icons/md'
 import useSelect from '@/hooks/useSelect'
 import Link from 'next/link'
+import 'moment/locale/id' 
+
 
 type MobileThreadCardProps = {
   id: string
@@ -61,7 +63,7 @@ export default function MobileThreadCard({
           </button>
         </div>
         <div className='mobile-thread-card__footer__description flex flex-row items-center justify-between gap-9'>
-          <p className='text-xs'>{moment().diff(createdAt, 'days')} hari lalu</p>
+          <p className='text-xs'>{moment(createdAt).fromNow()}</p>
           <p className='text-xs'>
             dibuat oleh <span className='font-bold'>{creatorName}</span>{' '}
           </p>

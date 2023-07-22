@@ -10,6 +10,7 @@ import { useDispatch } from 'react-redux'
 import Skeleton from 'react-loading-skeleton'
 import moment from 'moment'
 import SubmitButton from '@/components/SubmitButton'
+import 'moment/locale/id'
 
 export default function DetailThread() {
   const authUser = useSelect('authUser')
@@ -67,9 +68,7 @@ export default function DetailThread() {
         {isLoading ? (
           <Skeleton width={100} height={20} baseColor='#393E46' />
         ) : (
-          <p className='text-sm font-normal text-black'>
-            {moment().diff(threadDetail?.createdAt, 'days') + ' hari yang lalu'}
-          </p>
+          <p className='text-sm font-normal text-black'>{moment(threadDetail?.createdAt).fromNow()}</p>
         )}
         {isLoading ? (
           <Skeleton width={100} height={20} baseColor='#393E46' />
@@ -119,7 +118,7 @@ export default function DetailThread() {
           )}
         </div>
         {threadDetail?.comments.map((comment: any) => (
-          <div className='detail-thread__comment-container__list mt-4 w-full' key={comment.id}>
+          <div className='detail-thread__comment-container__list mt-4 h-56 w-full overflow-y-scroll' key={comment.id}>
             <div className='detail-thread__comment-container__list__item flex flex-col items-start gap-4'>
               <div className='detail-thread__comment-container__list__item__user flex w-full items-center justify-between'>
                 <div
@@ -151,20 +150,19 @@ export default function DetailThread() {
                   {isLoading ? (
                     <Skeleton width={100} height={20} baseColor='#393E46' />
                   ) : (
-                    <p className='text-xs font-normal text-black opacity-50'>
-                      {moment().diff(comment.createdAt, 'days') + ' hari yang lalu'}
-                    </p>
+                    <p className='text-xs font-normal text-black opacity-50'>{moment(comment.createdAt).fromNow()}</p>
                   )}
                 </div>
               </div>
               <div className='detail-thread__comment-container__list__item__content flex w-full items-center justify-between'>
-                <p className='text-sm font-normal text-black'>
-                  {isLoading ? (
-                    <Skeleton width={250} height={25} count={3} baseColor='#393E46' className='my-2' />
-                  ) : (
-                    comment.content
-                  )}
-                </p>
+                {isLoading ? (
+                  <Skeleton width={200} height={20} baseColor='#393E46' />
+                ) : (
+                  <p
+                    className='text-sm font-normal text-black'
+                    dangerouslySetInnerHTML={{ __html: comment.content }}
+                  ></p>
+                )}
               </div>
               <div className='detail-thread__comment-container__list__item__action flex items-center gap-4'>
                 {isLoading ? (
