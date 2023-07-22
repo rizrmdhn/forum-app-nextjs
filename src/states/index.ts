@@ -2,8 +2,10 @@ import { configureStore } from "@reduxjs/toolkit";
 import setShowMenuReducer from "./setShowMenu/reducer";
 import threadReducer from "./thread/reducer";
 import userReducer from "./user/reducer";
+import threadDetailReducer from "./detailThread/reducer";
 import leaderboardReducer from "./leaderboards/reducer";
 import authUserReducer from "./authUser/reducer";
+import isLoadingReducer from "./isLoading/reducer";
 
 
 export const store = configureStore({
@@ -12,9 +14,12 @@ export const store = configureStore({
     authUser: authUserReducer,
     thread: threadReducer,
     user: userReducer,
+    threadDetail: threadDetailReducer,
     leaderboard: leaderboardReducer,
+    isLoading: isLoadingReducer,
   },
 });
 
 // export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
+export type AppGetState = typeof store.getState;

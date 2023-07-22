@@ -115,9 +115,9 @@ const api = (() => {
                 throw new Error(message)
             }
 
-            const {data: {thread}} = response.data
+            const {data: {detailThread}} = response.data
 
-            return thread
+            return detailThread
         }
 
         async function createThread({title, body, category = ''}: {

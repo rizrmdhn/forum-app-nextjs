@@ -2,10 +2,9 @@
 
 import moment from 'moment'
 import Tags from './Tags'
-import { useRouter } from 'next/navigation'
 import { MdThumbUp, MdThumbUpOffAlt, MdThumbDown, MdOutlineThumbDownOffAlt, MdOutlineModeComment } from 'react-icons/md'
-import { useSelector } from 'react-redux'
 import useSelect from '@/hooks/useSelect'
+import Link from 'next/link'
 
 type MobileThreadCardProps = {
   id: string
@@ -32,19 +31,18 @@ export default function MobileThreadCard({
 }: MobileThreadCardProps) {
   const user = useSelect('user')
 
-  const router = useRouter()
+
 
   const creatorName = user.find((user: any) => user.id === ownerId).name
   return (
-    <div className='mobile-thread-card flex flex-col items-start gap-2 rounded-xl bg-threadCard px-7 py-3'>
+    <div className='mobile-thread-card flex flex-col items-start gap-2 rounded-xl bg-threadCard px-7 py-3' title={id}>
       <div className='mobile-thread-card__tags'>
         <Tags tags={category} />
       </div>
       <div
         className='mobile-thread-card__title line-clamp-2 hover:cursor-pointer hover:underline'
-        onClick={() => router.push(`/thread/${id}`)}
       >
-        <h3 className='text-2xl font-bold'>{title}</h3>
+        <Link className='text-2xl font-bold' href={`/thread/${id}`}>{title}</Link>
       </div>
       <div className='mobile-thread-card__content line-clamp-2 h-11 w-64 hyphens-auto whitespace-normal text-left'>
         <p className='text-sm'>{body}</p>

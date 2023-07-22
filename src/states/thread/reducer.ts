@@ -1,4 +1,4 @@
-import {ActionType, Action as ThreadAction} from './action';
+import { ActionType, Action as ThreadAction } from './action';
 
 export interface IThread {
     id: string;

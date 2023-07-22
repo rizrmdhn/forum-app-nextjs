@@ -29,6 +29,7 @@ module.exports = {
       height: {
         defaultHeaderMobile: "80px",
         defaultMobileHeight: "640px",
+        detailThreadHeight: "calc(100vh - 80px)",
       },
     },
   },
