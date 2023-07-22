@@ -163,7 +163,7 @@ export default function DetailThread() {
                     </button>
                     <button className='detail-thread__comment-container__list__item__action__dislike flex w-fit items-start gap-2 rounded bg-light p-1'>
                       <MdThumbDown className='h-5 w-5 text-black' />
-                      <p className='text-sm font-normal text-black'>100</p>
+                      <p className='text-sm font-normal text-black'>{comment.downVotesBy.length}</p>
                     </button>
                   </>
                 )}
