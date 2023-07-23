@@ -13,6 +13,7 @@ function useSelect(state: any) {
     const isLoading = useSelector<any, any>((state: any) => state.isLoading)
     const isPreload = useSelector<any, any>((state: any) => state.isPreload)
     const openModal = useSelector<any, any>((state: any) => state.openModal)
+    const locale = useSelector<any, any>((state: any) => state.locale)
     
     switch (state) {
         case 'showMenu':
@@ -39,6 +40,8 @@ function useSelect(state: any) {
             return isPreload
         case 'openModal':
             return openModal
+        case 'locale':
+            return locale
     }
     
 }

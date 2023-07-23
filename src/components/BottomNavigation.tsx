@@ -2,12 +2,16 @@
 
 import { usePathname } from 'next/navigation'
 import { MdLeaderboard, MdForum, MdMenu } from 'react-icons/md'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { AppDispatch } from '@/states'
 import { setShowMenuActionCreator, unsetShowMenuActionCreator } from '@/states/setShowMenu/action'
+import useSelect from '@/hooks/useSelect'
+import useLocale from '@/hooks/useLocale'
 
 export default function BottomNavigation() {
-  const showMenu = useSelector<any, any>((state: any) => state.showMenu)
+  const showMenu = useSelect('showMenu')
+
+  const { textForum, textMenu, textLeaderboardMenu } = useLocale()
 
   const dispatch = useDispatch<AppDispatch>()
 
@@ -43,7 +47,7 @@ export default function BottomNavigation() {
                 : 'font-bold text-white group-hover:text-active'
             }
           >
-            Leaderboard
+            {textLeaderboardMenu}
           </p>
         </a>
         <a className='icon-forum group flex w-full cursor-pointer flex-col items-center justify-center' href='/thread'>
@@ -61,7 +65,7 @@ export default function BottomNavigation() {
                 : 'font-bold text-white group-hover:text-active'
             }
           >
-            Forum
+            {textForum}
           </p>
         </a>
         <a
@@ -69,7 +73,7 @@ export default function BottomNavigation() {
           onClick={setShowMenu}
         >
           <MdMenu className='h-8 w-8 text-white group-hover:text-active' />
-          <p className='font-bold text-white group-hover:text-active'>Menu</p>
+          <p className='font-bold text-white group-hover:text-active'>{textMenu}</p>
         </a>
       </div>
     </div>

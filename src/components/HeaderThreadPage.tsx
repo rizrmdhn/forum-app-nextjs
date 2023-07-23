@@ -1,4 +1,5 @@
 'use client'
+import useLocale from '@/hooks/useLocale'
 import useSelect from '@/hooks/useSelect'
 import { setFilterThreadByTitleActionCreator } from '@/states/filterThreadByTitle/action'
 import { setShowCategoryActionCreator } from '@/states/showCategory/action'
@@ -9,6 +10,8 @@ import { useDispatch } from 'react-redux'
 export default function HeaderThreadPage() {
   const showCategory = useSelect('showCategory')
   const threadTitle = useSelect('threadTitle')
+
+  const { textSearchThread } = useLocale()
 
   const dispatch = useDispatch()
 
@@ -33,7 +36,7 @@ export default function HeaderThreadPage() {
         <div className='search-thread-container flex h-8 w-64 flex-row items-center rounded border-2 border-white bg-headerSearchBar px-3'>
           <input
             type='text'
-            placeholder='Search thread'
+            placeholder={textSearchThread}
             className='w-52 bg-transparent text-white focus:outline-none'
             value={threadTitle}
             onChange={searchThreadByTitle}

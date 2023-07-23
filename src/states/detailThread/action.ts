@@ -221,14 +221,14 @@ function asyncGetThreadsDetail(threadId: any): any {
     }
 }
 
-function asyncUpVoteThreadDetail(threadId: string): any {
+function asyncUpVoteThreadDetail(threadId: string, textLoginToVote:string): any {
     return async (dispatch: AppDispatch, getState: AppGetState) => {
         dispatch(showLoading());
         const {authUser} = getState();
         if (!authUser) {
             return myToast.fire({
                 icon: 'error',
-                title: 'You need to login to in order to vote',
+                title: textLoginToVote,
             });
         }
 
@@ -250,14 +250,14 @@ function asyncUpVoteThreadDetail(threadId: string): any {
     }
 }
 
-function asyncDownVoteThreadDetail(threadId: string): any {
+function asyncDownVoteThreadDetail(threadId: string, textLoginToVote:string): any {
     return async (dispatch: AppDispatch, getState: AppGetState) => {
         dispatch(showLoading());
         const {authUser} = getState();
         if (!authUser) {
             return myToast.fire({
                 icon: 'error',
-                title: 'You need to login to in order to vote',
+                title: textLoginToVote,
             });
         }
 
@@ -279,7 +279,7 @@ function asyncDownVoteThreadDetail(threadId: string): any {
     }
 }
 
-function asyncNeutralVoteThreadDetail(threadId: string): any {
+function asyncNeutralVoteThreadDetail(threadId: string, textLoginToVote: string): any {
     return async (dispatch: AppDispatch, getState: AppGetState) => {
         dispatch(showLoading());
         const {authUser} = getState();
@@ -332,12 +332,15 @@ function asyncCreateCommentThreadDetail(threadId: string, content: string): any 
     }       
 }
 
-function asyncUpVoteCommentThreadDetail(threadId: string, commentId: string): any {
+function asyncUpVoteCommentThreadDetail(threadId: string, commentId: string, textLoginToVote:string): any {
     return async (dispatch: AppDispatch, getState: AppGetState) => {
         dispatch(showLoading());
         const {authUser} = getState();
         if (!authUser) {
-            throw new Error('You need to login to in order to vote');
+            return myToast.fire({
+                icon: 'error',
+                title: textLoginToVote,
+            })
         }
 
         dispatch(upVoteCommentThreadDetailActionCreator(threadId, commentId, authUser.id));
@@ -359,12 +362,15 @@ function asyncUpVoteCommentThreadDetail(threadId: string, commentId: string): an
     }
 }
 
-function asyncDownVoteCommentThreadDetail(threadId: string, commentId: string): any {
+function asyncDownVoteCommentThreadDetail(threadId: string, commentId: string, textLoginToVote:string): any {
     return async (dispatch: AppDispatch, getState: AppGetState) => {
         dispatch(showLoading());
         const {authUser} = getState();
         if (!authUser) {
-            throw new Error('You need to login to in order to vote');
+           return myToast.fire({
+                icon: 'error',
+                title: textLoginToVote,
+            })
         }
 
         dispatch(downVoteCommentThreadDetailActionCreator(threadId, commentId, authUser.id));
@@ -385,12 +391,15 @@ function asyncDownVoteCommentThreadDetail(threadId: string, commentId: string): 
     }
 }
 
-function asyncNeutralVoteCommentThreadDetail(threadId: string, commentId: string): any {
+function asyncNeutralVoteCommentThreadDetail(threadId: string, commentId: string, textLoginToVote:string): any {
     return async (dispatch: AppDispatch, getState: AppGetState) => {
         dispatch(showLoading());
         const {authUser} = getState();
         if (!authUser) {
-            throw new Error('You need to login to in order to vote');
+           return myToast.fire({
+                icon: 'error',
+                title: textLoginToVote,
+           })   
         }
 
         dispatch(neutralVoteCommentThreadDetailActionCreator(threadId, commentId, authUser.id));

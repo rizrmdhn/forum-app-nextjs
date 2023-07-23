@@ -24,11 +24,15 @@ import useUpVoteDetailThread from '@/hooks/useUpVoteDetailThread'
 import useDownVoteDetailThread from '@/hooks/useDownVoteDetailThread'
 import useUpVoteComment from '@/hooks/useUpVoteComment'
 import useDownVoteComment from '@/hooks/useDownVoteComment'
+import useLocale from '@/hooks/useLocale'
 
 export default function DetailThread() {
   const authUser = useSelect('authUser')
   const threadDetail = useSelect('threadDetail')
   const isLoading = useSelect('isLoading')
+  const locale = useSelect('locale')
+
+  const { textComment, textGiveComment, textLoginToGiveComment, textLogin } = useLocale()
 
   const [upVoteThread, removeUpVoteThread] = useUpVoteDetailThread()
   const [downVoteThread, removeDownVoteThread] = useDownVoteDetailThread()
@@ -154,7 +158,11 @@ export default function DetailThread() {
         {isLoading ? (
           <Skeleton width={100} height={20} baseColor='#393E46' />
         ) : (
-          <p className='text-sm font-normal text-black'>{moment(threadDetail?.createdAt).fromNow()}</p>
+          <p className='text-sm font-normal text-black'>
+            {moment(threadDetail?.createdAt)
+              .locale(locale)
+              .fromNow()}
+          </p>
         )}
         {isLoading ? (
           <Skeleton width={100} height={20} baseColor='#393E46' />
@@ -166,7 +174,7 @@ export default function DetailThread() {
       </div>
       <div className='detail-thread__comment-container mt-4 w-full'>
         <div className='detail-thread__comment-container__header flex items-center justify-between gap-8'>
-          <p className='text-sm font-bold'>Beri komentar</p>
+          <p className='text-sm font-bold'>{textGiveComment}</p>
         </div>
         {authUser ? (
           <div className='detail-thread__comment-container__input mt-3 flex flex-col items-center justify-between gap-2'>
@@ -176,7 +184,7 @@ export default function DetailThread() {
               <>
                 <textarea
                   className='h-14 w-full rounded border border-gray-400 px-3 text-xs'
-                  placeholder='Komentar'
+                  placeholder={textComment}
                   value={content}
                   onChange={onChangeContent}
                 />
@@ -191,9 +199,9 @@ export default function DetailThread() {
             ) : (
               <p className='text-xs text-black'>
                 <Link href={'/login'} className='underline hover:font-bold'>
-                  Login
+                  {textLogin}
                 </Link>{' '}
-                untuk memberi komentar
+                {textLoginToGiveComment}
               </p>
             )}
           </div>
@@ -204,7 +212,7 @@ export default function DetailThread() {
             <Skeleton width={75} height={20} baseColor='#393E46' />
           ) : (
             <p className='text-sm font-bold'>
-              Komentar <span>({threadDetail?.comments.length})</span>
+              {textComment} <span>({threadDetail?.comments.length})</span>
             </p>
           )}
         </div>
@@ -242,7 +250,9 @@ export default function DetailThread() {
                     {isLoading ? (
                       <Skeleton width={100} height={20} baseColor='#393E46' />
                     ) : (
-                      <p className='text-xs font-normal text-black opacity-50'>{moment(comment.createdAt).fromNow()}</p>
+                      <p className='text-xs font-normal text-black opacity-50'>
+                        {moment(comment.createdAt).locale(locale).fromNow()}
+                      </p>
                     )}
                   </div>
                 </div>
@@ -276,13 +286,11 @@ export default function DetailThread() {
                         className='detail-thread__comment-container__list__item__action__dislike flex w-fit items-start gap-2 rounded bg-light p-1'
                         onClick={() => handleDownVoteComment(comment)}
                       >
-                        {
-                          isDownVotedComment(comment.id) ? (
-                            <MdThumbDown className='h-5 w-5 text-black' />
-                          ) : (
-                            <MdThumbDownOffAlt className='h-5 w-5 text-black' />
-                          )
-                        }
+                        {isDownVotedComment(comment.id) ? (
+                          <MdThumbDown className='h-5 w-5 text-black' />
+                        ) : (
+                          <MdThumbDownOffAlt className='h-5 w-5 text-black' />
+                        )}
                         <p className='text-sm font-normal text-black'>{comment.downVotesBy.length}</p>
                       </button>
                     </>

@@ -7,9 +7,8 @@ import useSelect from '@/hooks/useSelect'
 import Link from 'next/link'
 import 'moment/locale/id'
 import useUpVoteThread from '@/hooks/useUpVoteThread'
-import { useDispatch } from 'react-redux'
-import { asyncNeturalVoteThread } from '@/states/thread/action'
 import useDownVoteThread from '@/hooks/useDownVoteThread'
+import useLocale from '@/hooks/useLocale'
 
 type MobileThreadCardProps = {
   id: string
@@ -36,8 +35,9 @@ export default function MobileThreadCard({
 }: MobileThreadCardProps) {
   const authUser = useSelect('authUser')
   const user = useSelect('user')
+  const locale = useSelect('locale')
 
-  const dispatch = useDispatch()
+  const { textCreatedBy } = useLocale()
 
   const [upVoteThread, removeUpVoteThread] = useUpVoteThread()
   const [downVoteThread, removeDownVoteThread] = useDownVoteThread()
@@ -66,9 +66,10 @@ export default function MobileThreadCard({
       downVoteThread(id)
     }
   }
+  
 
   return (
-    <div className='mobile-thread-card flex flex-col items-start gap-2 rounded-xl bg-threadCard px-7 py-3' title={id}>
+    <div className='mobile-thread-card flex flex-col items-start gap-2 rounded-xl bg-threadCard px-7 py-3' title={title}>
       <div className='mobile-thread-card__tags'>
         <Tags tags={category} />
       </div>
@@ -110,9 +111,9 @@ export default function MobileThreadCard({
           </button>
         </div>
         <div className='mobile-thread-card__footer__description flex flex-row items-center justify-between gap-9'>
-          <p className='text-xs'>{moment(createdAt).fromNow()}</p>
+          <p className='text-xs'>{moment(createdAt).locale(locale).fromNow()}</p>
           <p className='text-xs'>
-            dibuat oleh <span className='font-bold'>{creatorName}</span>{' '}
+            {textCreatedBy} <span className='font-bold'>{creatorName}</span>{' '}
           </p>
         </div>
       </div>

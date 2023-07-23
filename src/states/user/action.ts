@@ -2,6 +2,7 @@ import { AnyAction } from "redux";
 import { hideLoading, showLoading } from 'react-redux-loading-bar';
 import api from '../../utils/api';
 import myToast from "@/components/myToast";
+import { AppDispatch } from "..";
 
 enum ActionType {
     RECEIVE_USER = 'RECEIVE_USER',
@@ -39,7 +40,7 @@ function asyncRegisterUser({name, email, password, router}:
         password: string,
         router: any
     }): any {
-        return async (dispatch: any) => {
+        return async (dispatch: AppDispatch) => {
             dispatch(showLoading());
             try {
                 await api.register({name, email, password});

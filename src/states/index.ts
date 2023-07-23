@@ -11,6 +11,7 @@ import authUserReducer from "./authUser/reducer";
 import isLoadingReducer from "./isLoading/reducer";
 import isPreloadReducer from "./isPreload/reducer";
 import openModalReducer from "./openModal/reducer";
+import localeReducer from "./locale/reducer";
 
 export const store = configureStore({
   reducer: {
@@ -26,6 +27,7 @@ export const store = configureStore({
     isLoading: isLoadingReducer,
     isPreload: isPreloadReducer,
     openModal: openModalReducer,
+    locale: localeReducer
   },
 });
 

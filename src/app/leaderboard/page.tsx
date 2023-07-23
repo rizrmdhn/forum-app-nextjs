@@ -7,11 +7,14 @@ import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import Skeleton from 'react-loading-skeleton'
 import { asyncSetIsPreload } from '@/states/isPreload/action'
+import useLocale from '@/hooks/useLocale'
 
 export default function LeaderboardPage() {
   const isLoading = useSelect('isLoading')
   const leaderboard = useSelect('leaderboard')
   const isPreload = useSelect('isPreload')
+
+  const { textUser, textScore } = useLocale()
 
   const dispatch = useDispatch()
 
@@ -19,7 +22,6 @@ export default function LeaderboardPage() {
     dispatch(asyncSetIsPreload())
     dispatch(asyncGetLeaderboard())
   }, [dispatch])
-
 
   if (isPreload) {
     return (
@@ -32,8 +34,8 @@ export default function LeaderboardPage() {
   return (
     <div className='leaderboard-page h-defaultMobileHeight bg-light'>
       <div className='leaderboard-page__header flex flex-row items-center justify-center gap-40 py-3'>
-        <h2 className='text-sm font-bold'>Pengguna</h2>
-        <h2 className='ml-2 text-sm font-bold'>Skor</h2>
+        <h2 className='text-sm font-bold'>{textUser}</h2>
+        <h2 className='ml-2 text-sm font-bold'>{textScore}</h2>
       </div>
       {leaderboard.map((leaderboard: any) => (
         <div

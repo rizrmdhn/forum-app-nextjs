@@ -1,11 +1,13 @@
+import useLocale from '@/hooks/useLocale'
+
 export default function HeaderLeaderboardPage() {
+  const { textLeaderboard } = useLocale()
+
   return (
-    <div className="container header-leaderboard-page flex flex-row justify-between items-center w-screen h-20 bg-defaultLightHeaders px-4">
-      <div className="flex flex-row justify-start items-center w-full text-center">
-        <h1 className="text-white text-sm font-bold mx-auto">
-          Klasmen Pengguna Aktif
-        </h1>
+    <div className='header-leaderboard-page container flex h-20 w-screen flex-row items-center justify-between bg-defaultLightHeaders px-4'>
+      <div className='flex w-full flex-row items-center justify-start text-center'>
+        <h1 className='mx-auto text-sm font-bold text-white'>{textLeaderboard}</h1>
       </div>
     </div>
-  );
+  )
 }
