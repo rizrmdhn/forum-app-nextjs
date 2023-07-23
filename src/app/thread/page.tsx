@@ -9,13 +9,14 @@ import MobileThreadCardLoading from '@/loadingComponent/MobileThreadCardLoading'
 import { asyncSetIsPreload } from '@/states/isPreload/action'
 import AddThreadButton from '@/components/AddThreadButton'
 import { openModalActionCreator } from '@/states/openModal/action'
+import ThreadPageCategoryList from '@/components/ThreadPageCategoryList'
 
 export default function ThreadPage() {
   const authUser = useSelect('authUser')
   const thread = useSelect('thread')
   const isLoading = useSelect('isLoading')
   const isPreload = useSelect('isPreload')
-  const openModal = useSelect('openModal')
+  const showCategory = useSelect('showCategory')
 
   const dispatch = useDispatch()
 
@@ -36,9 +37,12 @@ export default function ThreadPage() {
     dispatch(openModalActionCreator())
   }
 
+  const categoryList = thread.map((thread: any) => thread.category)
+
   return (
     <>
       <HeaderThreadPage />
+      {showCategory && <ThreadPageCategoryList category={categoryList} />}
       <div className='flex h-defaultMobileHeight flex-col items-center gap-8 overflow-y-auto bg-light px-8 py-12'>
         {isLoading ? (
           <>

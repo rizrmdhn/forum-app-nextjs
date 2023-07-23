@@ -46,7 +46,7 @@ export default function MobileMenu() {
 
   return (
     <div className='mobile-menu'>
-      <div className='mobile-menu-item fixed bottom-20 right-0 inline-flex h-28 w-fit flex-col items-center justify-between rounded-ss bg-defaultLightHeaders'>
+      <div className='mobile-menu-item fixed bottom-20 right-0 inline-flex h-28 w-fit flex-col items-center justify-between rounded-ss-xl bg-defaultLightHeaders'>
         <button className='mobile-menu-item__darkmode group flex w-32 items-center gap-3 px-4 py-1 hover:cursor-pointer'>
           <MdBedtime className='h-6 w-6 text-white group-hover:text-active' />
           <p className='font-bold text-white group-hover:text-active'>Dark</p>

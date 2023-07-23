@@ -1,5 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
 import setShowMenuReducer from "./setShowMenu/reducer";
+import showCategoryReducer from "./showCategory/reducer";
 import threadReducer from "./thread/reducer";
 import userReducer from "./user/reducer";
 import threadDetailReducer from "./detailThread/reducer";
@@ -12,6 +13,7 @@ import openModalReducer from "./openModal/reducer";
 export const store = configureStore({
   reducer: {
     showMenu: setShowMenuReducer,
+    showCategory: showCategoryReducer,
     authUser: authUserReducer,
     thread: threadReducer,
     user: userReducer,

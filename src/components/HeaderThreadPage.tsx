@@ -1,24 +1,40 @@
-import React from "react";
-import { MdFilterList, MdSearch } from "react-icons/md";
+'use client'
+import useSelect from '@/hooks/useSelect'
+import { setShowCategoryActionCreator } from '@/states/showCategory/action'
+import React from 'react'
+import { MdFilterList, MdSearch } from 'react-icons/md'
+import { useDispatch } from 'react-redux'
 
 export default function HeaderThreadPage() {
+  const showCategory = useSelect('showCategory')
+
+  const dispatch = useDispatch()
+
+  const openCatgeroyList = () => {
+    if (showCategory) {
+      dispatch(setShowCategoryActionCreator(false))
+    } else {
+      dispatch(setShowCategoryActionCreator(true))
+    }
+  }
+
   return (
-    <div className="header-thread-page flex flex-row justify-between items-center w-screen h-20 bg-defaultLightHeaders px-4 sticky top-0">
-      <div className="header-thread-page-item flex flex-row justify-between items-center w-full h-20 bg-defaultLightHeaders px-4 sticky">
-        <div className="icon cursor-pointer">
-          <MdFilterList className="w-6 h-6 text-white" />
-        </div>
-        <div className="search-thread-container flex flex-row items-center w-64 h-8 bg-headerSearchBar border-2 border-white px-3 rounded">
+    <div className='header-thread-page sticky top-0 flex h-20 w-screen flex-row items-center justify-between bg-defaultLightHeaders px-4'>
+      <div className='header-thread-page-item sticky flex h-20 w-full flex-row items-center justify-between bg-defaultLightHeaders px-4'>
+        <button className='icon group cursor-pointer' onClick={openCatgeroyList}>
+          <MdFilterList className='h-6 w-6 text-white group-hover:text-active' />
+        </button>
+        <div className='search-thread-container flex h-8 w-64 flex-row items-center rounded border-2 border-white bg-headerSearchBar px-3'>
           <input
-            type="text"
-            placeholder="Search thread"
-            className="bg-transparent text-white w-52 focus:outline-none"
+            type='text'
+            placeholder='Search thread'
+            className='w-52 bg-transparent text-white focus:outline-none'
           />
-          <button className="search-icon hover:cursor-pointer">
-            <MdSearch className="w-6 h-6 text-white" />
+          <button className='search-icon hover:cursor-pointer'>
+            <MdSearch className='h-6 w-6 text-white' />
           </button>
         </div>
       </div>
     </div>
-  );
+  )
 }

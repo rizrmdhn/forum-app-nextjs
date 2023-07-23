@@ -2,6 +2,7 @@ import { useSelector } from 'react-redux'
 
 function useSelect(state: any) {
     const showMenu = useSelector<any, any>((state: any) => state.showMenu)
+    const showCategory = useSelector<any, any>((state: any) => state.showCategory)
     const authUser = useSelector<any, any>((state: any) => state.authUser)
     const thread = useSelector<any, any>((state: any) => state.thread)
     const user = useSelector<any, any>((state: any) => state.user)
@@ -14,6 +15,8 @@ function useSelect(state: any) {
     switch (state) {
         case 'showMenu':
             return showMenu
+        case 'showCategory':
+            return showCategory
         case 'authUser':
             return authUser
         case 'thread':
