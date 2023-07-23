@@ -4,6 +4,7 @@ import showCategoryReducer from "./showCategory/reducer";
 import threadReducer from "./thread/reducer";
 import userReducer from "./user/reducer";
 import filterThreadByCategoryReducer from "./filterThreadByCategory/reducer";
+import filterThreadByTitleReducer from "./filterThreadByTitle/reducer";
 import threadDetailReducer from "./detailThread/reducer";
 import leaderboardReducer from "./leaderboards/reducer";
 import authUserReducer from "./authUser/reducer";
@@ -19,6 +20,7 @@ export const store = configureStore({
     thread: threadReducer,
     user: userReducer,
     category: filterThreadByCategoryReducer,
+    threadTitle: filterThreadByTitleReducer,
     threadDetail: threadDetailReducer,
     leaderboard: leaderboardReducer,
     isLoading: isLoadingReducer,

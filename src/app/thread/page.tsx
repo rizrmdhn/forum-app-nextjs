@@ -18,6 +18,7 @@ export default function ThreadPage() {
   const isPreload = useSelect('isPreload')
   const showCategory = useSelect('showCategory')
   const category = useSelect('category')
+  const threadTitle = useSelect('threadTitle')
 
   const dispatch = useDispatch()
 
@@ -40,7 +41,9 @@ export default function ThreadPage() {
 
   const categoryList = thread.map((thread: any) => thread.category)
 
-  const filteredThread = thread.filter((thread: any) => thread.category.toLowerCase().includes(category.toLowerCase()))
+  const filteredThread = thread
+    .filter((thread: any) => thread.title.toLowerCase().includes(threadTitle.toLowerCase()))
+    .filter((thread: any) => thread.category.toLowerCase().includes(category.toLowerCase()))
 
   return (
     <>

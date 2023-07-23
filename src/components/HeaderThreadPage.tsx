@@ -1,5 +1,6 @@
 'use client'
 import useSelect from '@/hooks/useSelect'
+import { setFilterThreadByTitleActionCreator } from '@/states/filterThreadByTitle/action'
 import { setShowCategoryActionCreator } from '@/states/showCategory/action'
 import React from 'react'
 import { MdFilterList, MdSearch } from 'react-icons/md'
@@ -7,6 +8,7 @@ import { useDispatch } from 'react-redux'
 
 export default function HeaderThreadPage() {
   const showCategory = useSelect('showCategory')
+  const threadTitle = useSelect('threadTitle')
 
   const dispatch = useDispatch()
 
@@ -16,6 +18,10 @@ export default function HeaderThreadPage() {
     } else {
       dispatch(setShowCategoryActionCreator(true))
     }
+  }
+
+  const searchThreadByTitle: React.ChangeEventHandler<HTMLInputElement> = (event) => {
+    dispatch(setFilterThreadByTitleActionCreator(event.target.value))
   }
 
   return (
@@ -29,6 +35,8 @@ export default function HeaderThreadPage() {
             type='text'
             placeholder='Search thread'
             className='w-52 bg-transparent text-white focus:outline-none'
+            value={threadTitle}
+            onChange={searchThreadByTitle}
           />
           <button className='search-icon hover:cursor-pointer'>
             <MdSearch className='h-6 w-6 text-white' />

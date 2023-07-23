@@ -23,11 +23,11 @@ export default function ThreadPageCategoryList({ category }: { category: string[
       <div className='category-list-menu__title w-full'>
         <h3 className='text-center text-base font-bold text-white'>Kategory List</h3>
       </div>
-      <div className='category-list-menu__list flex h-32 flex-row flex-wrap overflow-scroll'>
+      <div className='category-list-menu__list flex h-32 flex-col flex-wrap overflow-scroll'>
         {category.map((category: string) =>
           isCategory(category) ? (
             <ul
-              className='bg-gray-500 mx-auto mt-2 flex w-fit cursor-pointer flex-col gap-2 rounded p-1 text-white
+              className='mx-auto mt-2 flex h-8 w-fit cursor-pointer flex-col gap-2 rounded bg-gray-500 p-1 text-white
            transition duration-300 ease-in-out hover:bg-white hover:text-black
           '
               onClick={() => filterByCategory(category)}
@@ -37,7 +37,7 @@ export default function ThreadPageCategoryList({ category }: { category: string[
             </ul>
           ) : (
             <ul
-              className='mx-auto mt-2 flex w-fit cursor-pointer flex-col gap-2 rounded bg-light p-1 text-black
+              className='mx-auto mt-2 flex h-8 w-fit cursor-pointer flex-col gap-2 rounded bg-light p-1 text-black
            transition duration-300 ease-in-out hover:bg-gray-500 hover:text-white
           '
               onClick={() => filterByCategory(category)}
