@@ -22,6 +22,8 @@ import useCreateComment from '@/hooks/useCreateComment'
 import { asyncSetIsPreload } from '@/states/isPreload/action'
 import useUpVoteDetailThread from '@/hooks/useUpVoteDetailThread'
 import useDownVoteDetailThread from '@/hooks/useDownVoteDetailThread'
+import useUpVoteComment from '@/hooks/useUpVoteComment'
+import useDownVoteComment from '@/hooks/useDownVoteComment'
 
 export default function DetailThread() {
   const authUser = useSelect('authUser')
@@ -30,6 +32,8 @@ export default function DetailThread() {
 
   const [upVoteThread, removeUpVoteThread] = useUpVoteDetailThread()
   const [downVoteThread, removeDownVoteThread] = useDownVoteDetailThread()
+  const [upVoteComment, removeUpVoteComment] = useUpVoteComment()
+  const [downVoteComment, removeDownVoteComment] = useDownVoteComment()
   const [setThreadIdHandler, content, onChangeContent, onSubmitComment] = useCreateComment()
 
   const { threadId } = useParams()
@@ -43,6 +47,14 @@ export default function DetailThread() {
 
   const isUpVoted = threadDetail?.upVotesBy.includes(authUser?.id)
   const isDownVoted = threadDetail?.downVotesBy.includes(authUser?.id)
+
+  const isUpVotedComment = (id: string) => {
+    return threadDetail?.comments.find((comment: any) => comment.id === id)?.upVotesBy.includes(authUser?.id)
+  }
+
+  const isDownVotedComment = (id: string) => {
+    return threadDetail?.comments.find((comment: any) => comment.id === id)?.downVotesBy.includes(authUser?.id)
+  }
 
   const handleUpVote = (id: string) => {
     if (isUpVoted) {
@@ -61,6 +73,26 @@ export default function DetailThread() {
     } else {
       // add downvote
       downVoteThread(id)
+    }
+  }
+
+  const handleUpVoteComment = (comment: any) => {
+    if (isUpVotedComment(comment.id)) {
+      // remove upvote
+      removeUpVoteComment(threadId, comment.id)
+    } else {
+      // add upvote
+      upVoteComment(threadId, comment.id)
+    }
+  }
+
+  const handleDownVoteComment = (comment: any) => {
+    if (isDownVotedComment(comment.id)) {
+      // remove downvote
+      removeDownVoteComment(threadId, comment.id)
+    } else {
+      // add downvote
+      downVoteComment(threadId, comment.id)
     }
   }
 
@@ -229,12 +261,28 @@ export default function DetailThread() {
                     <Skeleton width={125} height={20} baseColor='#393E46' />
                   ) : (
                     <>
-                      <button className='detail-thread__comment-container__list__item__action__like flex w-fit items-center gap-2 rounded bg-light p-1'>
-                        <MdThumbUpOffAlt className='h-5 w-5 text-black' />
+                      <button
+                        className='detail-thread__comment-container__list__item__action__like flex w-fit items-center gap-2 rounded bg-light p-1'
+                        onClick={() => handleUpVoteComment(comment)}
+                      >
+                        {isUpVotedComment(comment.id) ? (
+                          <MdThumbUp className='h-5 w-5 text-black' />
+                        ) : (
+                          <MdThumbUpOffAlt className='h-5 w-5 text-black' />
+                        )}
                         <p className='text-sm font-normal text-black'>{comment.upVotesBy.length}</p>
                       </button>
-                      <button className='detail-thread__comment-container__list__item__action__dislike flex w-fit items-start gap-2 rounded bg-light p-1'>
-                        <MdThumbDownOffAlt className='h-5 w-5 text-black' />
+                      <button
+                        className='detail-thread__comment-container__list__item__action__dislike flex w-fit items-start gap-2 rounded bg-light p-1'
+                        onClick={() => handleDownVoteComment(comment)}
+                      >
+                        {
+                          isDownVotedComment(comment.id) ? (
+                            <MdThumbDown className='h-5 w-5 text-black' />
+                          ) : (
+                            <MdThumbDownOffAlt className='h-5 w-5 text-black' />
+                          )
+                        }
                         <p className='text-sm font-normal text-black'>{comment.downVotesBy.length}</p>
                       </button>
                     </>

@@ -296,7 +296,7 @@ function asyncNeutralVoteThreadDetail(threadId: string): any {
 
             myToast.fire({
                 icon: 'success',    
-                title: 'Neutral vote successfully',
+                title: 'Vote removed',
             }) 
         } catch (error: any) {
             myToast.fire({
@@ -341,10 +341,19 @@ function asyncUpVoteCommentThreadDetail(threadId: string, commentId: string): an
         }
 
         dispatch(upVoteCommentThreadDetailActionCreator(threadId, commentId, authUser.id));
+
         try {
             await api.upVoteComment({threadId, commentId});
+            
+            myToast.fire({
+                icon: 'success',
+                title: 'Upvoted successfully',
+            });
         } catch (error: any) {
-            throw new Error(error);
+            myToast.fire({
+                icon: 'error',
+                title: error.message,
+            });
         }
         dispatch(hideLoading());
     }
@@ -359,10 +368,18 @@ function asyncDownVoteCommentThreadDetail(threadId: string, commentId: string): 
         }
 
         dispatch(downVoteCommentThreadDetailActionCreator(threadId, commentId, authUser.id));
+
+        myToast.fire({
+            icon: 'success',
+            title: 'Downvoted successfully',
+        });
         try {
             await api.downVoteComment({threadId, commentId});
         } catch (error: any) {
-            throw new Error(error);
+            myToast.fire({
+                icon: 'error',
+                title: error.message,
+            });
         }
         dispatch(hideLoading());
     }
@@ -379,8 +396,16 @@ function asyncNeutralVoteCommentThreadDetail(threadId: string, commentId: string
         dispatch(neutralVoteCommentThreadDetailActionCreator(threadId, commentId, authUser.id));
         try {
             await api.neutralVoteComment({threadId, commentId});
+
+            myToast.fire({
+                icon: 'success',
+                title: 'Vote removed',
+            });
         } catch (error: any) {
-            throw new Error(error);
+            myToast.fire({
+                icon: 'error',
+                title: error.message,
+            });
         }
         dispatch(hideLoading());
     }

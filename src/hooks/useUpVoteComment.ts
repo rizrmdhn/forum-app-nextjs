@@ -1,8 +1,8 @@
-import { asyncDownVoteCommentThreadDetail, asyncNeutralVoteCommentThreadDetail, asyncUpVoteCommentThreadDetail } from "@/states/detailThread/action";
+import { asyncNeutralVoteCommentThreadDetail, asyncUpVoteCommentThreadDetail } from "@/states/detailThread/action";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 
-function useDownVoteComment(defaultValue= ''): [
+function useUpVoteComment(defaultValue= ''): [
     any,
     any,
 ] {
@@ -11,14 +11,14 @@ function useDownVoteComment(defaultValue= ''): [
     const [commentId, setCommentId] = useState<string>(defaultValue);
     const [threadId, setThreadId] = useState<string>(defaultValue);
 
-    const downVoteComment: any = (threadId: string,commentId: string) => {
+    const upVoteComment: any = (threadId: string,commentId: string) => {
         setCommentId(commentId);
         setThreadId(threadId);
-        dispatch(asyncDownVoteCommentThreadDetail(threadId,commentId));
+        dispatch(asyncUpVoteCommentThreadDetail(threadId,commentId));
         setCommentId('');
     }
 
-    const removeDownVoteComment: any = (threadId: string,commentId: string) => {
+    const removeUpVoteComment: any = (threadId: string,commentId: string) => {
         setCommentId(commentId);
         setThreadId(threadId);
         dispatch(asyncNeutralVoteCommentThreadDetail(threadId,commentId));
@@ -26,9 +26,9 @@ function useDownVoteComment(defaultValue= ''): [
     }
 
     return [
-        downVoteComment,
-        removeDownVoteComment,
+        upVoteComment,
+        removeUpVoteComment,
     ]
 }
 
-export default useDownVoteComment;
+export default useUpVoteComment;

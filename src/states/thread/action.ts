@@ -204,7 +204,7 @@ function asyncNeturalVoteThread(threadId: string): any {
 
             myToast.fire({
                 icon: 'success',
-                title: 'Netural vote thread successfully',
+                title: 'Vote removed',
             }) 
         } catch (error: any) {
             myToast.fire({
