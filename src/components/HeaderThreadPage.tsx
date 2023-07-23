@@ -14,9 +14,9 @@ export default function HeaderThreadPage() {
             placeholder="Search thread"
             className="bg-transparent text-white w-52 focus:outline-none"
           />
-          <div className="search-icon">
+          <button className="search-icon hover:cursor-pointer">
             <MdSearch className="w-6 h-6 text-white" />
-          </div>
+          </button>
         </div>
       </div>
     </div>

@@ -67,32 +67,32 @@ export default function InputThread({
   return (
     <div className='hidden'>
       <Dialog open={openModal} handler={onOpenModal}>
-        <div className='flex items-center justify-between px-3'>
-          <DialogHeader>{dialogHeader}</DialogHeader>
+        <div className='flex items-center justify-between rounded-t bg-defaultLightHeaders px-3'>
+          <DialogHeader className='text-white'>{dialogHeader}</DialogHeader>
           <button onClick={onCloseModalHandler}>
             <IconContext.Provider value={{ size: '20px' }}>
-              <IoMdClose />
+              <IoMdClose color='white' />
             </IconContext.Provider>
           </button>
         </div>
-        <DialogBody divider>
+        <DialogBody divider className='bg-light'>
           <div className='grid gap-6'>
             {input &&
               input.map(({ name, type, value, onChange }, index) => (
-                <Input key={index} label={name} name={name} type={type} onChange={onChange} value={value} />
+                <Input key={index} label={name} name={name} type={type} onChange={onChange} value={value}  />
               ))}
             {textArea &&
               textArea.map(({ item, value, onChange }, index) => (
-                <Textarea key={index} label={item} name={item} onChange={onChange} value={value} />
+                <Textarea key={index} label={item} name={item} onChange={onChange} value={value}  />
               ))}
             {option &&
               option.map(({ name, value, onChange }, index) => (
-                <Radio key={index} label={name} name={name} onChange={onChange} value={value} />
+                <Radio key={index} label={name} name={name} onChange={onChange} value={value}  />
               ))}
           </div>
         </DialogBody>
-        <DialogFooter className='space-x-2'>
-          <Button variant='outlined' color='red' onClick={onCloseModalHandler}>
+        <DialogFooter className='space-x-2 bg-defaultLightHeaders rounded-b'>
+          <Button variant='gradient' color='red' onClick={onCloseModalHandler}>
             Tutup
           </Button>
           <Button variant='gradient' color='blue' type='submit' onClick={submitHandler}>
