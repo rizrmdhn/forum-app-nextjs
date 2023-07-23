@@ -2,7 +2,7 @@ import { ChangeEventHandler, FormEventHandler, useState } from "react";
 import { useRouter } from 'next/navigation'
 import { useDispatch } from "react-redux";
 import { asyncSetAuthUser } from "@/states/authUser/action";
-import myToast from "@/components/myToast";
+import { closeModalActionCreator } from "@/states/openModal/action";
 
 function useLogin(defaultValue = ''): [
     string,
@@ -30,6 +30,7 @@ function useLogin(defaultValue = ''): [
     const onSubmit: FormEventHandler<HTMLFormElement> = (event) => {
         event.preventDefault();
         dispatch(asyncSetAuthUser({email, password, router}));
+        dispatch(closeModalActionCreator())
     }
 
     return [

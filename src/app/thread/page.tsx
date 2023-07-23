@@ -8,12 +8,14 @@ import useSelect from '@/hooks/useSelect'
 import MobileThreadCardLoading from '@/loadingComponent/MobileThreadCardLoading'
 import { asyncSetIsPreload } from '@/states/isPreload/action'
 import AddThreadButton from '@/components/AddThreadButton'
+import { openModalActionCreator } from '@/states/openModal/action'
 
 export default function ThreadPage() {
   const authUser = useSelect('authUser')
   const thread = useSelect('thread')
   const isLoading = useSelect('isLoading')
   const isPreload = useSelect('isPreload')
+  const openModal = useSelect('openModal')
 
   const dispatch = useDispatch()
 
@@ -28,6 +30,10 @@ export default function ThreadPage() {
         <div className='h-32 w-32 animate-spin rounded-full border-b-2 border-t-2 border-gray-900'></div>
       </div>
     )
+  }
+
+  const onOpenModal = () => {
+    dispatch(openModalActionCreator())
   }
 
   return (
@@ -48,7 +54,7 @@ export default function ThreadPage() {
             ))}
           </>
         )}
-        {isLoading ? null : authUser ? <AddThreadButton /> : null}
+        {isLoading ? null : authUser ? <AddThreadButton AddNewThread={onOpenModal} /> : null}
       </div>
     </>
   )

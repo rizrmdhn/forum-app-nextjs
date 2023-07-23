@@ -2,9 +2,9 @@ import ReduxProvider from "@/provider/provider";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 
-import "./globals.css";
-import 'animate.css';
 import "react-loading-skeleton/dist/skeleton.css";
+import "./globals.css";
+import 'animate.css'
 
 const inter = Inter({ subsets: ["latin"] });
 

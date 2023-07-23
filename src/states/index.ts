@@ -7,6 +7,7 @@ import leaderboardReducer from "./leaderboards/reducer";
 import authUserReducer from "./authUser/reducer";
 import isLoadingReducer from "./isLoading/reducer";
 import isPreloadReducer from "./isPreload/reducer";
+import openModalReducer from "./openModal/reducer";
 
 export const store = configureStore({
   reducer: {
@@ -18,6 +19,7 @@ export const store = configureStore({
     leaderboard: leaderboardReducer,
     isLoading: isLoadingReducer,
     isPreload: isPreloadReducer,
+    openModal: openModalReducer,
   },
 });
 

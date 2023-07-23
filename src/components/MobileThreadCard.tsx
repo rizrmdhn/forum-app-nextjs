@@ -45,7 +45,7 @@ export default function MobileThreadCard({
         </Link>
       </div>
       <div className='mobile-thread-card__content line-clamp-2 h-11 w-64 hyphens-auto whitespace-normal text-left'>
-        <p className='text-sm'>{body}</p>
+        <p className='text-sm' dangerouslySetInnerHTML={{__html: body}}></p>
       </div>
       <div className='mobile-thread-card__footer flex h-auto w-64 flex-col flex-wrap content-start items-start justify-between gap-y-2'>
         <div className='mobile-thread-card__footer__action__button flex w-32 items-center justify-between'>

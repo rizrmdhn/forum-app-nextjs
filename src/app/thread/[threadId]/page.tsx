@@ -4,23 +4,34 @@ import { asyncGetThreadsDetail } from '@/states/detailThread/action'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useParams } from 'next/navigation'
-import { useEffect } from 'react'
-import { MdThumbUp, MdThumbUpOffAlt, MdThumbDown, MdOutlineThumbDownOffAlt, MdOutlineModeComment } from 'react-icons/md'
+import { use, useEffect } from 'react'
+import {
+  MdThumbUp,
+  MdThumbUpOffAlt,
+  MdThumbDown,
+  MdOutlineThumbDownOffAlt,
+  MdOutlineModeComment,
+  MdThumbDownOffAlt,
+} from 'react-icons/md'
 import { useDispatch } from 'react-redux'
 import Skeleton from 'react-loading-skeleton'
 import moment from 'moment'
 import SubmitButton from '@/components/SubmitButton'
 import 'moment/locale/id'
+import useCreateComment from '@/hooks/useCreateComment'
 
 export default function DetailThread() {
   const authUser = useSelect('authUser')
   const threadDetail = useSelect('threadDetail')
   const isLoading = useSelect('isLoading')
 
+  const [setThreadIdHandler, content, onChangeContent, onSubmitComment] = useCreateComment()
+
   const { threadId } = useParams()
   const dispatch = useDispatch()
 
   useEffect(() => {
+    setThreadIdHandler(threadDetail.id)
     dispatch(asyncGetThreadsDetail(threadId))
   }, [dispatch, threadId])
 
@@ -88,8 +99,13 @@ export default function DetailThread() {
               <Skeleton width={150} height={20} baseColor='#393E46' />
             ) : (
               <>
-                <textarea className='h-14 w-full rounded border border-gray-400 px-3 text-xs' placeholder='Komentar' />
-                <SubmitButton />
+                <textarea
+                  className='h-14 w-full rounded border border-gray-400 px-3 text-xs'
+                  placeholder='Komentar'
+                  value={content}
+                  onChange={onChangeContent}
+                />
+                <SubmitButton onSubmitComment={onSubmitComment} />
               </>
             )}
           </div>
@@ -117,72 +133,74 @@ export default function DetailThread() {
             </p>
           )}
         </div>
-        {threadDetail?.comments.map((comment: any) => (
-          <div className='detail-thread__comment-container__list mt-4 h-56 w-full overflow-y-scroll' key={comment.id}>
-            <div className='detail-thread__comment-container__list__item flex flex-col items-start gap-4'>
-              <div className='detail-thread__comment-container__list__item__user flex w-full items-center justify-between'>
-                <div
-                  className='detail-thread__comment-container__list__item__user__detail
+        <div className='detail-thread__comment-container mt-4 h-56 w-full overflow-y-scroll'>
+          {threadDetail?.comments.map((comment: any) => (
+            <div className='detail-thread__comment-container__list mt-4 w-full overflow-y-scroll' key={comment.id}>
+              <div className='detail-thread__comment-container__list__item flex flex-col items-start gap-4'>
+                <div className='detail-thread__comment-container__list__item__user flex w-full items-center justify-between'>
+                  <div
+                    className='detail-thread__comment-container__list__item__user__detail
              flex w-fit flex-row'
-                >
+                  >
+                    {isLoading ? (
+                      <Skeleton width={25} height={25} circle baseColor='#393E46' className='mr-5' />
+                    ) : (
+                      <div className='detail-thread__comment-container__list__item__user__avatar mr-5 flex items-center'>
+                        <Image
+                          className='h-8 w-8 rounded-full'
+                          src={comment.owner.avatar}
+                          alt='avatar'
+                          width={25}
+                          height={25}
+                        />
+                      </div>
+                    )}
+                    {isLoading ? (
+                      <Skeleton width={100} height={20} baseColor='#393E46' />
+                    ) : (
+                      <div className='detail-thread__comment-container__list__item__user__name flex items-center'>
+                        <p className='text-sm font-bold'>{comment.owner.name}</p>
+                      </div>
+                    )}
+                  </div>
+                  <div className='detail-thread__comment-container__list__item__user__posted flex items-center'>
+                    {isLoading ? (
+                      <Skeleton width={100} height={20} baseColor='#393E46' />
+                    ) : (
+                      <p className='text-xs font-normal text-black opacity-50'>{moment(comment.createdAt).fromNow()}</p>
+                    )}
+                  </div>
+                </div>
+                <div className='detail-thread__comment-container__list__item__content flex w-full items-center justify-between'>
                   {isLoading ? (
-                    <Skeleton width={25} height={25} circle baseColor='#393E46' className='mr-5' />
+                    <Skeleton width={200} height={20} baseColor='#393E46' />
                   ) : (
-                    <div className='detail-thread__comment-container__list__item__user__avatar mr-5 flex items-center'>
-                      <Image
-                        className='h-8 w-8 rounded-full'
-                        src={comment.owner.avatar}
-                        alt='avatar'
-                        width={25}
-                        height={25}
-                      />
-                    </div>
-                  )}
-                  {isLoading ? (
-                    <Skeleton width={100} height={20} baseColor='#393E46' />
-                  ) : (
-                    <div className='detail-thread__comment-container__list__item__user__name flex items-center'>
-                      <p className='text-sm font-bold'>{comment.owner.name}</p>
-                    </div>
+                    <p
+                      className='text-sm font-normal text-black'
+                      dangerouslySetInnerHTML={{ __html: comment.content }}
+                    ></p>
                   )}
                 </div>
-                <div className='detail-thread__comment-container__list__item__user__posted flex items-center'>
+                <div className='detail-thread__comment-container__list__item__action flex items-center gap-4'>
                   {isLoading ? (
-                    <Skeleton width={100} height={20} baseColor='#393E46' />
+                    <Skeleton width={125} height={20} baseColor='#393E46' />
                   ) : (
-                    <p className='text-xs font-normal text-black opacity-50'>{moment(comment.createdAt).fromNow()}</p>
+                    <>
+                      <button className='detail-thread__comment-container__list__item__action__like flex w-fit items-center gap-2 rounded bg-light p-1'>
+                        <MdThumbUpOffAlt className='h-5 w-5 text-black' />
+                        <p className='text-sm font-normal text-black'>{comment.upVotesBy.length}</p>
+                      </button>
+                      <button className='detail-thread__comment-container__list__item__action__dislike flex w-fit items-start gap-2 rounded bg-light p-1'>
+                        <MdThumbDownOffAlt className='h-5 w-5 text-black' />
+                        <p className='text-sm font-normal text-black'>{comment.downVotesBy.length}</p>
+                      </button>
+                    </>
                   )}
                 </div>
-              </div>
-              <div className='detail-thread__comment-container__list__item__content flex w-full items-center justify-between'>
-                {isLoading ? (
-                  <Skeleton width={200} height={20} baseColor='#393E46' />
-                ) : (
-                  <p
-                    className='text-sm font-normal text-black'
-                    dangerouslySetInnerHTML={{ __html: comment.content }}
-                  ></p>
-                )}
-              </div>
-              <div className='detail-thread__comment-container__list__item__action flex items-center gap-4'>
-                {isLoading ? (
-                  <Skeleton width={125} height={20} baseColor='#393E46' />
-                ) : (
-                  <>
-                    <button className='detail-thread__comment-container__list__item__action__like flex w-fit items-center gap-2 rounded bg-light p-1'>
-                      <MdThumbUp className='h-5 w-5 text-black' />
-                      <p className='text-sm font-normal text-black'>{comment.upVotesBy.length}</p>
-                    </button>
-                    <button className='detail-thread__comment-container__list__item__action__dislike flex w-fit items-start gap-2 rounded bg-light p-1'>
-                      <MdThumbDown className='h-5 w-5 text-black' />
-                      <p className='text-sm font-normal text-black'>{comment.downVotesBy.length}</p>
-                    </button>
-                  </>
-                )}
               </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     </div>
   )

@@ -143,46 +143,58 @@ const api = (() => {
             body: string,
             category?: string
         }) {
-            const response = await _fetchWithAuth(`${baseUrl}/threads`, {
+            let createThread;
+            await _fetchWithAuth(`${baseUrl}/threads`, {
                 method: 'POST',
-                body:{
+                data:{
                     title,
                     body,
                     category
                 }
+            }).catch((error) => {
+                if (error.response) {
+                    
+                    const {message} = error.response.data
+
+                    throw new Error(message)
+                }
+            }).then((response) => {
+                const {data}:any = response
+
+                const {data: {thread}} = data
+
+                createThread = thread
             })
 
-            const {status, message} = response.data
-
-            if (status !== 'success') {
-                throw new Error(message)
-            }
-
-            const {data : {thread}} = response.data
-
-            return thread
+           return createThread
         }
 
         async function createComment({threadId, content}: {
             threadId: string,
             content: string
         }) {
-            const response = await _fetchWithAuth(`${baseUrl}/threads/${threadId}/comments`, {
+            let createComment;
+           await _fetchWithAuth(`${baseUrl}/threads/${threadId}/comments`, {
                 method: 'POST',
-                body: {
+                data: {
                     content
                 }
+            }).catch((error) => {
+                if (error.response) {
+                    
+                    const {message} = error.response.data
+
+                    throw new Error(message)
+                }
+            }).then((response) => {
+                const {data}:any = response
+
+                const {data: {comment}} = data
+
+                createComment = comment
             })
 
-            const {status, message} = response.data
-
-            if (status !== 'success') {
-                throw new Error(message)
-            }
-
-            const {data: {comment}} = response.data
-
-            return comment
+            return createComment
         }
 
         async function upVoteThread(threadId: string) {

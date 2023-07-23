@@ -9,7 +9,8 @@ function useSelect(state: any) {
     const leaderboard = useSelector<any, any>((state: any) => state.leaderboard)
     const isLoading = useSelector<any, any>((state: any) => state.isLoading)
     const isPreload = useSelector<any, any>((state: any) => state.isPreload)
-
+    const openModal = useSelector<any, any>((state: any) => state.openModal)
+    
     switch (state) {
         case 'showMenu':
             return showMenu
@@ -27,6 +28,8 @@ function useSelect(state: any) {
             return isLoading
         case 'isPreload':
             return isPreload
+        case 'openModal':
+            return openModal
     }
     
 }

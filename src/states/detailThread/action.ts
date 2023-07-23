@@ -4,6 +4,7 @@ import api from '@/utils/api';
 import { AppDispatch, AppGetState } from "..";
 import { notFound } from "next/navigation";
 import { setIsLoadingActionCreator, unsetIsLoadingActionCreator } from "../isLoading/action";
+import myToast from "@/components/myToast";
 
 enum ActionType {
     RECEIVE_THREADS_DETAIL = 'RECEIVE_THREADS_DETAIL',
@@ -273,16 +274,24 @@ function asyncNeutralVoteThreadDetail(threadId: string): any {
 }
 
 function asyncCreateCommentThreadDetail(threadId: string, content: string): any {
-    return async (dispatch: AppDispatch, getState: AppGetState) => {
+    return async (dispatch: AppDispatch) => {
         dispatch(showLoading())
         try {
-            const comment = await api.createComment({ threadId, content });
+            const comment:any = await api.createComment({ threadId, content });
             dispatch(createCommentThreadDetailActionCreator(threadId, comment));
 
             const threadDetail = await api.getThreadById(threadId)
             dispatch(receiveThreadsDetailActionCreator(threadDetail))
+
+            myToast.fire({
+                icon: 'success',
+                title: 'Comment created successfully',
+            })
         } catch (error: any) {
-            throw new Error(error)
+            myToast.fire({
+                icon: 'error',
+                title: error.message,
+            })
         }
         dispatch(hideLoading())
     }       
