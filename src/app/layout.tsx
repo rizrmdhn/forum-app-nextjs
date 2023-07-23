@@ -1,8 +1,10 @@
 import ReduxProvider from "@/provider/provider";
-import "./globals.css";
-import "react-loading-skeleton/dist/skeleton.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+
+import "./globals.css";
+import 'animate.css';
+import "react-loading-skeleton/dist/skeleton.css";
 
 const inter = Inter({ subsets: ["latin"] });
 
