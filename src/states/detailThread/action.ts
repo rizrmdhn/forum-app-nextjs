@@ -2,7 +2,6 @@ import { AnyAction } from "redux";
 import { hideLoading, showLoading } from 'react-redux-loading-bar';
 import api from '@/utils/api';
 import { AppDispatch, AppGetState } from "..";
-import { notFound } from "next/navigation";
 import { setIsLoadingActionCreator, unsetIsLoadingActionCreator } from "../isLoading/action";
 import myToast from "@/components/myToast";
 
@@ -210,7 +209,10 @@ function asyncGetThreadsDetail(threadId: any): any {
             const threadDetail = await api.getThreadById(threadId);
             dispatch(receiveThreadsDetailActionCreator(threadDetail));
         } catch (error: any) {
-            notFound();
+            myToast.fire({
+                icon: 'error',
+                title: error.message,
+            })
         }
         dispatch(hideLoading());
         setTimeout(() => {
@@ -224,14 +226,25 @@ function asyncUpVoteThreadDetail(threadId: string): any {
         dispatch(showLoading());
         const {authUser} = getState();
         if (!authUser) {
-            throw new Error('User is not authenticated');
+            return myToast.fire({
+                icon: 'error',
+                title: 'You need to login to in order to vote',
+            });
         }
 
         dispatch(upVoteThreadDetailActionCreator(threadId, authUser.id));
         try {
             await api.upVoteThread(threadId);
+
+            myToast.fire({
+                icon: 'success',
+                title: 'Upvoted successfully',
+            });
         } catch (error: any) {
-            throw new Error(error);
+            myToast.fire({
+                icon: 'error',
+                title: error.message,
+            });
         }
         dispatch(hideLoading());
     }
@@ -242,14 +255,25 @@ function asyncDownVoteThreadDetail(threadId: string): any {
         dispatch(showLoading());
         const {authUser} = getState();
         if (!authUser) {
-            throw new Error('User is not authenticated');
+            return myToast.fire({
+                icon: 'error',
+                title: 'You need to login to in order to vote',
+            });
         }
 
         dispatch(downVoteThreadDetailActionCreator(threadId, authUser.id));
         try {
             await api.downVoteThread(threadId);
+
+            myToast.fire({
+                icon: 'success',
+                title: 'Downvoted successfully',
+            });
         } catch (error: any) {
-            throw new Error(error);
+            myToast.fire({
+                icon: 'error',
+                title: error.message,
+            });
         }
         dispatch(hideLoading());
     }
@@ -260,14 +284,25 @@ function asyncNeutralVoteThreadDetail(threadId: string): any {
         dispatch(showLoading());
         const {authUser} = getState();
         if (!authUser) {
-            throw new Error('User is not authenticated');
+            return myToast.fire({
+                icon: 'error',
+                title: 'You need to login to in order to vote',
+            });
         }
 
         dispatch(neutralVoteThreadDetailActionCreator(threadId, authUser.id));
         try {
             await api.neturalVoteThread(threadId);
+
+            myToast.fire({
+                icon: 'success',    
+                title: 'Neutral vote successfully',
+            }) 
         } catch (error: any) {
-            throw new Error(error);
+            myToast.fire({
+                icon: 'error',
+                title: error.message,
+            });
         }
         dispatch(hideLoading());
     }
@@ -302,7 +337,7 @@ function asyncUpVoteCommentThreadDetail(threadId: string, commentId: string): an
         dispatch(showLoading());
         const {authUser} = getState();
         if (!authUser) {
-            throw new Error('User is not authenticated');
+            throw new Error('You need to login to in order to vote');
         }
 
         dispatch(upVoteCommentThreadDetailActionCreator(threadId, commentId, authUser.id));
@@ -320,7 +355,7 @@ function asyncDownVoteCommentThreadDetail(threadId: string, commentId: string): 
         dispatch(showLoading());
         const {authUser} = getState();
         if (!authUser) {
-            throw new Error('User is not authenticated');
+            throw new Error('You need to login to in order to vote');
         }
 
         dispatch(downVoteCommentThreadDetailActionCreator(threadId, commentId, authUser.id));
@@ -338,7 +373,7 @@ function asyncNeutralVoteCommentThreadDetail(threadId: string, commentId: string
         dispatch(showLoading());
         const {authUser} = getState();
         if (!authUser) {
-            throw new Error('User is not authenticated');
+            throw new Error('You need to login to in order to vote');
         }
 
         dispatch(neutralVoteCommentThreadDetailActionCreator(threadId, commentId, authUser.id));

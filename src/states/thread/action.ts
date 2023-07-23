@@ -3,6 +3,7 @@ import { hideLoading, showLoading } from 'react-redux-loading-bar';
 import { IThread } from './reducer';
 import api from '@/utils/api';
 import myToast from "@/components/myToast";
+import { AppDispatch, AppGetState } from "..";
 
 enum ActionType {
     RECEIVE_THREAD = 'RECEIVE_THREAD',
@@ -105,7 +106,7 @@ function asyncCreateThread({title, body, category}: {
     body: string,
     category: string,   
 }): any {
-    return async (dispatch: any) => {
+    return async (dispatch: AppDispatch) => {
         dispatch(showLoading());
         try {
         const threads: any = await api.createThread({title, body, category});
@@ -125,46 +126,92 @@ function asyncCreateThread({title, body, category}: {
     }
 }
 
-function asyncUpVoteThread(threadId: string) {
-    return async (dispatch: any, getState: any) => {
+function asyncUpVoteThread(threadId: string): any {
+    return async (dispatch: AppDispatch, getState: AppGetState) => {
         dispatch(showLoading());
-        const { authedUser } = getState();
-        dispatch(upVoteThreadActionCreator(threadId, authedUser.id));
+        const { authUser } = getState();
+        if (!authUser) {
+            return myToast.fire({
+                icon: 'error',
+                title: 'You need to login to in order to vote',
+            });
+        }
+
+        dispatch(upVoteThreadActionCreator(threadId, authUser.id));
         try {
-            const threads = await api.upVoteThread(threadId);
-            dispatch(upVoteThreadActionCreator(threadId, authedUser.id));
+            await api.upVoteThread(threadId);
+
+            myToast.fire({
+                icon: 'success',
+                title: 'Up vote thread successfully',
+            });
         } catch (error: any) {
-            throw new Error(error);
+            myToast.fire({
+                icon: 'error',
+                title: error.message,
+            });
+            dispatch(upVoteThreadActionCreator(threadId, authUser.id));
         }
         dispatch(hideLoading());
     }
 }
 
-function asyncDownVoteThread(threadId: string) {
-    return async (dispatch: any, getState: any) => {
+function asyncDownVoteThread(threadId: string): any {
+    return async (dispatch: AppDispatch, getState: AppGetState) => {
         dispatch(showLoading());
-        const { authedUser } = getState();
-        dispatch(downVoteThreadActionCreator(threadId, authedUser.id));
+        const { authUser } = getState();
+        if (!authUser) {
+            return myToast.fire({
+                icon: 'error',
+                title: 'You need to login to in order to vote',
+            });
+        }
+
+        dispatch(downVoteThreadActionCreator(threadId, authUser.id));
         try {
-            const threads = await api.downVoteThread(threadId);
-            dispatch(downVoteThreadActionCreator(threadId, authedUser.id));
+            await api.downVoteThread(threadId);
+
+            myToast.fire({
+                icon: 'success',
+                title: 'Down vote thread successfully',
+            }) 
         } catch (error: any) {
-            throw new Error(error);
+            myToast.fire({
+                icon: 'error',
+                title: error.message,
+            });
+            dispatch(downVoteThreadActionCreator(threadId, authUser.id));
         }
         dispatch(hideLoading());
     }
 }
 
-function asyncNeturalVoteThread(threadId: string) {
-    return async (dispatch: any, getState: any) => {
+function asyncNeturalVoteThread(threadId: string): any {
+    return async (dispatch: AppDispatch, getState: AppGetState) => {
         dispatch(showLoading());
-        const { authedUser } = getState();
-        dispatch(neturalVoteThreadActionCreator(threadId, authedUser.id));
+        const { authUser } = getState();
+        if (!authUser) {
+            return myToast.fire({
+                icon: 'error',
+                title: 'You need to login to in order to vote',
+            });
+        }
+
+
+        dispatch(neturalVoteThreadActionCreator(threadId, authUser.id));
         try {
-            const threads = await api.neturalVoteThread(threadId);
-            dispatch(neturalVoteThreadActionCreator(threadId, authedUser.id));
+            await api.neturalVoteThread(threadId);
+
+            myToast.fire({
+                icon: 'success',
+                title: 'Netural vote thread successfully',
+            }) 
         } catch (error: any) {
-            throw new Error(error);
+            myToast.fire({
+                icon: 'error',
+                title: error.message,
+            });
+            dispatch(neturalVoteThreadActionCreator(threadId, authUser.id));
         }
         dispatch(hideLoading());
     }

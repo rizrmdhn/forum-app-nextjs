@@ -3,7 +3,7 @@ import useSelect from '@/hooks/useSelect'
 import { asyncGetThreadsDetail } from '@/states/detailThread/action'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useParams } from 'next/navigation'
+import { notFound, useParams } from 'next/navigation'
 import { use, useEffect } from 'react'
 import {
   MdThumbUp,
@@ -19,21 +19,50 @@ import moment from 'moment'
 import SubmitButton from '@/components/SubmitButton'
 import 'moment/locale/id'
 import useCreateComment from '@/hooks/useCreateComment'
+import { asyncSetIsPreload } from '@/states/isPreload/action'
+import useUpVoteDetailThread from '@/hooks/useUpVoteDetailThread'
+import useDownVoteDetailThread from '@/hooks/useDownVoteDetailThread'
 
 export default function DetailThread() {
   const authUser = useSelect('authUser')
   const threadDetail = useSelect('threadDetail')
   const isLoading = useSelect('isLoading')
 
+  const [upVoteThread, removeUpVoteThread] = useUpVoteDetailThread()
+  const [downVoteThread, removeDownVoteThread] = useDownVoteDetailThread()
   const [setThreadIdHandler, content, onChangeContent, onSubmitComment] = useCreateComment()
 
   const { threadId } = useParams()
   const dispatch = useDispatch()
 
   useEffect(() => {
-    setThreadIdHandler(threadDetail.id)
+    dispatch(asyncSetIsPreload())
+    setThreadIdHandler(threadDetail?.id)
     dispatch(asyncGetThreadsDetail(threadId))
   }, [dispatch, threadId])
+
+  const isUpVoted = threadDetail?.upVotesBy.includes(authUser?.id)
+  const isDownVoted = threadDetail?.downVotesBy.includes(authUser?.id)
+
+  const handleUpVote = (id: string) => {
+    if (isUpVoted) {
+      // remove upvote
+      removeUpVoteThread(id)
+    } else {
+      // add upvote
+      upVoteThread(id)
+    }
+  }
+
+  const handleDownVote = (id: string) => {
+    if (isDownVoted) {
+      // remove downvote
+      removeDownVoteThread(id)
+    } else {
+      // add downvote
+      downVoteThread(id)
+    }
+  }
 
   return (
     <div className='detail-thread-page flex h-defaultMobileHeight w-screen flex-col items-start gap-3 bg-light px-7 py-3'>
@@ -60,12 +89,26 @@ export default function DetailThread() {
           <Skeleton width={150} height={20} baseColor='#393E46' />
         ) : (
           <>
-            <button className='detail-thread__action-button__like flex w-fit items-center gap-2 rounded bg-light p-1'>
-              <MdThumbUpOffAlt className='h-5 w-5 text-black' />
+            <button
+              className='detail-thread__action-button__like flex w-fit items-center gap-2 rounded bg-light p-1'
+              onClick={() => handleUpVote(threadDetail?.id)}
+            >
+              {isUpVoted ? (
+                <MdThumbUp className='h-5 w-5 text-black' />
+              ) : (
+                <MdThumbUpOffAlt className='h-5 w-5 text-black' />
+              )}
               <p className='text-sm font-normal text-black'>{threadDetail?.upVotesBy.length}</p>
             </button>
-            <button className='detail-thread__action-button__dislike flex w-fit items-center gap-2 rounded bg-light p-1'>
-              <MdOutlineThumbDownOffAlt className='h-5 w-5 text-black' />
+            <button
+              className='detail-thread__action-button__dislike flex w-fit items-center gap-2 rounded bg-light p-1'
+              onClick={() => handleDownVote(threadDetail?.id)}
+            >
+              {isDownVoted ? (
+                <MdThumbDown className='h-5 w-5 text-black' />
+              ) : (
+                <MdOutlineThumbDownOffAlt className='h-5 w-5 text-black' />
+              )}
               <p className='text-sm font-normal text-black'>{threadDetail?.downVotesBy.length}</p>
             </button>
             <button className='detail-thread__action-button__share flex w-fit items-center gap-2 rounded bg-light p-1'>

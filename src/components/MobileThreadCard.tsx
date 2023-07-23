@@ -5,8 +5,11 @@ import Tags from './Tags'
 import { MdThumbUp, MdThumbUpOffAlt, MdThumbDown, MdOutlineThumbDownOffAlt, MdOutlineModeComment } from 'react-icons/md'
 import useSelect from '@/hooks/useSelect'
 import Link from 'next/link'
-import 'moment/locale/id' 
-
+import 'moment/locale/id'
+import useUpVoteThread from '@/hooks/useUpVoteThread'
+import { useDispatch } from 'react-redux'
+import { asyncNeturalVoteThread } from '@/states/thread/action'
+import useDownVoteThread from '@/hooks/useDownVoteThread'
 
 type MobileThreadCardProps = {
   id: string
@@ -31,9 +34,39 @@ export default function MobileThreadCard({
   downVotesBy,
   totalComments,
 }: MobileThreadCardProps) {
+  const authUser = useSelect('authUser')
   const user = useSelect('user')
 
+  const dispatch = useDispatch()
+
+  const [upVoteThread, removeUpVoteThread] = useUpVoteThread()
+  const [downVoteThread, removeDownVoteThread] = useDownVoteThread()
+
   const creatorName = user.find((user: any) => user.id === ownerId).name
+
+  const isUpVoted = upVotesBy.includes(authUser?.id)
+  const isDownVoted = downVotesBy.includes(authUser?.id)
+
+  const handleUpVote = (id: string) => {
+    if (isUpVoted) {
+      // remove upvote
+      removeUpVoteThread(id)
+    } else {
+      // add upvote
+      upVoteThread(id)
+    }
+  }
+
+  const handleDownVote = (id: string) => {
+    if (isDownVoted) {
+      // remove downvote
+      removeDownVoteThread(id)
+    } else {
+      // add downvote
+      downVoteThread(id)
+    }
+  }
+
   return (
     <div className='mobile-thread-card flex flex-col items-start gap-2 rounded-xl bg-threadCard px-7 py-3' title={id}>
       <div className='mobile-thread-card__tags'>
@@ -45,16 +78,30 @@ export default function MobileThreadCard({
         </Link>
       </div>
       <div className='mobile-thread-card__content line-clamp-2 h-11 w-64 hyphens-auto whitespace-normal text-left'>
-        <p className='text-sm' dangerouslySetInnerHTML={{__html: body}}></p>
+        <p className='text-sm' dangerouslySetInnerHTML={{ __html: body }}></p>
       </div>
       <div className='mobile-thread-card__footer flex h-auto w-64 flex-col flex-wrap content-start items-start justify-between gap-y-2'>
         <div className='mobile-thread-card__footer__action__button flex w-32 items-center justify-between'>
-          <button className='mobile-thread-card__footer__action__button__like mx-3 flex items-center gap-2'>
-            <MdThumbUpOffAlt className='h-6 w-6 text-black' />
+          <button
+            className='mobile-thread-card__footer__action__button__like mx-3 flex items-center gap-2'
+            onClick={() => handleUpVote(id)}
+          >
+            {isUpVoted ? (
+              <MdThumbUp className='h-6 w-6 text-black' />
+            ) : (
+              <MdThumbUpOffAlt className='h-6 w-6 text-black' />
+            )}
             <p>{upVotesBy.length}</p>
           </button>
-          <button className='mobile-thread-card__footer__action__button__dislike mx-3 flex items-center gap-2'>
-            <MdOutlineThumbDownOffAlt className='h-6 w-6 text-black' />
+          <button
+            className='mobile-thread-card__footer__action__button__dislike mx-3 flex items-center gap-2'
+            onClick={() => handleDownVote(id)}
+          >
+            {isDownVoted ? (
+              <MdThumbDown className='h-6 w-6 text-black' />
+            ) : (
+              <MdOutlineThumbDownOffAlt className='h-6 w-6 text-black' />
+            )}
             <p>{downVotesBy.length}</p>
           </button>
           <button className='mobile-thread-card__footer__action__button__share mx-3 flex items-center gap-2'>
