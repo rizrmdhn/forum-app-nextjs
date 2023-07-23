@@ -17,9 +17,7 @@ export default function MobileMenu() {
   const dispatch = useDispatch()
 
   const closeMenu = () => {
-    setTimeout(() => {
-      dispatch(unsetShowMenuActionCreator())
-    }, 500)
+    dispatch(unsetShowMenuActionCreator())
   }
 
   const onLogout = () => {
@@ -38,6 +36,26 @@ export default function MobileMenu() {
       dispatch(setLocaleActionCreator(locale))
     } else {
       dispatch(setLocaleActionCreator('id'))
+    }
+    // check if menu is clicked in outside of the menu
+    const menu = document.querySelector('.mobile-menu')
+    const menuItem = document.querySelector('.mobile-menu-item')
+
+    const iconMenu = document.querySelector('.icon-menu')
+
+    const handleClickOutside = (event: any) => {
+      if (iconMenu && iconMenu.contains(event.target)) {
+        return
+      }
+      if (menu && !menu.contains(event.target) && menuItem && !menuItem.contains(event.target)) {
+        closeMenu()
+      }
+    }
+
+    document.addEventListener('mousedown', handleClickOutside)
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside)
     }
   }, [dispatch])
 

@@ -10,6 +10,8 @@ import { asyncSetIsPreload } from '@/states/isPreload/action'
 import AddThreadButton from '@/components/AddThreadButton'
 import { openModalActionCreator } from '@/states/openModal/action'
 import ThreadPageCategoryList from '@/components/ThreadPageCategoryList'
+import { unsetShowMenuActionCreator } from '@/states/setShowMenu/action'
+import { setShowCategoryActionCreator } from '@/states/showCategory/action'
 
 export default function ThreadPage() {
   const authUser = useSelect('authUser')

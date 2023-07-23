@@ -6,6 +6,7 @@ import MobileMenu from '@/components/MobileMenu'
 import useCreateThread from '@/hooks/useCreateThread'
 import useSelect from '@/hooks/useSelect'
 import { setLocaleActionCreator } from '@/states/locale/action'
+import { unsetShowMenuActionCreator } from '@/states/setShowMenu/action'
 import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 

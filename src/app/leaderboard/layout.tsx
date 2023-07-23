@@ -5,6 +5,7 @@ import HeaderLeaderboardPage from '@/components/HeaderLeaderboardPage'
 import MobileMenu from '@/components/MobileMenu'
 import useSelect from '@/hooks/useSelect'
 import { setLocaleActionCreator } from '@/states/locale/action'
+import { unsetShowMenuActionCreator } from '@/states/setShowMenu/action'
 import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 

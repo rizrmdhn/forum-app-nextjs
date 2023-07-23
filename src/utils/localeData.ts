@@ -16,6 +16,7 @@ export interface ILocaleData {
     textMenu: string;
     textLeaderboardMenu: string;
     textLeaderboard: string;
+    textCategoryList: string;
     
 
     // For Forum
@@ -80,7 +81,8 @@ const localeData: {[locale: string]: ILocaleData} = {
         textComment: 'Komentar',
         textGiveComment: 'Beri komentar',
         textLoginToGiveComment: 'untuk memberi komentar',
-        textLoginToVote: 'Login untuk melakukan vote'
+        textLoginToVote: 'Login untuk melakukan vote',
+        textCategoryList: 'Daftar Kategori'
     },
     en:{
         textLogin: 'Login',
@@ -109,7 +111,8 @@ const localeData: {[locale: string]: ILocaleData} = {
         textComment: 'Comment',
         textGiveComment: 'Send comment',
         textLoginToGiveComment: 'to comment',
-        textLoginToVote: 'Login to vote'
+        textLoginToVote: 'Login to vote',
+        textCategoryList: 'Category List'
     }
 };
 
