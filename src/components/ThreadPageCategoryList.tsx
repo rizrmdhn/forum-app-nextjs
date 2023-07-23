@@ -1,8 +1,6 @@
 import useLocale from '@/hooks/useLocale'
 import useSelect from '@/hooks/useSelect'
 import { setFilterThreadByCategoryActionCreator } from '@/states/filterThreadByCategory/action'
-import { unsetShowMenuActionCreator } from '@/states/setShowMenu/action'
-import { use, useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 
 export default function ThreadPageCategoryList({ category }: { category: string[] }) {
@@ -23,7 +21,7 @@ export default function ThreadPageCategoryList({ category }: { category: string[
       dispatch(setFilterThreadByCategoryActionCreator(category))
     }
   }
-  
+
   return (
     <div className='category-list-menu fixed flex max-h-screen w-32 flex-col rounded-ee-xl bg-defaultLightHeaders py-4'>
       <div className='category-list-menu__title w-full'>

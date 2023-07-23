@@ -1,3 +1,4 @@
+import { closeModalActionCreator } from "@/states/openModal/action";
 import { asyncCreateThread } from "@/states/thread/action";
 import { ChangeEventHandler, MouseEventHandler, useState } from "react";
 import { useDispatch } from "react-redux";
@@ -35,6 +36,7 @@ function useCreateThread(defaultValue= ''): [
         setTitle('');
         setBody('');
         setCategory('');
+        dispatch(closeModalActionCreator());
     }
 
     return [
