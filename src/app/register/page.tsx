@@ -1,8 +1,26 @@
 'use client'
 import useRegister from '@/hooks/useRegister'
+import useSelect from '@/hooks/useSelect'
+import { asyncSetIsPreload } from '@/states/isPreload/action'
+import { useRouter } from 'next/navigation'
+import { useEffect } from 'react'
+import { useDispatch } from 'react-redux'
 
 export default function RegisterPage() {
+  const authUser = useSelect('authUser')
+
   const [name, onChangeName, email, onChangeEmail, password, onChangePassword, onSubmit] = useRegister()
+
+  const router = useRouter()
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(asyncSetIsPreload())
+
+    if (authUser) {
+      router.push('/thread')
+    }
+  }, [dispatch])
 
   return (
     <div className='register-page container'>

@@ -1,16 +1,32 @@
 'use client'
 import useLogin from '@/hooks/useLogin'
+import useSelect from '@/hooks/useSelect'
+import { asyncSetIsPreload } from '@/states/isPreload/action'
+import { useRouter } from 'next/navigation'
+import { useEffect } from 'react'
+import { useDispatch } from 'react-redux'
 
 export default function LoginPage() {
+  const authUser = useSelect('authUser')
+
   const [email, onChangeEmail, password, onChangePassword, onSubmit] = useLogin()
+
+  const router = useRouter()
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(asyncSetIsPreload())
+
+    if (authUser) {
+      router.push('/thread')
+    }
+  }, [dispatch])
 
   return (
     <div className='login-page container'>
       <div className='flex h-screen w-full flex-col items-center justify-center gap-8 bg-light'>
         <div className='text-title text-4xl font-normal'>LOGIN</div>
-        <form className='input-login container flex flex-col items-center justify-center gap-4'
-        onSubmit={onSubmit}
-        >
+        <form className='input-login container flex flex-col items-center justify-center gap-4' onSubmit={onSubmit}>
           <div className='email-container w-72'>
             <input
               type='text'
