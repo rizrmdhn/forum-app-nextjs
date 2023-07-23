@@ -9,7 +9,6 @@ import { useDispatch } from 'react-redux'
 
 export default function HeaderThreadPage() {
   const showCategory = useSelect('showCategory')
-  console.log('🚀 ~ file: HeaderThreadPage.tsx:12 ~ HeaderThreadPage ~ showCategory:', showCategory)
   const threadTitle = useSelect('threadTitle')
 
   const { textSearchThread } = useLocale()
@@ -36,8 +35,6 @@ export default function HeaderThreadPage() {
     // check if menu is clicked in outside of the menu
     const menu = document.querySelector('.category-list-menu')
     const menuButton = document.querySelector('.category-list-menu__list')
-
-    const iconMenu = document.querySelector('.icon-filter-by-category')
 
     const handleClickOutside = (event: any) => {
       if (menu && !menu.contains(event.target) && menuButton && !menuButton.contains(event.target)) {
