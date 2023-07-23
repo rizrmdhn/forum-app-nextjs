@@ -17,6 +17,7 @@ export default function ThreadPage() {
   const isLoading = useSelect('isLoading')
   const isPreload = useSelect('isPreload')
   const showCategory = useSelect('showCategory')
+  const category = useSelect('category')
 
   const dispatch = useDispatch()
 
@@ -39,6 +40,8 @@ export default function ThreadPage() {
 
   const categoryList = thread.map((thread: any) => thread.category)
 
+  const filteredThread = thread.filter((thread: any) => thread.category.toLowerCase().includes(category.toLowerCase()))
+
   return (
     <>
       <HeaderThreadPage />
@@ -53,7 +56,7 @@ export default function ThreadPage() {
           </>
         ) : (
           <>
-            {thread.map((thread: any) => (
+            {filteredThread.map((thread: any) => (
               <MobileThreadCard key={thread.id} {...thread} />
             ))}
           </>

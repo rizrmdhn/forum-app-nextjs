@@ -3,6 +3,7 @@ import setShowMenuReducer from "./setShowMenu/reducer";
 import showCategoryReducer from "./showCategory/reducer";
 import threadReducer from "./thread/reducer";
 import userReducer from "./user/reducer";
+import filterThreadByCategoryReducer from "./filterThreadByCategory/reducer";
 import threadDetailReducer from "./detailThread/reducer";
 import leaderboardReducer from "./leaderboards/reducer";
 import authUserReducer from "./authUser/reducer";
@@ -17,6 +18,7 @@ export const store = configureStore({
     authUser: authUserReducer,
     thread: threadReducer,
     user: userReducer,
+    category: filterThreadByCategoryReducer,
     threadDetail: threadDetailReducer,
     leaderboard: leaderboardReducer,
     isLoading: isLoadingReducer,

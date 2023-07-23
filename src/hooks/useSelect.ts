@@ -6,6 +6,7 @@ function useSelect(state: any) {
     const authUser = useSelector<any, any>((state: any) => state.authUser)
     const thread = useSelector<any, any>((state: any) => state.thread)
     const user = useSelector<any, any>((state: any) => state.user)
+    const category = useSelector<any, any>((state: any) => state.category)
     const threadDetail = useSelector<any, any>((state: any) => state.threadDetail)
     const leaderboard = useSelector<any, any>((state: any) => state.leaderboard)
     const isLoading = useSelector<any, any>((state: any) => state.isLoading)
@@ -23,6 +24,8 @@ function useSelect(state: any) {
             return thread
         case 'user':
             return user
+        case 'category':
+            return category
         case 'threadDetail':
             return threadDetail
         case 'leaderboard':
