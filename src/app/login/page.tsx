@@ -27,7 +27,7 @@ export default function LoginPage() {
   }, [authUser, dispatch, router])
 
   return (
-    <div className='login-page container'>
+    <div className='login-page'>
       <div className='flex h-screen w-full flex-col items-center justify-center gap-8 bg-light duration-200  dark:bg-dark'>
         <div className='text-title text-4xl font-normal duration-200 dark:text-white'>LOGIN</div>
         <form className='input-login container flex flex-col items-center justify-center gap-4' onSubmit={onSubmit}>
@@ -35,7 +35,7 @@ export default function LoginPage() {
             <input
               type='text'
               placeholder={textEmail}
-              className='w-full border-2 border-black bg-transparent px-2 py-2 text-black duration-200 focus:outline-none dark:text-white'
+              className='w-full border-2 border-black bg-transparent px-2 py-2 text-black duration-200 focus:outline-none dark:border-white dark:text-white dark:placeholder:text-white'
               value={email}
               onChange={onChangeEmail}
             />
@@ -44,7 +44,7 @@ export default function LoginPage() {
             <input
               type='password'
               placeholder={textPassword}
-              className='w-full border-2 border-black bg-transparent px-2 py-2 text-black duration-200 focus:outline-none dark:text-white'
+              className='w-full border-2 border-black bg-transparent px-2 py-2 text-black duration-200 focus:outline-none dark:border-white dark:text-white dark:placeholder:text-white'
               value={password}
               onChange={onChangePassword}
             />
@@ -60,9 +60,9 @@ export default function LoginPage() {
           </button>
         </form>
         <div className='had-an-account flex-rows container flex items-center justify-center'>
-          <p className='text-xs font-normal text-black duration-200 dark:text-white'>
+          <p className='text-xs font-normal text-black duration-200 dark:text-white 2xl:text-xl'>
             {textNeedAccount}{' '}
-            <a href='/register' className='text-xs font-normal underline duration-200 hover:font-bold dark:text-white'>
+            <a href='/register' className='text-xs font-normal underline duration-200 hover:font-bold dark:text-white 2xl:text-xl'>
               {textRegisterHere}
             </a>
           </p>

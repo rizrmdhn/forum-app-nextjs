@@ -69,21 +69,21 @@ export default function MobileThreadCard({
 
   return (
     <div
-      className='mobile-thread-card flex flex-col items-start gap-2 rounded-xl bg-threadCard px-7 py-3 duration-200 dark:bg-threadCardDark'
+      className='mobile-thread-card flex w-64 flex-col items-start gap-2 rounded-xl bg-threadCard px-7 py-3 duration-200 dark:bg-threadCardDark sm:w-96'
       title={title}
     >
       <div className='mobile-thread-card__tags'>
         <Tags tags={category} />
       </div>
-      <div className='mobile-thread-card__title line-clamp-2 hover:cursor-pointer hover:underline'>
+      <div className='mobile-thread-card__title line-clamp-2 w-full hover:cursor-pointer hover:underline'>
         <Link className='text-2xl font-bold duration-200 dark:text-white' href={`/thread/${id}`}>
           {title}
         </Link>
       </div>
-      <div className='mobile-thread-card__content line-clamp-2 h-11 w-64 hyphens-auto whitespace-normal text-left'>
+      <div className='mobile-thread-card__content line-clamp-2 h-11 w-full hyphens-auto whitespace-normal text-left'>
         <p className='text-sm duration-200 dark:text-white' dangerouslySetInnerHTML={{ __html: body }}></p>
       </div>
-      <div className='mobile-thread-card__footer flex h-auto w-64 flex-col flex-wrap content-start items-start justify-between gap-y-2'>
+      <div className='mobile-thread-card__footer flex h-auto w-full flex-col flex-wrap content-start items-start justify-between gap-y-2'>
         <div className='mobile-thread-card__footer__action__button flex w-32 items-center justify-between'>
           <button
             className='mobile-thread-card__footer__action__button__like mx-3 flex items-center gap-2'

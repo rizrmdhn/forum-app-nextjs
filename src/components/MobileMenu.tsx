@@ -104,7 +104,7 @@ export default function MobileMenu() {
   return (
     <div className='mobile-menu'>
       <div
-        className='mobile-menu-item animate__animated animate__fadeInUp fixed bottom-20 right-0 inline-flex h-28 w-fit flex-col items-center justify-between rounded-ss-xl bg-defaultLightHeaders duration-200 dark:border-l-2 dark:border-t-2
+        className='mobile-menu-item animate__animated animate__fadeInUp fixed bottom-20 right-0 inline-flex h-28 w-fit flex-col items-center justify-between rounded-ss-xl bg-defaultLightHeaders duration-200 dark:border-l-2 dark:border-t-2 sm:w-52
       dark:border-white dark:bg-dark
       '
       >

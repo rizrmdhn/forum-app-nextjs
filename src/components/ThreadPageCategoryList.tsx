@@ -51,7 +51,7 @@ export default function ThreadPageCategoryList({ category }: { category: string[
   }, [dispatch])
 
   return (
-    <div className='category-list-menu animate__animated animate__fadeInLeft fixed flex max-h-screen w-32 flex-col rounded-ee-xl bg-defaultLightHeaders py-4 duration-200 dark:border-b-2 dark:border-r-2 dark:border-white dark:bg-dark'>
+    <div className='category-list-menu animate__animated animate__fadeInLeft fixed flex max-h-screen w-32 flex-col rounded-ee-xl bg-defaultLightHeaders py-4 duration-200 dark:border-b-2 dark:border-r-2 dark:border-white dark:bg-dark 2xl:w-64'>
       <div className='category-list-menu__title w-full'>
         <h3 className='text-center text-base font-bold text-white'>{textCategoryList}</h3>
       </div>
