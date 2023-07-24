@@ -3,7 +3,7 @@ import useLocale from '@/hooks/useLocale'
 import useSelect from '@/hooks/useSelect'
 import { setFilterThreadByTitleActionCreator } from '@/states/filterThreadByTitle/action'
 import { setShowCategoryActionCreator } from '@/states/showCategory/action'
-import React, { useEffect } from 'react'
+import React from 'react'
 import { MdFilterList, MdSearch } from 'react-icons/md'
 import { useDispatch } from 'react-redux'
 
@@ -16,8 +16,12 @@ export default function HeaderThreadPage() {
   const dispatch = useDispatch()
 
   const openCategoryList = () => {
+    const categoryMenu = document.querySelector('.category-list-menu')
     if (showCategory) {
-      dispatch(setShowCategoryActionCreator(false))
+      categoryMenu?.classList.replace('animate__fadeInLeft', 'animate__fadeOutLeft')
+      setTimeout(() => {
+        dispatch(setShowCategoryActionCreator(false))
+      }, 500)
     } else {
       dispatch(setShowCategoryActionCreator(true))
     }
@@ -27,32 +31,9 @@ export default function HeaderThreadPage() {
     dispatch(setFilterThreadByTitleActionCreator(event.target.value))
   }
 
-  const closeMenu = () => {
-    dispatch(setShowCategoryActionCreator(false))
-  }
-
-  useEffect(() => {
-    // check if menu is clicked in outside of the menu
-    const menu = document.querySelector('.category-list-menu')
-    const menuButton = document.querySelector('.category-list-menu__list')
-
-    const handleClickOutside = (event: any) => {
-      if (menu && !menu.contains(event.target) && menuButton && !menuButton.contains(event.target)) {
-        
-        return closeMenu()
-      }
-    }
-
-    document.addEventListener('mousedown', handleClickOutside)
-
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside)
-    }
-  }, [dispatch])
-
   return (
-    <div className='header-thread-page sticky top-0 flex h-20 w-screen flex-row items-center justify-between bg-defaultLightHeaders px-4'>
-      <div className='header-thread-page-item sticky flex h-20 w-full flex-row items-center justify-between bg-defaultLightHeaders px-4'>
+    <div className='header-thread-page sticky top-0 flex h-20 w-screen flex-row items-center justify-between bg-defaultLightHeaders px-4 duration-200 dark:bg-dark dark:border-b-2 dark:border-white'>
+      <div className='header-thread-page-item sticky flex w-full flex-row items-center justify-between bg-defaultLightHeaders px-4 duration-200 dark:bg-dark'>
         <button className='icon-filter-by-category group cursor-pointer' onClick={openCategoryList}>
           <MdFilterList className='h-6 w-6 text-white group-hover:text-active' />
         </button>

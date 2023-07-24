@@ -16,8 +16,12 @@ export default function BottomNavigation() {
   const dispatch = useDispatch<AppDispatch>()
 
   const setShowMenu = () => {
+    const menu = document.querySelector('.mobile-menu-item')
     if (showMenu) {
-      dispatch(unsetShowMenuActionCreator())
+      menu?.classList.replace('animate__fadeInUp', 'animate__fadeOutDown')
+      setTimeout(() => {
+        dispatch(unsetShowMenuActionCreator())
+      }, 500)
     } else {
       dispatch(setShowMenuActionCreator())
     }
@@ -28,7 +32,7 @@ export default function BottomNavigation() {
 
   return (
     <div className='bottom-navigation fixed bottom-0'>
-      <div className='flex h-defaultHeaderMobile w-screen flex-row items-center justify-between bg-defaultLightHeaders px-6'>
+      <div className='flex h-defaultHeaderMobile w-screen flex-row items-center justify-between bg-defaultLightHeaders px-6 duration-200 dark:border-t-2 dark:border-white dark:bg-dark'>
         <a
           className='icon-leaderboard group flex w-full cursor-pointer flex-col items-center justify-center'
           href='/leaderboard'

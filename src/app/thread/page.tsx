@@ -10,8 +10,6 @@ import { asyncSetIsPreload } from '@/states/isPreload/action'
 import AddThreadButton from '@/components/AddThreadButton'
 import { openModalActionCreator } from '@/states/openModal/action'
 import ThreadPageCategoryList from '@/components/ThreadPageCategoryList'
-import { unsetShowMenuActionCreator } from '@/states/setShowMenu/action'
-import { setShowCategoryActionCreator } from '@/states/showCategory/action'
 
 export default function ThreadPage() {
   const authUser = useSelect('authUser')
@@ -51,7 +49,7 @@ export default function ThreadPage() {
     <>
       <HeaderThreadPage />
       {showCategory && <ThreadPageCategoryList category={categoryList} />}
-      <div className='flex h-defaultMobileHeight flex-col items-center gap-8 overflow-y-auto bg-light px-8 py-12'>
+      <div className='flex h-defaultMobileHeight flex-col items-center gap-8 overflow-y-auto bg-light px-8 py-12 duration-200 dark:bg-dark'>
         {isLoading ? (
           <>
             <MobileThreadCardLoading />

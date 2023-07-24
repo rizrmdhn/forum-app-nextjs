@@ -7,6 +7,7 @@ export default withMT({
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
+  darkMode: "class",
   theme: {
     extend: {
       backgroundImage: {
@@ -21,6 +22,8 @@ export default withMT({
         headerSearchBar: "rgba(0, 0, 0, 0.00)",
         defaultDarkHeaders: "#222831",
         threadCard: "rgba(0, 0, 0, 0.15)",
+        threadCardDark: "rgba(255, 255, 255, 0.15)",
+        categoryDark: "rgba(34, 40, 49, 0.95)",
         active: "#00C2FF",
         detailThreadBg: "rgba(238, 238, 238, 0.93)",
         detailBtnColor: "#323232",

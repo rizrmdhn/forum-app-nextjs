@@ -12,6 +12,7 @@ import isLoadingReducer from "./isLoading/reducer";
 import isPreloadReducer from "./isPreload/reducer";
 import openModalReducer from "./openModal/reducer";
 import localeReducer from "./locale/reducer";
+import themeReducer from "./theme/reducer";
 
 export const store = configureStore({
   reducer: {
@@ -27,7 +28,8 @@ export const store = configureStore({
     isLoading: isLoadingReducer,
     isPreload: isPreloadReducer,
     openModal: openModalReducer,
-    locale: localeReducer
+    locale: localeReducer,
+    theme: themeReducer,
   },
 });
 
