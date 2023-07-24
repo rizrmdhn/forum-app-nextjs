@@ -20,7 +20,7 @@ export default function Home() {
     } else {
       router.push('/login')
     }
-  }, [dispatch])
+  }, [authUser, dispatch, router])
 
   return <main className='h-screen bg-light'></main>
 }

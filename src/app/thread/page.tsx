@@ -1,4 +1,5 @@
 'use client'
+
 import HeaderThreadPage from '@/components/HeaderThreadPage'
 import MobileThreadCard from '@/components/MobileThreadCard'
 import { useDispatch } from 'react-redux'

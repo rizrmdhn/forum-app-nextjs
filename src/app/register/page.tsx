@@ -1,4 +1,5 @@
 'use client'
+
 import useGetLocalTheme from '@/hooks/useGetLocalTheme'
 import useGetLocale from '@/hooks/useGetLocale'
 import useLocale from '@/hooks/useLocale'
@@ -30,7 +31,7 @@ export default function RegisterPage() {
 
     setLocaleData()
     setLocalTheme()
-  }, [dispatch])
+  }, [authUser, dispatch, router, setLocalTheme, setLocaleData])
 
   return (
     <div className='register-page container'>

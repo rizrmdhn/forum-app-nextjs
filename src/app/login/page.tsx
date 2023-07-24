@@ -1,11 +1,9 @@
 'use client'
-import useGetLocalTheme from '@/hooks/useGetLocalTheme'
-import useGetLocale from '@/hooks/useGetLocale'
+
 import useLocale from '@/hooks/useLocale'
 import useLogin from '@/hooks/useLogin'
 import useSelect from '@/hooks/useSelect'
 import { asyncSetIsPreload } from '@/states/isPreload/action'
-import { setLocaleActionCreator } from '@/states/locale/action'
 import { useRouter } from 'next/navigation'
 import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
@@ -26,7 +24,7 @@ export default function LoginPage() {
     if (authUser) {
       router.push('/thread')
     }
-  }, [dispatch])
+  }, [authUser, dispatch, router])
 
   return (
     <div className='login-page container'>

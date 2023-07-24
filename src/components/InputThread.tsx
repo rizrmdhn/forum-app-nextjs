@@ -67,7 +67,7 @@ export default function InputThread({
   return (
     <div className='hidden'>
       <Dialog open={openModal} handler={onOpenModal}>
-        <div className='flex items-center justify-between rounded-t bg-defaultLightHeaders px-3'>
+        <div className='flex items-center justify-between rounded-t bg-defaultLightHeaders px-3 duration-200 dark:bg-dark'>
           <DialogHeader className='text-white'>{dialogHeader}</DialogHeader>
           <button onClick={onCloseModalHandler}>
             <IconContext.Provider value={{ size: '20px' }}>
@@ -75,23 +75,45 @@ export default function InputThread({
             </IconContext.Provider>
           </button>
         </div>
-        <DialogBody divider className='bg-light'>
+        <DialogBody divider className='bg-light duration-200 dark:bg-dark'>
           <div className='grid gap-6'>
             {input &&
               input.map(({ name, type, value, onChange }, index) => (
-                <Input key={index} label={name} name={name} type={type} onChange={onChange} value={value}  />
+                <Input
+                  key={index}
+                  label={name}
+                  name={name}
+                  type={type}
+                  onChange={onChange}
+                  value={value}
+                  className='dark:text-white'
+                />
               ))}
             {textArea &&
               textArea.map(({ item, value, onChange }, index) => (
-                <Textarea key={index} label={item} name={item} onChange={onChange} value={value}  />
+                <Textarea
+                  key={index}
+                  label={item}
+                  name={item}
+                  onChange={onChange}
+                  value={value}
+                  className='dark:text-white'
+                />
               ))}
             {option &&
               option.map(({ name, value, onChange }, index) => (
-                <Radio key={index} label={name} name={name} onChange={onChange} value={value}  />
+                <Radio
+                  key={index}
+                  label={name}
+                  name={name}
+                  onChange={onChange}
+                  value={value}
+                  className='dark:text-white'
+                />
               ))}
           </div>
         </DialogBody>
-        <DialogFooter className='space-x-2 bg-defaultLightHeaders rounded-b'>
+        <DialogFooter className='space-x-2 rounded-b bg-defaultLightHeaders duration-200 dark:bg-dark'>
           <Button variant='gradient' color='red' onClick={onCloseModalHandler}>
             Tutup
           </Button>

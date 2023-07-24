@@ -74,7 +74,7 @@ export default function MobileMenu() {
     return () => {
       document.removeEventListener('mousedown', handleClickOutside)
     }
-  }, [dispatch, colorTheme, theme])
+  }, [dispatch, colorTheme, theme, setLocalTheme])
 
   const isUserLoogedIn = () => {
     if (authUser) {

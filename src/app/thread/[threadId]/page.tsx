@@ -1,10 +1,11 @@
 'use client'
+
 import useSelect from '@/hooks/useSelect'
 import { asyncGetThreadsDetail } from '@/states/detailThread/action'
 import Image from 'next/image'
 import Link from 'next/link'
-import { notFound, useParams } from 'next/navigation'
-import { use, useEffect } from 'react'
+import { useParams } from 'next/navigation'
+import { useEffect } from 'react'
 import {
   MdThumbUp,
   MdThumbUpOffAlt,
@@ -47,7 +48,7 @@ export default function DetailThread() {
     dispatch(asyncSetIsPreload())
     setThreadIdHandler(threadDetail?.id)
     dispatch(asyncGetThreadsDetail(threadId))
-  }, [dispatch, threadId])
+  }, [dispatch, threadDetail?.id, threadId])
 
   const isUpVoted = threadDetail?.upVotesBy.includes(authUser?.id)
   const isDownVoted = threadDetail?.downVotesBy.includes(authUser?.id)
@@ -280,7 +281,7 @@ export default function DetailThread() {
                   ) : (
                     <>
                       <button
-                        className='detail-thread__comment-container__list__item__action__like flex w-fit items-center gap-2 roundedp-1'
+                        className='detail-thread__comment-container__list__item__action__like roundedp-1 flex w-fit items-center gap-2'
                         onClick={() => handleUpVoteComment(comment)}
                       >
                         {isUpVotedComment(comment.id) ? (
@@ -288,10 +289,12 @@ export default function DetailThread() {
                         ) : (
                           <MdThumbUpOffAlt className='h-5 w-5 text-black duration-200 dark:text-white' />
                         )}
-                        <p className='text-sm font-normal text-black duration-200 dark:text-white'>{comment.upVotesBy.length}</p>
+                        <p className='text-sm font-normal text-black duration-200 dark:text-white'>
+                          {comment.upVotesBy.length}
+                        </p>
                       </button>
                       <button
-                        className='detail-thread__comment-container__list__item__action__dislike flex w-fit items-start gap-2 roundedp-1'
+                        className='detail-thread__comment-container__list__item__action__dislike roundedp-1 flex w-fit items-start gap-2'
                         onClick={() => handleDownVoteComment(comment)}
                       >
                         {isDownVotedComment(comment.id) ? (
@@ -299,7 +302,9 @@ export default function DetailThread() {
                         ) : (
                           <MdThumbDownOffAlt className='h-5 w-5 text-black duration-200 dark:text-white' />
                         )}
-                        <p className='text-sm font-normal text-black duration-200 dark:text-white'>{comment.downVotesBy.length}</p>
+                        <p className='text-sm font-normal text-black duration-200 dark:text-white'>
+                          {comment.downVotesBy.length}
+                        </p>
                       </button>
                     </>
                   )}

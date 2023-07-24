@@ -1,4 +1,5 @@
 'use client'
+
 import useLocale from '@/hooks/useLocale'
 import useSelect from '@/hooks/useSelect'
 import { setFilterThreadByTitleActionCreator } from '@/states/filterThreadByTitle/action'
