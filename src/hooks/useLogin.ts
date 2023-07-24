@@ -3,6 +3,7 @@ import { useRouter } from 'next/navigation'
 import { useDispatch } from "react-redux";
 import { asyncSetAuthUser } from "@/states/authUser/action";
 import { closeModalActionCreator } from "@/states/openModal/action";
+import useLocale from "./useLocale";
 
 function useLogin(defaultValue = ''): [
     string,
@@ -13,6 +14,8 @@ function useLogin(defaultValue = ''): [
 ] {
     const dispatch = useDispatch();
     const router = useRouter();
+
+    const {textLoginSuccess, textLoginFailed} = useLocale();
 
     const [email, setEmail] = useState<string>(defaultValue);
     const [password, setPassword] = useState<string>(defaultValue);
@@ -29,7 +32,7 @@ function useLogin(defaultValue = ''): [
 
     const onSubmit: FormEventHandler<HTMLFormElement> = (event) => {
         event.preventDefault();
-        dispatch(asyncSetAuthUser({email, password, router}));
+        dispatch(asyncSetAuthUser({email, password, router, textLoginSuccess, textLoginFailed}));
         dispatch(closeModalActionCreator())
     }
 

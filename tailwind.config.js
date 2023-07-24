@@ -34,8 +34,9 @@ export default withMT({
       },
       height: {
         defaultHeaderMobile: "80px",
-        defaultMobileHeight: "640px",
+        defaultMobileHeight: "calc(100vh - 80px)",
         detailThreadHeight: "calc(100vh - 80px)",
+        leaderboardHeight: "calc(100vh - 160px)",
       },
     },
   },

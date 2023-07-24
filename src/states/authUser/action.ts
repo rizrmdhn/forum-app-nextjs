@@ -45,10 +45,12 @@ function unsetAuthUserActionCreator(): UnsetAuthUserAction {
     };
 }
 
-function asyncSetAuthUser({email, password, router}: {
+function asyncSetAuthUser({email, password, router, textLoginSuccess, textLoginFailed}: {
     email: string,
     password: string,
-    router: any
+    router: any,
+    textLoginSuccess: string,
+    textLoginFailed: string,
 }): any {
     return async (dispatch: any) => {
         dispatch(showLoading());
@@ -61,12 +63,12 @@ function asyncSetAuthUser({email, password, router}: {
             router.push('/thread');
             myToast.fire({
                 icon: 'success',
-                title: 'Login success'
+                title: textLoginSuccess,
             });
         } catch (error: any) {
             myToast.fire({
                 icon: 'error',
-                title: error.message
+                title: textLoginFailed,
             });
         }
         dispatch(hideLoading());

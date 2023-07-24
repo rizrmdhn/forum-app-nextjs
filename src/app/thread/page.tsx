@@ -16,7 +16,6 @@ export default function ThreadPage() {
   const authUser = useSelect('authUser')
   const thread = useSelect('thread')
   const isLoading = useSelect('isLoading')
-  const isPreload = useSelect('isPreload')
   const showCategory = useSelect('showCategory')
   const category = useSelect('category')
   const threadTitle = useSelect('threadTitle')
@@ -24,13 +23,8 @@ export default function ThreadPage() {
   const dispatch = useDispatch()
 
   useEffect(() => {
-    dispatch(asyncSetIsPreload())
     dispatch(asyncPopulateUsersAndThreads())
   }, [dispatch])
-
-  if (isPreload) {
-    return null
-  }
 
   const onOpenModal = () => {
     dispatch(openModalActionCreator())
@@ -46,7 +40,7 @@ export default function ThreadPage() {
     <>
       <HeaderThreadPage />
       {showCategory && <ThreadPageCategoryList category={categoryList} />}
-      <div className='flex h-screen flex-col items-center gap-8 overflow-y-auto bg-light px-8 py-12 duration-200 dark:bg-dark'>
+      <div className='flex h-leaderboardHeight flex-col items-center gap-8 overflow-y-auto bg-light px-8 py-12 duration-200 dark:bg-dark'>
         {isLoading ? (
           <>
             <MobileThreadCardLoading />

@@ -7,7 +7,7 @@ function useUpVoteDetailThread(defaultValue= ''): [
     any,
     any,
 ] {
-    const {textLoginToVote} = useLocale()
+    const { textLoginToVote, textUpVoteSuccess,textRemoveVoteSuccess,textErrorRemoveVote, textErrorUpVote } = useLocale()
 
     const dispatch = useDispatch();
 
@@ -16,13 +16,13 @@ function useUpVoteDetailThread(defaultValue= ''): [
 
     const upVoteThread: any = (threadId: string) => {
         setThreadId(threadId);
-        dispatch(asyncUpVoteThreadDetail(threadId,textLoginToVote));
+        dispatch(asyncUpVoteThreadDetail(threadId,textLoginToVote,textUpVoteSuccess,textErrorUpVote));
         setThreadId('');
     }
 
     const removeUpVoteThread: any = (threadId: string) => {
         setThreadId(threadId);
-        dispatch(asyncNeutralVoteThreadDetail(threadId,textLoginToVote));
+        dispatch(asyncNeutralVoteThreadDetail(threadId,textLoginToVote,textRemoveVoteSuccess,textErrorRemoveVote));
         setThreadId('');
     }
 

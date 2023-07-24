@@ -7,7 +7,7 @@ function useDownVoteComment(defaultValue= ''): [
     any,
     any,
 ] {
-    const {textLoginToVote} = useLocale()
+    const {textLoginToVote, textDownVoteSuccess, textRemoveVoteSuccess, textErrorDownVote, textErrorRemoveVote} = useLocale()
 
     const dispatch = useDispatch();
 
@@ -17,14 +17,14 @@ function useDownVoteComment(defaultValue= ''): [
     const downVoteComment: any = (threadId: string,commentId: string) => {
         setCommentId(commentId);
         setThreadId(threadId);
-        dispatch(asyncDownVoteCommentThreadDetail(threadId,commentId,textLoginToVote));
+        dispatch(asyncDownVoteCommentThreadDetail(threadId,commentId,textLoginToVote,textDownVoteSuccess,textErrorDownVote));
         setCommentId('');
     }
 
     const removeDownVoteComment: any = (threadId: string,commentId: string) => {
         setCommentId(commentId);
         setThreadId(threadId);
-        dispatch(asyncNeutralVoteCommentThreadDetail(threadId,commentId,textLoginToVote));
+        dispatch(asyncNeutralVoteCommentThreadDetail(threadId,commentId,textLoginToVote,textRemoveVoteSuccess,textErrorRemoveVote));
         setCommentId('');
     }
 

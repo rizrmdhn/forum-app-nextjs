@@ -8,13 +8,12 @@ const myToast = MySwal.mixin({
   position: 'top-end',
   showConfirmButton: false,
   customClass: {
-    container: 'my-swal',
-    timerProgressBar: 'bg-main',
+    timerProgressBar: 'bg-light'
   },
   timer: 1500,
   timerProgressBar: true,
-  background: '#F8F9FC',
-  color: '#000000',
+  background: '#323232',
+  color: '#fff',
   showClass: {
     popup: 'animate__animated animate__fadeInDown',
   },

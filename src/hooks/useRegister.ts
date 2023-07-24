@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import { useRouter } from 'next/navigation'
 import myToast from "@/components/myToast";
 import { asyncRegisterUser } from "@/states/user/action";
+import useLocale from "./useLocale";
 
 function useRegister(defaultValue = ''): [
     string,
@@ -15,6 +16,8 @@ function useRegister(defaultValue = ''): [
 ] {
     const dispatch = useDispatch();
     const router = useRouter();
+
+    const {textRegisterSuccess, textRegisterFailed} = useLocale();
 
     const [name, setName] = useState<string>(defaultValue);
     const [email, setEmail] = useState<string>(defaultValue);
@@ -36,7 +39,7 @@ function useRegister(defaultValue = ''): [
 
     const onSubmit: FormEventHandler<HTMLFormElement> = (event) => {
         event.preventDefault();
-        dispatch(asyncRegisterUser({name,email, password,router}));
+        dispatch(asyncRegisterUser({name,email, password,router,textRegisterSuccess,textRegisterFailed}));
     }
 
     return [

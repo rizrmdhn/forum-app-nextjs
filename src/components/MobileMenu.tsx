@@ -9,13 +9,14 @@ import { useEffect } from 'react'
 import useLocale from '@/hooks/useLocale'
 import { changeThemeActionCreator } from '@/states/theme/action'
 import useGetLocalTheme from '@/hooks/useGetLocalTheme'
+import myToast from './myToast'
 
 export default function MobileMenu() {
   const authUser = useSelect('authUser')
   const locale = useSelect('locale')
   const theme = useSelect('theme')
 
-  const { textLogin, textDarkMode, textLogout, textLightMode } = useLocale()
+  const { textLogin, textDarkMode, textLogout, textLightMode, textLogoutSuccess } = useLocale()
 
   const [setLocalTheme] = useGetLocalTheme()
 
@@ -30,6 +31,10 @@ export default function MobileMenu() {
   const onLogout = () => {
     dispatch(asyncUnsetAuthUser())
     closeMenu()
+    myToast.fire({
+      icon: 'success',
+      title: textLogoutSuccess
+    })
   }
 
   const changeLanguage = (lang: string) => {

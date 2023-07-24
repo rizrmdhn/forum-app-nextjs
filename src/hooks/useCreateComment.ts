@@ -1,6 +1,7 @@
 import { asyncCreateCommentThreadDetail } from "@/states/detailThread/action";
 import { ChangeEventHandler, MouseEventHandler, useState } from "react";
 import { useDispatch } from "react-redux";
+import useLocale from "./useLocale";
 
 function useCreateComment(defaultValue= ''): [
     (threadId: string) => void,
@@ -9,6 +10,8 @@ function useCreateComment(defaultValue= ''): [
     MouseEventHandler<HTMLButtonElement>,
 ] {
     const dispatch = useDispatch();
+
+    const {textCommentCreated, textErrorCreateComment} = useLocale();
 
     const [threadId, setThreadId] = useState<string>(defaultValue);
     const [content, setContent] = useState<string>(defaultValue);
@@ -23,7 +26,7 @@ function useCreateComment(defaultValue= ''): [
 
     const onSubmit: MouseEventHandler<HTMLButtonElement> = (event) => {
         event.preventDefault();
-        dispatch(asyncCreateCommentThreadDetail(threadId, content));
+        dispatch(asyncCreateCommentThreadDetail(threadId, content, textCommentCreated, textErrorCreateComment));
         setContent('');
     }
 

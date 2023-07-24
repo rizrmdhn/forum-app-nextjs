@@ -7,7 +7,7 @@ function useDownVoteThread(defaultValue= ''): [
     any,
     any,
 ] {
-    const {textLoginToVote} = useLocale();
+    const {textLoginToVote, textDownVoteSuccess, textRemoveVoteSuccess, textErrorDownVote, textErrorRemoveVote} = useLocale();
     const dispatch = useDispatch();
 
     const [threadId, setThreadId] = useState<string>(defaultValue);
@@ -15,13 +15,13 @@ function useDownVoteThread(defaultValue= ''): [
 
     const downVoteThread: any = (threadId: string) => {
         setThreadId(threadId);
-        dispatch(asyncDownVoteThread(threadId,textLoginToVote));
+        dispatch(asyncDownVoteThread(threadId,textLoginToVote,textDownVoteSuccess,textErrorDownVote));
         setThreadId('');
     }
 
     const removeDownVoteThread: any = (threadId: string) => {
         setThreadId(threadId);
-        dispatch(asyncNeturalVoteThread(threadId,textLoginToVote));
+        dispatch(asyncNeturalVoteThread(threadId,textLoginToVote,textRemoveVoteSuccess,textErrorRemoveVote));
         setThreadId('');
     }
 

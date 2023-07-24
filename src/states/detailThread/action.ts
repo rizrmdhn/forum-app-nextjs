@@ -221,7 +221,7 @@ function asyncGetThreadsDetail(threadId: any): any {
     }
 }
 
-function asyncUpVoteThreadDetail(threadId: string, textLoginToVote:string): any {
+function asyncUpVoteThreadDetail(threadId: string, textLoginToVote:string, textUpVoteSuccess: string, textErrorUpVote: string): any {
     return async (dispatch: AppDispatch, getState: AppGetState) => {
         dispatch(showLoading());
         const {authUser} = getState();
@@ -238,19 +238,19 @@ function asyncUpVoteThreadDetail(threadId: string, textLoginToVote:string): any 
 
             myToast.fire({
                 icon: 'success',
-                title: 'Upvoted successfully',
+                title: textUpVoteSuccess,
             });
         } catch (error: any) {
             myToast.fire({
                 icon: 'error',
-                title: error.message,
+                title: textErrorUpVote,
             });
         }
         dispatch(hideLoading());
     }
 }
 
-function asyncDownVoteThreadDetail(threadId: string, textLoginToVote:string): any {
+function asyncDownVoteThreadDetail(threadId: string, textLoginToVote:string, textDownVoteSuccess: string, textErrorDownVote: string): any {
     return async (dispatch: AppDispatch, getState: AppGetState) => {
         dispatch(showLoading());
         const {authUser} = getState();
@@ -267,26 +267,26 @@ function asyncDownVoteThreadDetail(threadId: string, textLoginToVote:string): an
 
             myToast.fire({
                 icon: 'success',
-                title: 'Downvoted successfully',
+                title: textDownVoteSuccess,
             });
         } catch (error: any) {
             myToast.fire({
                 icon: 'error',
-                title: error.message,
+                title: textErrorDownVote,
             });
         }
         dispatch(hideLoading());
     }
 }
 
-function asyncNeutralVoteThreadDetail(threadId: string, textLoginToVote: string): any {
+function asyncNeutralVoteThreadDetail(threadId: string, textLoginToVote: string,textRemoveVoteSuccess: string, textErrorRemoveVote:string): any {
     return async (dispatch: AppDispatch, getState: AppGetState) => {
         dispatch(showLoading());
         const {authUser} = getState();
         if (!authUser) {
             return myToast.fire({
                 icon: 'error',
-                title: 'You need to login to in order to vote',
+                title: textLoginToVote,
             });
         }
 
@@ -296,19 +296,19 @@ function asyncNeutralVoteThreadDetail(threadId: string, textLoginToVote: string)
 
             myToast.fire({
                 icon: 'success',    
-                title: 'Vote removed',
+                title: textRemoveVoteSuccess,
             }) 
         } catch (error: any) {
             myToast.fire({
                 icon: 'error',
-                title: error.message,
+                title: textErrorRemoveVote,
             });
         }
         dispatch(hideLoading());
     }
 }
 
-function asyncCreateCommentThreadDetail(threadId: string, content: string): any {
+function asyncCreateCommentThreadDetail(threadId: string, content: string, textCommentCreated: string, textErrorCreateComment: string): any {
     return async (dispatch: AppDispatch) => {
         dispatch(showLoading())
         try {
@@ -320,19 +320,19 @@ function asyncCreateCommentThreadDetail(threadId: string, content: string): any 
 
             myToast.fire({
                 icon: 'success',
-                title: 'Comment created successfully',
+                title: textCommentCreated,
             })
         } catch (error: any) {
             myToast.fire({
                 icon: 'error',
-                title: error.message,
+                title: textErrorCreateComment,
             })
         }
         dispatch(hideLoading())
     }       
 }
 
-function asyncUpVoteCommentThreadDetail(threadId: string, commentId: string, textLoginToVote:string): any {
+function asyncUpVoteCommentThreadDetail(threadId: string, commentId: string, textLoginToVote:string, textUpVoteSuccess: string, textErrorUpVote: string): any {
     return async (dispatch: AppDispatch, getState: AppGetState) => {
         dispatch(showLoading());
         const {authUser} = getState();
@@ -350,19 +350,19 @@ function asyncUpVoteCommentThreadDetail(threadId: string, commentId: string, tex
             
             myToast.fire({
                 icon: 'success',
-                title: 'Upvoted successfully',
+                title: textUpVoteSuccess,
             });
         } catch (error: any) {
             myToast.fire({
                 icon: 'error',
-                title: error.message,
+                title: textErrorUpVote,
             });
         }
         dispatch(hideLoading());
     }
 }
 
-function asyncDownVoteCommentThreadDetail(threadId: string, commentId: string, textLoginToVote:string): any {
+function asyncDownVoteCommentThreadDetail(threadId: string, commentId: string, textLoginToVote:string, textDownVoteSuccess: string, textErrorDownVote: string): any {
     return async (dispatch: AppDispatch, getState: AppGetState) => {
         dispatch(showLoading());
         const {authUser} = getState();
@@ -377,21 +377,21 @@ function asyncDownVoteCommentThreadDetail(threadId: string, commentId: string, t
 
         myToast.fire({
             icon: 'success',
-            title: 'Downvoted successfully',
+            title: textDownVoteSuccess,
         });
         try {
             await api.downVoteComment({threadId, commentId});
         } catch (error: any) {
             myToast.fire({
                 icon: 'error',
-                title: error.message,
+                title: textErrorDownVote,
             });
         }
         dispatch(hideLoading());
     }
 }
 
-function asyncNeutralVoteCommentThreadDetail(threadId: string, commentId: string, textLoginToVote:string): any {
+function asyncNeutralVoteCommentThreadDetail(threadId: string, commentId: string, textLoginToVote:string, textRemoveVoteSuccess: string, textErrorRemoveVote: string): any {
     return async (dispatch: AppDispatch, getState: AppGetState) => {
         dispatch(showLoading());
         const {authUser} = getState();
@@ -408,12 +408,12 @@ function asyncNeutralVoteCommentThreadDetail(threadId: string, commentId: string
 
             myToast.fire({
                 icon: 'success',
-                title: 'Vote removed',
+                title: textRemoveVoteSuccess,
             });
         } catch (error: any) {
             myToast.fire({
                 icon: 'error',
-                title: error.message,
+                title: textErrorRemoveVote,
             });
         }
         dispatch(hideLoading());

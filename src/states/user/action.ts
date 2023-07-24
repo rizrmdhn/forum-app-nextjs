@@ -33,12 +33,14 @@ function receiveUserActionCreator(users: IUSER[]): ReceiveUserAction {
     };
 }
 
-function asyncRegisterUser({name, email, password, router}:
+function asyncRegisterUser({name, email, password, router, textRegisterSuccess, textRegisterFailed}:
     {
         name: string,
         email: string,
         password: string,
-        router: any
+        router: any,
+        textRegisterSuccess: string,
+        textRegisterFailed: string,
     }): any {
         return async (dispatch: AppDispatch) => {
             dispatch(showLoading());
@@ -46,13 +48,13 @@ function asyncRegisterUser({name, email, password, router}:
                 await api.register({name, email, password});
                 myToast.fire({
                     icon: 'success',
-                    title: 'Register success'
+                    title: textRegisterSuccess
                 })
                 router.push('/login');
             } catch (error: any) {
                 myToast.fire({
                     icon: 'error',
-                    title: error.message
+                    title: textRegisterFailed
                 })
             }
             dispatch(hideLoading());

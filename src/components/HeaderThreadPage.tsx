@@ -51,7 +51,7 @@ export default function HeaderThreadPage() {
           </button>
         </div>
         <div className='flex sm:hidden 2xl:inline'>
-          <h2 className='text-2xl font-bold duration-200 dark:text-white'>Forum App</h2>
+          <h2 className='text-2xl font-bold text-white duration-200'>Forum App</h2>
         </div>
       </div>
     </div>

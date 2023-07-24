@@ -31,6 +31,14 @@ export interface ILocaleData {
 
     // For Error
     textError: string;
+    textLoginFailed: string;
+    textLogoutFailed: string;
+    textRegisterFailed: string;
+    textErrorCreateThread: string;
+    textErrorCreateComment: string;
+    textErrorUpVote: string;
+    textErrorDownVote: string;
+    textErrorRemoveVote: string;
 
     // For Success
     textSuccess: string;
@@ -49,8 +57,16 @@ export interface ILocaleData {
     textGiveComment: string;
 
     // For Alert
+    textLoginSuccess: string;
+    textLogoutSuccess: string;
+    textRegisterSuccess: string;
+    textThreadCreated: string;
+    textCommentCreated: string;
     textLoginToGiveComment: string;
     textLoginToVote: string;
+    textUpVoteSuccess: string;
+    textDownVoteSuccess: string;
+    textRemoveVoteSuccess: string;
 
 }
 const localeData: {[locale: string]: ILocaleData} = {
@@ -82,7 +98,23 @@ const localeData: {[locale: string]: ILocaleData} = {
         textGiveComment: 'Beri komentar',
         textLoginToGiveComment: 'untuk memberi komentar',
         textLoginToVote: 'Login untuk melakukan vote',
-        textCategoryList: 'Daftar Kategori'
+        textCategoryList: 'Daftar Kategori',
+        textUpVoteSuccess: 'Upvote berhasil',
+        textDownVoteSuccess: 'Downvote berhasil',
+        textRemoveVoteSuccess: 'Vote berhasil dihapus',
+        textErrorUpVote: 'Upvote gagal',
+        textErrorDownVote: 'Downvote gagal',
+        textErrorRemoveVote: 'Vote gagal dihapus',
+        textThreadCreated: 'Thread berhasil dibuat',
+        textErrorCreateThread: 'Thread gagal dibuat',
+        textCommentCreated: 'Komentar berhasil dibuat',
+        textErrorCreateComment: 'Komentar gagal dibuat',
+        textLoginFailed: 'Login gagal',
+        textLoginSuccess: 'Login berhasil',
+        textLogoutFailed: 'Logout gagal',
+        textLogoutSuccess: 'Logout berhasil',
+        textRegisterFailed: 'Register gagal',
+        textRegisterSuccess: 'Register berhasil',
     },
     en:{
         textLogin: 'Login',
@@ -112,7 +144,23 @@ const localeData: {[locale: string]: ILocaleData} = {
         textGiveComment: 'Send comment',
         textLoginToGiveComment: 'to comment',
         textLoginToVote: 'Login to vote',
-        textCategoryList: 'Category List'
+        textCategoryList: 'Category List',
+        textUpVoteSuccess: 'Upvote success',
+        textDownVoteSuccess: 'Downvote success',
+        textRemoveVoteSuccess: 'Vote removed',
+        textErrorUpVote: 'Upvote failed',
+        textErrorDownVote: 'Downvote failed',
+        textErrorRemoveVote: 'Vote failed to remove',
+        textThreadCreated: 'Thread created',
+        textErrorCreateThread: 'Thread failed to create',
+        textCommentCreated: 'Comment created',
+        textErrorCreateComment: 'Comment failed to create',
+        textLoginFailed: 'Login failed',
+        textLoginSuccess: 'Login success',
+        textLogoutFailed: 'Logout failed',
+        textLogoutSuccess: 'Logout success',
+        textRegisterFailed: 'Register failed',
+        textRegisterSuccess: 'Register success',
     }
 };
 

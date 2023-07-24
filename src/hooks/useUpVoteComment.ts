@@ -7,7 +7,7 @@ function useUpVoteComment(defaultValue= ''): [
     any,
     any,
 ] {
-    const {textLoginToVote} = useLocale()
+    const {textLoginToVote, textUpVoteSuccess, textRemoveVoteSuccess, textErrorUpVote, textErrorRemoveVote} = useLocale()
     const dispatch = useDispatch();
 
     const [commentId, setCommentId] = useState<string>(defaultValue);
@@ -16,14 +16,14 @@ function useUpVoteComment(defaultValue= ''): [
     const upVoteComment: any = (threadId: string,commentId: string) => {
         setCommentId(commentId);
         setThreadId(threadId);
-        dispatch(asyncUpVoteCommentThreadDetail(threadId,commentId,textLoginToVote));
+        dispatch(asyncUpVoteCommentThreadDetail(threadId,commentId,textLoginToVote,textUpVoteSuccess,textErrorUpVote));
         setCommentId('');
     }
 
     const removeUpVoteComment: any = (threadId: string,commentId: string) => {
         setCommentId(commentId);
         setThreadId(threadId);
-        dispatch(asyncNeutralVoteCommentThreadDetail(threadId,commentId,textLoginToVote));
+        dispatch(asyncNeutralVoteCommentThreadDetail(threadId,commentId,textLoginToVote,textRemoveVoteSuccess,textErrorRemoveVote));
         setCommentId('');
     }
 

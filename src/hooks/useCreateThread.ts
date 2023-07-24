@@ -2,6 +2,7 @@ import { closeModalActionCreator } from "@/states/openModal/action";
 import { asyncCreateThread } from "@/states/thread/action";
 import { ChangeEventHandler, MouseEventHandler, useState } from "react";
 import { useDispatch } from "react-redux";
+import useLocale from "./useLocale";
 
 function useCreateThread(defaultValue= ''): [
     string,
@@ -13,6 +14,8 @@ function useCreateThread(defaultValue= ''): [
     MouseEventHandler<HTMLButtonElement>,
 ] {
     const dispatch = useDispatch();
+
+    const {textThreadCreated, textErrorCreateThread} = useLocale();
 
     const [title, setTitle] = useState<string>(defaultValue);
     const [body, setBody] = useState<string>(defaultValue);
@@ -32,7 +35,7 @@ function useCreateThread(defaultValue= ''): [
 
     const onSubmit: MouseEventHandler<HTMLButtonElement> = (event) => {
         event.preventDefault();
-        dispatch(asyncCreateThread({title, body, category}));
+        dispatch(asyncCreateThread({title, body, category,textThreadCreated,textErrorCreateThread}));
         setTitle('');
         setBody('');
         setCategory('');

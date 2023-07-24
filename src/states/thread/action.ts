@@ -101,10 +101,12 @@ function neturalVoteThreadActionCreator(threadId: string, userId: string): Netur
     };
 }
 
-function asyncCreateThread({title, body, category}: {
+function asyncCreateThread({title, body, category, textThreadCreated, textErrorCreateThread}: {
     title: string,
     body: string,
-    category: string,   
+    category: string,  
+    textThreadCreated: string,
+    textErrorCreateThread: string, 
 }): any {
     return async (dispatch: AppDispatch) => {
         dispatch(showLoading());
@@ -114,19 +116,19 @@ function asyncCreateThread({title, body, category}: {
 
         myToast.fire({
             icon: 'success',
-            title: 'Create thread successfully',
+            title: textThreadCreated,
         });
         } catch (error: any) {
             myToast.fire({
                 icon: 'error',
-                title: error.message,
+                title: textErrorCreateThread,
             });
         }
         dispatch(hideLoading());
     }
 }
 
-function asyncUpVoteThread(threadId: string, textLoginToVote: string): any {
+function asyncUpVoteThread(threadId: string, textLoginToVote: string, textUpVoteSuccess: string, textErrorUpVote: string): any {
     return async (dispatch: AppDispatch, getState: AppGetState) => {
         dispatch(showLoading());
         const { authUser } = getState();
@@ -143,12 +145,12 @@ function asyncUpVoteThread(threadId: string, textLoginToVote: string): any {
 
             myToast.fire({
                 icon: 'success',
-                title: 'Up vote thread successfully',
+                title: textUpVoteSuccess,
             });
         } catch (error: any) {
             myToast.fire({
                 icon: 'error',
-                title: error.message,
+                title: textErrorUpVote,
             });
             dispatch(upVoteThreadActionCreator(threadId, authUser.id));
         }
@@ -156,7 +158,7 @@ function asyncUpVoteThread(threadId: string, textLoginToVote: string): any {
     }
 }
 
-function asyncDownVoteThread(threadId: string, textLoginToVote:string): any {
+function asyncDownVoteThread(threadId: string, textLoginToVote:string, textDownVoteSuccess: string, textErrorDownVote: string): any {
     return async (dispatch: AppDispatch, getState: AppGetState) => {
         dispatch(showLoading());
         const { authUser } = getState();
@@ -173,12 +175,12 @@ function asyncDownVoteThread(threadId: string, textLoginToVote:string): any {
 
             myToast.fire({
                 icon: 'success',
-                title: 'Down vote thread successfully',
+                title: textDownVoteSuccess,
             }) 
         } catch (error: any) {
             myToast.fire({
                 icon: 'error',
-                title: error.message,
+                title: textErrorDownVote,
             });
             dispatch(downVoteThreadActionCreator(threadId, authUser.id));
         }
@@ -186,7 +188,7 @@ function asyncDownVoteThread(threadId: string, textLoginToVote:string): any {
     }
 }
 
-function asyncNeturalVoteThread(threadId: string,textLoginToVote:string): any {
+function asyncNeturalVoteThread(threadId: string,textLoginToVote:string, textRemoveVoteSuccess: string, textErrorRemoveVote: string): any {
     return async (dispatch: AppDispatch, getState: AppGetState) => {
         dispatch(showLoading());
         const { authUser } = getState();
@@ -204,12 +206,12 @@ function asyncNeturalVoteThread(threadId: string,textLoginToVote:string): any {
 
             myToast.fire({
                 icon: 'success',
-                title: 'Vote removed',
+                title: textRemoveVoteSuccess,
             }) 
         } catch (error: any) {
             myToast.fire({
                 icon: 'error',
-                title: error.message,
+                title: textErrorRemoveVote,
             });
             dispatch(neturalVoteThreadActionCreator(threadId, authUser.id));
         }
