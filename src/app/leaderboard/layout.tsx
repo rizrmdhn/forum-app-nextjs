@@ -3,9 +3,9 @@
 import BottomNavigation from '@/components/BottomNavigation'
 import HeaderLeaderboardPage from '@/components/HeaderLeaderboardPage'
 import MobileMenu from '@/components/MobileMenu'
+import useGetLocalTheme from '@/hooks/useGetLocalTheme'
+import useGetLocale from '@/hooks/useGetLocale'
 import useSelect from '@/hooks/useSelect'
-import { setLocaleActionCreator } from '@/states/locale/action'
-import { unsetShowMenuActionCreator } from '@/states/setShowMenu/action'
 import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 
@@ -14,14 +14,13 @@ export default function LeaderboardLayout({ children }: { children: React.ReactN
 
   const dispatch = useDispatch()
 
+  const [setLocaleData] = useGetLocale()
+  const [setLocalTheme] = useGetLocalTheme()
+
   useEffect(() => {
-    const locale = localStorage.getItem('locale')
-    if (locale) {
-      dispatch(setLocaleActionCreator(locale))
-    } else {
-      dispatch(setLocaleActionCreator('id'))
-    }
-  }, [dispatch])
+    setLocaleData()
+    setLocalTheme()
+  }, [dispatch, setLocaleData, setLocalTheme])
 
   return (
     <>

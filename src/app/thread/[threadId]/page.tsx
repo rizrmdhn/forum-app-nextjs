@@ -32,7 +32,7 @@ export default function DetailThread() {
   const isLoading = useSelect('isLoading')
   const locale = useSelect('locale')
 
-  const { textComment, textGiveComment, textLoginToGiveComment, textLogin } = useLocale()
+  const { textComment, textGiveComment, textLoginToGiveComment, textLogin, textCreatedBy } = useLocale()
 
   const [upVoteThread, removeUpVoteThread] = useUpVoteDetailThread()
   const [downVoteThread, removeDownVoteThread] = useDownVoteDetailThread()
@@ -101,18 +101,20 @@ export default function DetailThread() {
   }
 
   return (
-    <div className='detail-thread-page flex h-defaultMobileHeight w-screen flex-col items-start gap-3 bg-light px-7 py-3'>
+    <div className='detail-thread-page flex h-defaultMobileHeight w-screen flex-col items-start gap-3 bg-light px-7 py-3 duration-200 dark:bg-dark'>
       <div className='detail-thread-tags__list'>
         {isLoading ? (
           <Skeleton width={100} height={20} baseColor='#393E46' />
         ) : (
-          <div className='detail-thread-tags__item flex w-fit justify-start gap-3 rounded bg-white p-1'>
-            <p className='tags text-sm font-normal text-black'># {threadDetail?.category}</p>
+          <div className='detail-thread-tags__item flex w-fit justify-start gap-3 rounded bg-white p-1 duration-200 dark:bg-detailCategoryDark'>
+            <p className='tags text-sm font-normal text-black duration-200 dark:text-white'>
+              # {threadDetail?.category}
+            </p>
           </div>
         )}
       </div>
       <div className='detail-thread__content overflow-y-scroll'>
-        <p className='text-sm font-normal text-black'>
+        <p className='text-sm font-normal text-black duration-200 dark:text-white'>
           {isLoading ? (
             <Skeleton width={200} height={25} count={3} baseColor='#393E46' />
           ) : (
@@ -126,30 +128,36 @@ export default function DetailThread() {
         ) : (
           <>
             <button
-              className='detail-thread__action-button__like flex w-fit items-center gap-2 rounded bg-light p-1'
+              className='detail-thread__action-button__like flex w-fit items-center gap-2 rounded p-1'
               onClick={() => handleUpVote(threadDetail?.id)}
             >
               {isUpVoted ? (
-                <MdThumbUp className='h-5 w-5 text-black' />
+                <MdThumbUp className='h-5 w-5 text-black duration-200 dark:text-white' />
               ) : (
-                <MdThumbUpOffAlt className='h-5 w-5 text-black' />
+                <MdThumbUpOffAlt className='h-5 w-5 text-black duration-200 dark:text-white' />
               )}
-              <p className='text-sm font-normal text-black'>{threadDetail?.upVotesBy.length}</p>
+              <p className='text-sm font-normal text-black duration-200 dark:text-white'>
+                {threadDetail?.upVotesBy.length}
+              </p>
             </button>
             <button
-              className='detail-thread__action-button__dislike flex w-fit items-center gap-2 rounded bg-light p-1'
+              className='detail-thread__action-button__dislike flex w-fit items-center gap-2 rounded p-1'
               onClick={() => handleDownVote(threadDetail?.id)}
             >
               {isDownVoted ? (
-                <MdThumbDown className='h-5 w-5 text-black' />
+                <MdThumbDown className='h-5 w-5 text-black duration-200 dark:text-white' />
               ) : (
-                <MdOutlineThumbDownOffAlt className='h-5 w-5 text-black' />
+                <MdOutlineThumbDownOffAlt className='h-5 w-5 text-black duration-200 dark:text-white' />
               )}
-              <p className='text-sm font-normal text-black'>{threadDetail?.downVotesBy.length}</p>
+              <p className='text-sm font-normal text-black duration-200 dark:text-white'>
+                {threadDetail?.downVotesBy.length}
+              </p>
             </button>
-            <button className='detail-thread__action-button__share flex w-fit items-center gap-2 rounded bg-light p-1'>
-              <MdOutlineModeComment className='h-5 w-5 text-black' />
-              <p className='text-sm font-normal text-black'>{threadDetail?.comments.length}</p>
+            <button className='detail-thread__action-button__share flex w-fit items-center gap-2 rounded p-1'>
+              <MdOutlineModeComment className='h-5 w-5 text-black duration-200 dark:text-white' />
+              <p className='text-sm font-normal text-black duration-200 dark:text-white'>
+                {threadDetail?.comments.length}
+              </p>
             </button>
           </>
         )}
@@ -158,7 +166,7 @@ export default function DetailThread() {
         {isLoading ? (
           <Skeleton width={100} height={20} baseColor='#393E46' />
         ) : (
-          <p className='text-sm font-normal text-black'>
+          <p className='text-sm font-normal text-black duration-200 dark:text-white'>
             {moment(threadDetail?.createdAt)
               .locale(locale)
               .fromNow()}
@@ -167,14 +175,14 @@ export default function DetailThread() {
         {isLoading ? (
           <Skeleton width={100} height={20} baseColor='#393E46' />
         ) : (
-          <p className='text-sm font-normal text-black'>
-            Dibuat Oleh <span className='font-bold'>{threadDetail?.owner.name}</span>
+          <p className='text-sm font-normal text-black duration-200 dark:text-white'>
+            {textCreatedBy} <span className='font-bold duration-200 dark:text-white'>{threadDetail?.owner.name}</span>
           </p>
         )}
       </div>
       <div className='detail-thread__comment-container mt-4 w-full'>
         <div className='detail-thread__comment-container__header flex items-center justify-between gap-8'>
-          <p className='text-sm font-bold'>{textGiveComment}</p>
+          <p className='text-sm font-bold duration-200 dark:text-white'>{textGiveComment}</p>
         </div>
         {authUser ? (
           <div className='detail-thread__comment-container__input mt-3 flex flex-col items-center justify-between gap-2'>
@@ -197,8 +205,8 @@ export default function DetailThread() {
             {isLoading ? (
               <Skeleton width={150} height={20} baseColor='#393E46' />
             ) : (
-              <p className='text-xs text-black'>
-                <Link href={'/login'} className='underline hover:font-bold'>
+              <p className='text-xs text-black duration-200 dark:text-white'>
+                <Link href={'/login'} className='underline duration-200 hover:font-bold dark:text-white'>
                   {textLogin}
                 </Link>{' '}
                 {textLoginToGiveComment}
@@ -211,8 +219,8 @@ export default function DetailThread() {
           {isLoading ? (
             <Skeleton width={75} height={20} baseColor='#393E46' />
           ) : (
-            <p className='text-sm font-bold'>
-              {textComment} <span>({threadDetail?.comments.length})</span>
+            <p className='text-sm font-bold duration-200 dark:text-white'>
+              {textComment} <span className='duration-200 dark:text-white'>({threadDetail?.comments.length})</span>
             </p>
           )}
         </div>
@@ -242,7 +250,7 @@ export default function DetailThread() {
                       <Skeleton width={100} height={20} baseColor='#393E46' />
                     ) : (
                       <div className='detail-thread__comment-container__list__item__user__name flex items-center'>
-                        <p className='text-sm font-bold'>{comment.owner.name}</p>
+                        <p className='text-sm font-bold duration-200 dark:text-white'>{comment.owner.name}</p>
                       </div>
                     )}
                   </div>
@@ -250,7 +258,7 @@ export default function DetailThread() {
                     {isLoading ? (
                       <Skeleton width={100} height={20} baseColor='#393E46' />
                     ) : (
-                      <p className='text-xs font-normal text-black opacity-50'>
+                      <p className='text-xs font-normal text-black opacity-50 duration-200 dark:text-white'>
                         {moment(comment.createdAt).locale(locale).fromNow()}
                       </p>
                     )}
@@ -261,7 +269,7 @@ export default function DetailThread() {
                     <Skeleton width={200} height={20} baseColor='#393E46' />
                   ) : (
                     <p
-                      className='text-sm font-normal text-black'
+                      className='text-sm font-normal text-black duration-200 dark:text-white'
                       dangerouslySetInnerHTML={{ __html: comment.content }}
                     ></p>
                   )}
@@ -272,26 +280,26 @@ export default function DetailThread() {
                   ) : (
                     <>
                       <button
-                        className='detail-thread__comment-container__list__item__action__like flex w-fit items-center gap-2 rounded bg-light p-1'
+                        className='detail-thread__comment-container__list__item__action__like flex w-fit items-center gap-2 roundedp-1'
                         onClick={() => handleUpVoteComment(comment)}
                       >
                         {isUpVotedComment(comment.id) ? (
-                          <MdThumbUp className='h-5 w-5 text-black' />
+                          <MdThumbUp className='h-5 w-5 text-black duration-200 dark:text-white' />
                         ) : (
-                          <MdThumbUpOffAlt className='h-5 w-5 text-black' />
+                          <MdThumbUpOffAlt className='h-5 w-5 text-black duration-200 dark:text-white' />
                         )}
-                        <p className='text-sm font-normal text-black'>{comment.upVotesBy.length}</p>
+                        <p className='text-sm font-normal text-black duration-200 dark:text-white'>{comment.upVotesBy.length}</p>
                       </button>
                       <button
-                        className='detail-thread__comment-container__list__item__action__dislike flex w-fit items-start gap-2 rounded bg-light p-1'
+                        className='detail-thread__comment-container__list__item__action__dislike flex w-fit items-start gap-2 roundedp-1'
                         onClick={() => handleDownVoteComment(comment)}
                       >
                         {isDownVotedComment(comment.id) ? (
-                          <MdThumbDown className='h-5 w-5 text-black' />
+                          <MdThumbDown className='h-5 w-5 text-black duration-200 dark:text-white' />
                         ) : (
-                          <MdThumbDownOffAlt className='h-5 w-5 text-black' />
+                          <MdThumbDownOffAlt className='h-5 w-5 text-black duration-200 dark:text-white' />
                         )}
-                        <p className='text-sm font-normal text-black'>{comment.downVotesBy.length}</p>
+                        <p className='text-sm font-normal text-black duration-200 dark:text-white'>{comment.downVotesBy.length}</p>
                       </button>
                     </>
                   )}

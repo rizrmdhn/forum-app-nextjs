@@ -70,7 +70,7 @@ export default function ThreadPageCategoryList({ category }: { category: string[
           ) : (
             <ul
               className='mx-auto mt-2 flex h-8 w-fit cursor-pointer flex-col gap-2 rounded bg-light p-1 text-black
-           transition duration-200 ease-in-out hover:bg-gray-500 hover:text-white dark:bg-black dark:text-white dark:hover:bg-white dark:hover:text-black
+           transition duration-200 ease-in-out hover:bg-gray-500 hover:text-white dark:bg-threadCardDark dark:text-white dark:hover:bg-white dark:hover:text-black
           '
               onClick={() => filterByCategory(category)}
               key={category}

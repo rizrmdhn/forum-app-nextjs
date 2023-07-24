@@ -6,8 +6,19 @@ type SubmitButtonProps = {
 
 export default function SubmitButton({ onSubmitComment }: SubmitButtonProps) {
   return (
-    <button className='submit-btn h-10 w-full rounded bg-defaultLightHeaders' onClick={onSubmitComment}>
-      <p className='text-base font-bold text-white'>Submit</p>
+    <button
+      className='submit-btn group h-10 w-full rounded border-2 bg-defaultLightHeaders duration-200 hover:bg-black dark:bg-dark
+    dark:hover:bg-white dark:hover:text-black
+    '
+      onClick={onSubmitComment}
+    >
+      <p
+        className='text-base font-bold text-white duration-200 group-hover:text-white
+      dark:text-white dark:group-hover:text-black
+      '
+      >
+        Submit
+      </p>
     </button>
   )
 }

@@ -24,18 +24,14 @@ export default function LeaderboardPage() {
   }, [dispatch])
 
   if (isPreload) {
-    return (
-      <div className='flex h-defaultMobileHeight items-center justify-center'>
-        <div className='h-32 w-32 animate-spin rounded-full border-b-2 border-t-2 border-gray-900'></div>
-      </div>
-    )
+    return null
   }
 
   return (
-    <div className='leaderboard-page h-defaultMobileHeight bg-light'>
+    <div className='leaderboard-page h-defaultMobileHeight bg-light duration-200 dark:bg-dark'>
       <div className='leaderboard-page__header flex flex-row items-center justify-center gap-40 py-3'>
-        <h2 className='text-sm font-bold'>{textUser}</h2>
-        <h2 className='ml-2 text-sm font-bold'>{textScore}</h2>
+        <h2 className='text-sm font-bold duration-200 dark:text-white'>{textUser}</h2>
+        <h2 className='ml-2 text-sm font-bold duration-200 dark:text-white'>{textScore}</h2>
       </div>
       {leaderboard.map((leaderboard: any) => (
         <div
@@ -60,7 +56,7 @@ export default function LeaderboardPage() {
               {isLoading ? (
                 <Skeleton width={100} height={20} baseColor='#393E46' />
               ) : (
-                <h2 className='w-32 text-sm font-normal'>{leaderboard.user.name}</h2>
+                <h2 className='w-32 text-sm font-normal duration-200 dark:text-white'>{leaderboard.user.name}</h2>
               )}
             </div>
           </div>
@@ -68,7 +64,7 @@ export default function LeaderboardPage() {
             {isLoading ? (
               <Skeleton width={20} height={20} baseColor='#393E46' />
             ) : (
-              <h2 className='text-sm font-normal'>{leaderboard.score}</h2>
+              <h2 className='text-sm font-normal duration-200 dark:text-white'>{leaderboard.score}</h2>
             )}
           </div>
         </div>

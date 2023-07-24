@@ -4,9 +4,9 @@ import BottomNavigation from '@/components/BottomNavigation'
 import InputThread from '@/components/InputThread'
 import MobileMenu from '@/components/MobileMenu'
 import useCreateThread from '@/hooks/useCreateThread'
+import useGetLocalTheme from '@/hooks/useGetLocalTheme'
+import useGetLocale from '@/hooks/useGetLocale'
 import useSelect from '@/hooks/useSelect'
-import { setLocaleActionCreator } from '@/states/locale/action'
-import { unsetShowMenuActionCreator } from '@/states/setShowMenu/action'
 import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 
@@ -15,6 +15,8 @@ export default function ThreadPageLayout({ children }: { children: React.ReactNo
 
   const dispatch = useDispatch()
 
+  const [setLocaleData] = useGetLocale()
+  const [setLocalTheme] = useGetLocalTheme()
   const [title, onChangeTitle, body, onChangeBody, category, onChangeCategory, onSubmit] = useCreateThread()
 
   const threadInput = [
@@ -41,13 +43,9 @@ export default function ThreadPageLayout({ children }: { children: React.ReactNo
   ]
 
   useEffect(() => {
-    const locale = localStorage.getItem('locale')
-    if (locale) {
-      dispatch(setLocaleActionCreator(locale))
-    } else {
-      dispatch(setLocaleActionCreator('id'))
-    }
-  }, [dispatch])
+    setLocaleData()
+    setLocalTheme()
+  }, [dispatch, setLocaleData, setLocalTheme])
 
   return (
     <>

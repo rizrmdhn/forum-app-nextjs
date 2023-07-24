@@ -8,6 +8,7 @@ import { setLocaleActionCreator } from '@/states/locale/action'
 import { useEffect } from 'react'
 import useLocale from '@/hooks/useLocale'
 import { changeThemeActionCreator } from '@/states/theme/action'
+import useGetLocalTheme from '@/hooks/useGetLocalTheme'
 
 export default function MobileMenu() {
   const authUser = useSelect('authUser')
@@ -15,6 +16,8 @@ export default function MobileMenu() {
   const theme = useSelect('theme')
 
   const { textLogin, textDarkMode, textLogout, textLightMode } = useLocale()
+
+  const [setLocalTheme] = useGetLocalTheme()
 
   const colorTheme = theme === 'light' ? 'dark' : 'light'
 
@@ -47,17 +50,7 @@ export default function MobileMenu() {
       dispatch(setLocaleActionCreator('id'))
     }
 
-    const theme = localStorage.getItem('theme')
-    const root = window.document.documentElement
-
-    if (theme) {
-      dispatch(changeThemeActionCreator(theme))
-      root.classList.remove(colorTheme)
-      root.classList.add(theme)
-    } else {
-      dispatch(changeThemeActionCreator('light'))
-      root.classList.add('light')
-    }
+    setLocalTheme()
     // check if menu is clicked in outside of the menu
     const menu = document.querySelector('.mobile-menu')
     const menuItem = document.querySelector('.mobile-menu-item')
