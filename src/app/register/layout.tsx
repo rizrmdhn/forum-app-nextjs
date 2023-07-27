@@ -23,7 +23,7 @@ export default function RegisterLayout({ children }: { children: React.ReactNode
     <>
       {children}
       {showMenu && <MobileMenu />}
-      <FloatingMenu AddNewThread={() => {}} />
+      <FloatingMenu />
       <BottomNavigation />
     </>
   )

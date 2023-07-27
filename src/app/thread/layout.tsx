@@ -53,9 +53,7 @@ export default function ThreadPageLayout({ children }: { children: React.ReactNo
     setLocalTheme()
   }, [dispatch, setLocaleData, setLocalTheme])
 
-  const onOpenModal = () => {
-    dispatch(openModalActionCreator())
-  }
+ 
 
   if (isPreload) {
     return (
@@ -70,7 +68,7 @@ export default function ThreadPageLayout({ children }: { children: React.ReactNo
     <>
       {children}
       {showMenu && <MobileMenu />}
-      <FloatingMenu AddNewThread={onOpenModal} />
+      <FloatingMenu />
       <BottomNavigation />
       <InputThread
         sendDialog='Add Thread'

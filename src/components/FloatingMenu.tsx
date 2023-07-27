@@ -1,8 +1,17 @@
 import { IconButton, SpeedDial, SpeedDialHandler, SpeedDialContent, SpeedDialAction } from '@material-tailwind/react'
-import { MdBedtime, MdOutlineGTranslate, MdLogout, MdLogin, MdSunny, MdMenu, MdAdd, MdChatBubble } from 'react-icons/md'
+import {
+  MdBedtime,
+  MdOutlineGTranslate,
+  MdLogout,
+  MdLogin,
+  MdSunny,
+  MdMenu,
+  MdAdd,
+  MdChatBubble,
+  MdLeaderboard,
+} from 'react-icons/md'
 import useSelect from '@/hooks/useSelect'
-import React, { useEffect } from 'react'
-import useGetLocalTheme from '@/hooks/useGetLocalTheme'
+import React from 'react'
 import useLocale from '@/hooks/useLocale'
 import { useDispatch } from 'react-redux'
 import { asyncUnsetAuthUser } from '@/states/authUser/action'
@@ -12,9 +21,9 @@ import { setLocaleActionCreator } from '@/states/locale/action'
 import { changeThemeActionCreator } from '@/states/theme/action'
 import Link from 'next/link'
 import { useParams, usePathname } from 'next/navigation'
-import useGetLocale from '@/hooks/useGetLocale'
+import { openModalActionCreator } from '@/states/openModal/action'
 
-export default function FloatingMenu({ AddNewThread }: { AddNewThread: () => void }) {
+export default function FloatingMenu() {
   const authUser = useSelect('authUser')
   const locale = useSelect('locale')
   const theme = useSelect('theme')
@@ -23,11 +32,6 @@ export default function FloatingMenu({ AddNewThread }: { AddNewThread: () => voi
   const path = usePathname()
 
   const { textLogin, textDarkMode, textLogout, textLightMode, textLogoutSuccess, textAddThread } = useLocale()
-
-  const [setLocalTheme] = useGetLocalTheme()
-  const [setLocale] = useGetLocale()
-
-  const colorTheme = theme === 'light' ? 'dark' : 'light'
 
   const dispatch = useDispatch()
 
@@ -54,6 +58,10 @@ export default function FloatingMenu({ AddNewThread }: { AddNewThread: () => voi
     localStorage.setItem('theme', theme === 'light' ? 'dark' : 'light')
   }
 
+  const onOpenModal = () => {
+    dispatch(openModalActionCreator())
+  }
+
   const isUserLoogedIn = () => {
     if (authUser) {
       return (
@@ -76,11 +84,6 @@ export default function FloatingMenu({ AddNewThread }: { AddNewThread: () => voi
     }
   }
 
-  useEffect(() => {
-    setLocalTheme()
-    setLocale()
-  }, [colorTheme, locale, setLocalTheme, setLocale, dispatch])
-
   return (
     <div className='hidden 2xl:fixed 2xl:bottom-16 2xl:right-5 2xl:flex 2xl:w-full'>
       <div className='hidden 2xl:absolute 2xl:bottom-0 2xl:right-5 2xl:flex'>
@@ -96,7 +99,7 @@ export default function FloatingMenu({ AddNewThread }: { AddNewThread: () => voi
                 <MdAdd
                   className='h-8 w-8 text-white duration-200 dark:text-black'
                   title={textAddThread}
-                  onClick={AddNewThread}
+                  onClick={onOpenModal}
                 />
               </SpeedDialAction>
             )}
@@ -104,6 +107,13 @@ export default function FloatingMenu({ AddNewThread }: { AddNewThread: () => voi
               <SpeedDialAction className='bg-dark duration-200 dark:bg-white'>
                 <Link href='/thread' title='Thread'>
                   <MdChatBubble className='h-8 w-8 text-white duration-200 dark:text-black' />
+                </Link>
+              </SpeedDialAction>
+            )}
+            {path.includes('/leaderboard') === false && (
+              <SpeedDialAction className='bg-dark duration-200 dark:bg-white'>
+                <Link href='/leaderboard' title='Leaderboard'>
+                  <MdLeaderboard className='h-8 w-8 text-white duration-200 dark:text-black' />
                 </Link>
               </SpeedDialAction>
             )}

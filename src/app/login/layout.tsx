@@ -23,7 +23,7 @@ export default function LoginLayout({ children }: { children: React.ReactNode })
     <>
       {children}
       {showMenu && <MobileMenu />}
-      <FloatingMenu AddNewThread={() => {}} />
+      <FloatingMenu />
       <BottomNavigation />
     </>
   )

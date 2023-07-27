@@ -1,6 +1,7 @@
 'use client'
 
 import BottomNavigation from '@/components/BottomNavigation'
+import FloatingMenu from '@/components/FloatingMenu'
 import HeaderLeaderboardPage from '@/components/HeaderLeaderboardPage'
 import MobileMenu from '@/components/MobileMenu'
 import Spinner from '@/components/Spinner'
@@ -41,6 +42,7 @@ export default function LeaderboardLayout({ children }: { children: React.ReactN
       <HeaderLeaderboardPage />
       {children}
       {showMenu && <MobileMenu />}
+      <FloatingMenu />
       <BottomNavigation />
     </>
   )

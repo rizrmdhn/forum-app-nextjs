@@ -24,7 +24,7 @@ export default function LeaderboardPage() {
 
 
   return (
-    <div className='leaderboard-page h-leaderboardHeight bg-light duration-200 dark:bg-dark'>
+    <div className='leaderboard-page h-leaderboardHeight 2xl:h-defaultDesktopHeight bg-light duration-200 dark:bg-dark'>
       <div className='leaderboard-page__header flex flex-row items-center justify-between gap-40 px-10 py-3 2xl:w-full'>
         <h2 className='ml-4 text-sm font-bold duration-200 dark:text-white 2xl:text-xl'>{textUser}</h2>
         <h2 className='text-sm font-bold duration-200 dark:text-white 2xl:text-xl'>{textScore}</h2>

@@ -8,7 +8,6 @@ import { setLocaleActionCreator } from '@/states/locale/action'
 import { useEffect } from 'react'
 import useLocale from '@/hooks/useLocale'
 import { changeThemeActionCreator } from '@/states/theme/action'
-import useGetLocalTheme from '@/hooks/useGetLocalTheme'
 import myToast from './myToast'
 
 export default function MobileMenu() {
@@ -17,10 +16,6 @@ export default function MobileMenu() {
   const theme = useSelect('theme')
 
   const { textLogin, textDarkMode, textLogout, textLightMode, textLogoutSuccess } = useLocale()
-
-  const [setLocalTheme] = useGetLocalTheme()
-
-  const colorTheme = theme === 'light' ? 'dark' : 'light'
 
   const dispatch = useDispatch()
 
@@ -48,14 +43,6 @@ export default function MobileMenu() {
   }
 
   useEffect(() => {
-    const locale = localStorage.getItem('locale')
-    if (locale) {
-      dispatch(setLocaleActionCreator(locale))
-    } else {
-      dispatch(setLocaleActionCreator('id'))
-    }
-
-    setLocalTheme()
     // check if menu is clicked in outside of the menu
     const menu = document.querySelector('.mobile-menu')
     const menuItem = document.querySelector('.mobile-menu-item')
@@ -79,7 +66,7 @@ export default function MobileMenu() {
     return () => {
       document.removeEventListener('mousedown', handleClickOutside)
     }
-  }, [dispatch, colorTheme, theme, setLocalTheme])
+  }, [dispatch])
 
   const isUserLoogedIn = () => {
     if (authUser) {
