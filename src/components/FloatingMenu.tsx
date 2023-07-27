@@ -57,7 +57,7 @@ export default function FloatingMenu({ AddNewThread }: { AddNewThread: () => voi
   const isUserLoogedIn = () => {
     if (authUser) {
       return (
-        <SpeedDialAction className='mobile-menu-item__logout group flex items-center gap-3  hover:cursor-pointer'>
+        <SpeedDialAction className='mobile-menu-item__logout group flex items-center gap-3  bg-dark duration-200 hover:cursor-pointer dark:bg-white'>
           <MdLogout className='h-8 w-8 text-white duration-200 dark:text-black' title={textLogout} onClick={onLogout} />
         </SpeedDialAction>
       )
