@@ -7,7 +7,6 @@ import { useEffect } from 'react'
 import { asyncPopulateUsersAndThreads } from '@/states/shared/action'
 import useSelect from '@/hooks/useSelect'
 import MobileThreadCardLoading from '@/loadingComponent/MobileThreadCardLoading'
-import { asyncSetIsPreload } from '@/states/isPreload/action'
 import AddThreadButton from '@/components/AddThreadButton'
 import { openModalActionCreator } from '@/states/openModal/action'
 import ThreadPageCategoryList from '@/components/ThreadPageCategoryList'
@@ -40,7 +39,7 @@ export default function ThreadPage() {
     <>
       <HeaderThreadPage />
       {showCategory && <ThreadPageCategoryList category={categoryList} />}
-      <div className='flex h-leaderboardHeight flex-col items-center gap-8 overflow-y-auto bg-light px-8 py-12 duration-200 dark:bg-dark'>
+      <div className='flex h-leaderboardHeight 2xl:h-defaultDesktopHeight flex-col items-center gap-8 overflow-y-auto bg-light px-8 py-12 duration-200 dark:bg-dark'>
         {isLoading ? (
           <>
             <MobileThreadCardLoading />

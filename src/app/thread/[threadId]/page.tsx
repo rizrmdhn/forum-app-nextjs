@@ -102,7 +102,7 @@ export default function DetailThread() {
   }
 
   return (
-    <div className='detail-thread-page flex h-leaderboardHeight w-screen flex-col items-start gap-3 bg-light px-7 py-3 duration-200 dark:bg-dark 2xl:px-80 2xl:pb-10 2xl:pt-20'>
+    <div className='detail-thread-page flex h-leaderboardHeight w-screen flex-col items-start gap-3 bg-light px-7 py-3 duration-200 dark:bg-dark 2xl:h-defaultDesktopHeight 2xl:px-80 2xl:pb-10 2xl:pt-20'>
       <div className='detail-thread-tags__list'>
         {isLoading ? (
           <Skeleton width={100} height={20} baseColor='#393E46' />

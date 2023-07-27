@@ -17,6 +17,7 @@ export interface ILocaleData {
     textLeaderboardMenu: string;
     textLeaderboard: string;
     textCategoryList: string;
+    textAddThread: string;
     
 
     // For Forum
@@ -115,6 +116,7 @@ const localeData: {[locale: string]: ILocaleData} = {
         textLogoutSuccess: 'Logout berhasil',
         textRegisterFailed: 'Register gagal',
         textRegisterSuccess: 'Register berhasil',
+        textAddThread: 'Tambah Thread',
     },
     en:{
         textLogin: 'Login',
@@ -161,6 +163,7 @@ const localeData: {[locale: string]: ILocaleData} = {
         textLogoutSuccess: 'Logout success',
         textRegisterFailed: 'Register failed',
         textRegisterSuccess: 'Register success',
+        textAddThread: 'Add Thread',
     }
 };
 

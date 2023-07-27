@@ -1,6 +1,7 @@
 'use client'
 
 import BottomNavigation from '@/components/BottomNavigation'
+import FloatingMenu from '@/components/FloatingMenu'
 import InputThread from '@/components/InputThread'
 import MobileMenu from '@/components/MobileMenu'
 import Spinner from '@/components/Spinner'
@@ -9,6 +10,7 @@ import useGetLocalTheme from '@/hooks/useGetLocalTheme'
 import useGetLocale from '@/hooks/useGetLocale'
 import useSelect from '@/hooks/useSelect'
 import { asyncSetIsPreload } from '@/states/isPreload/action'
+import { openModalActionCreator } from '@/states/openModal/action'
 import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 
@@ -51,6 +53,10 @@ export default function ThreadPageLayout({ children }: { children: React.ReactNo
     setLocalTheme()
   }, [dispatch, setLocaleData, setLocalTheme])
 
+  const onOpenModal = () => {
+    dispatch(openModalActionCreator())
+  }
+
   if (isPreload) {
     return (
       <div className='flex h-screen w-screen items-center justify-center flex-col bg-light duration-200 dark:bg-dark'>
@@ -64,6 +70,7 @@ export default function ThreadPageLayout({ children }: { children: React.ReactNo
     <>
       {children}
       {showMenu && <MobileMenu />}
+      <FloatingMenu AddNewThread={onOpenModal} />
       <BottomNavigation />
       <InputThread
         sendDialog='Add Thread'

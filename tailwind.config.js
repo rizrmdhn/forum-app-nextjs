@@ -33,6 +33,7 @@ export default withMT({
         defaultHeaderMobile: "360px",
       },
       height: {
+        defaultDesktopHeight: "calc(100vh - 80px)",
         defaultHeaderMobile: "80px",
         defaultMobileHeight: "calc(100vh - 80px)",
         detailThreadHeight: "calc(100vh - 80px)",

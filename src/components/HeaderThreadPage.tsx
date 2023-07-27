@@ -50,7 +50,7 @@ export default function HeaderThreadPage() {
             <MdSearch className='h-6 w-6 text-white' />
           </button>
         </div>
-        <div className='flex sm:hidden 2xl:inline'>
+        <div className='hidden 2xl:block'>
           <h2 className='text-2xl font-bold text-white duration-200'>Forum App</h2>
         </div>
       </div>

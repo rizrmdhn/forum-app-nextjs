@@ -6,6 +6,7 @@ import useSelect from '@/hooks/useSelect'
 import { useEffect } from 'react'
 import useGetLocale from '@/hooks/useGetLocale'
 import useGetLocalTheme from '@/hooks/useGetLocalTheme'
+import FloatingMenu from '@/components/FloatingMenu'
 
 export default function RegisterLayout({ children }: { children: React.ReactNode }) {
   const showMenu = useSelect('showMenu')
@@ -22,6 +23,7 @@ export default function RegisterLayout({ children }: { children: React.ReactNode
     <>
       {children}
       {showMenu && <MobileMenu />}
+      <FloatingMenu AddNewThread={() => {}} />
       <BottomNavigation />
     </>
   )

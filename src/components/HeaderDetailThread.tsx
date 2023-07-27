@@ -16,11 +16,11 @@ export default function HeaderDetailThread({ title, isLoading }: { title: string
           '
           />
         </Link>
-        <div className='detail-thread-header-title mx-auto my-auto line-clamp-2 w-64'>
+        <div className='detail-thread-header-title mx-auto my-auto line-clamp-2 w-64 2xl:w-fit'>
           {isLoading ? (
             <Skeleton width={200} height={25} baseColor='#393E46' />
           ) : (
-            <p className='text-auto text-center font-bold text-white'>{title}</p>
+            <p className='text-auto text-center font-bold text-white 2xl:text-xl'>{title}</p>
           )}
         </div>
       </div>

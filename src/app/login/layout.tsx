@@ -1,6 +1,7 @@
 'use client'
 
 import BottomNavigation from '@/components/BottomNavigation'
+import FloatingMenu from '@/components/FloatingMenu'
 import MobileMenu from '@/components/MobileMenu'
 import useGetLocalTheme from '@/hooks/useGetLocalTheme'
 import useGetLocale from '@/hooks/useGetLocale'
@@ -17,11 +18,12 @@ export default function LoginLayout({ children }: { children: React.ReactNode })
     setLocaleData()
     setLocalTheme()
   }, [setLocaleData, setLocalTheme])
-  
+
   return (
     <>
       {children}
       {showMenu && <MobileMenu />}
+      <FloatingMenu AddNewThread={() => {}} />
       <BottomNavigation />
     </>
   )

@@ -51,11 +51,11 @@ export default function ThreadPageCategoryList({ category }: { category: string[
   }, [dispatch])
 
   return (
-    <div className='category-list-menu animate__animated animate__fadeInLeft fixed flex max-h-screen w-32 flex-col rounded-ee-xl bg-defaultLightHeaders py-4 duration-200 dark:border-b-2 dark:border-r-2 dark:border-white dark:bg-dark 2xl:w-64'>
+    <div className='category-list-menu animate__animated animate__fadeInLeft fixed flex h-leaderboardHeight w-32 flex-col bg-defaultLightHeaders py-4 duration-200 dark:border-b-2 dark:border-r-2 dark:bg-dark 2xl:h-defaultDesktopHeight 2xl:w-64 2xl:rounded-ee-xl 2xl:dark:border-white'>
       <div className='category-list-menu__title w-full'>
-        <h3 className='text-center text-base font-bold text-white'>{textCategoryList}</h3>
+        <h3 className='text-center text-base font-bold text-white 2xl:ml-3 2xl:text-start'>{textCategoryList}</h3>
       </div>
-      <div className='category-list-menu__list flex h-32 flex-col flex-wrap overflow-scroll'>
+      <div className='category-list-menu__list flex h-32 flex-col flex-wrap overflow-scroll 2xl:h-full 2xl:flex-row'>
         {category.map((category: string) =>
           isCategory(category) ? (
             <ul
