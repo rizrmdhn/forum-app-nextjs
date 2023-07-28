@@ -31,7 +31,7 @@ export default function BottomNavigation() {
   const isInThreadPage = usePathname().includes('/thread')
 
   return (
-    <div className='bottom-navigation sticky bottom-0 2xl:hidden'>
+    <div className='bottom-navigation fixed bottom-0 2xl:hidden'>
       <div className='flex h-defaultHeaderMobile w-screen flex-row items-center justify-between bg-defaultLightHeaders px-6 duration-200 dark:border-t-2 dark:border-white dark:bg-dark'>
         <a
           className='icon-leaderboard group flex w-full cursor-pointer flex-col items-center justify-center'
