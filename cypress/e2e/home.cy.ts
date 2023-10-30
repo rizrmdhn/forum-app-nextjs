@@ -14,7 +14,7 @@ describe('Home spec', () => {
   })
 
   it('should redirect to thread page', async () => {
-    cy.visit(Cypress.env('APP_URL') + '/')
+    cy.visit(Cypress.env('APP_URL'))
 
     // the redirect is not instant, so we need to wait
     cy.wait(5000).then(() => {
