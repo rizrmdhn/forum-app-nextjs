@@ -49,7 +49,7 @@ export default function ThreadPageLayout({ children }: { children: React.ReactNo
   useEffect(() => {
     setLocaleData()
     setLocalTheme()
-  }, [dispatch, setLocaleData, setLocalTheme])
+  }, [setLocaleData, setLocalTheme])
 
   useEffect(() => {
     dispatch(asyncSetIsPreload())

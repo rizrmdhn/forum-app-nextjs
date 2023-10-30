@@ -20,7 +20,7 @@ import { unsetShowMenuActionCreator } from '@/states/setShowMenu/action'
 import { setLocaleActionCreator } from '@/states/locale/action'
 import { changeThemeActionCreator } from '@/states/theme/action'
 import Link from 'next/link'
-import { useParams, usePathname } from 'next/navigation'
+import { useParams, usePathname, useRouter } from 'next/navigation'
 import { openModalActionCreator } from '@/states/openModal/action'
 
 export default function FloatingMenu() {

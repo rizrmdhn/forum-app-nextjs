@@ -27,17 +27,16 @@ export default function RegisterLayout({ children }: { children: React.ReactNode
   }, [setLocaleData, setLocalTheme])
 
   useEffect(() => {
-    dispatch(asyncSetIsPreload())
-
     if (authUser) {
       router.push('/thread')
     }
 
-    setLocaleData()
-    setLocalTheme()
-
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [authUser, dispatch, setLocalTheme, setLocaleData])
+  }, [authUser, dispatch])
+
+  useEffect(() => {
+    dispatch(asyncSetIsPreload())
+  }, [dispatch])
 
   return (
     <>
