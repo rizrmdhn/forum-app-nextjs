@@ -1,3 +1,41 @@
+/**
+ *
+ * test scenario for detailThread action
+ *
+ * - detailThread action
+ *  - asyncGetThreadsDetail thunk
+ *    - should return thread detail
+ *    - should return error message if theres a error
+ *  - asyncUpVoteThreadDetail thunk
+ *    - should return error when user not login
+ *    - should upvote thread detail
+ *    - should return error message if theres a error
+ *  - asyncDownVoteThreadDetail thunk
+ *    - should return error when user not login
+ *    - should downvote thread detail
+ *    - should return error message if theres a error
+ *  - asyncNeutralVoteThreadDetail thunk
+ *    - should return error when user not login
+ *    - should neutral vote thread detail
+ *    - should return error message if theres a error
+ *  - asyncCreateCommentThreadDetail thunk
+ *    - should return error when user not login
+ *    - should create comment thread detail
+ *    - should return error message if theres a error
+ *  - asyncUpVoteCommentThreadDetail thunk
+ *    - should return error when user not login
+ *    - should upvote comment thread detail
+ *    - should return error message if theres a error
+ *  - asyncDownVoteCommentThreadDetail thunk
+ *    - should return error when user not login
+ *    - should downvote comment thread detail
+ *    - should return error message if theres a error
+ *  - asyncNeutralVoteCommentThreadDetail thunk
+ *    - should return error when user not login
+ *    - should neutral vote comment thread detail
+ *    - should return error message if theres a error
+ */
+
 import { describe, it, vi, expect } from 'vitest'
 import api from '@/utils/api'
 import {

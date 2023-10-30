@@ -1,3 +1,28 @@
+/**
+ *
+ * test scenario for thread action
+ *
+ * - thread action
+ *  - receiveThreadActionCreator
+ *    - should return action with type RECEIVE_THREAD and payload thread
+ *  - asyncCreateThread thunk
+ *   - should return action with type CREATE_THREAD and payload thread
+ *   - should return error message if theres a error
+ *  - asyncUpVoteThread thunk
+ *    - should return error when user not login
+ *    - should return action with type UP_VOTE_THREAD and payload threadId and userId
+ *    - should return error message if theres a error
+ *  - asyncDownVoteThread thunk
+ *    - should return error when user not login
+ *    - should return action with type UP_VOTE_THREAD and payload threadId and userId
+ *    - should return error message if theres a error
+ *  - asyncNeturalVoteThread thunk
+ *    - should return error when user not login
+ *    - should return action with type UP_VOTE_THREAD and payload threadId and userId
+ *    - should return error message if theres a error
+ *
+ */
+
 import { describe, it, vi, expect } from 'vitest'
 import api from '@/utils/api'
 import { IThread } from '@/types'

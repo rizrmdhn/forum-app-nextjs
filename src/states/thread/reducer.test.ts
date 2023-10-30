@@ -1,3 +1,27 @@
+/**
+ *
+ * test scenario for thread reducer
+ *
+ * - threadReducer reducer function
+ *  - should return the initial state
+ *  - should handle RECEIVE_THREAD
+ *    - should handle RECEIVE_THREAD
+ *  - should handle CREATE_THREAD
+ *    - should handle CREATE_THREAD
+ *  - should handle UP_VOTE_THREAD
+ *    - should handle UP_VOTE_THREAD
+ *    - should handle UP_VOTE_THREAD when thread is already upvoted (remove upvote)
+ *    - should return thread if no id match
+ *  - should handle DOWN_VOTE_THREAD
+ *    - should handle DOWN_VOTE_THREAD
+ *    - should handle DOWN_VOTE_THREAD when thread is already downvoted (remove downvote)
+ *    - should return thread if no id match
+ *  - should handle NETURAL_VOTE_THREAD
+ *    - should handle NETURAL_VOTE_THREAD
+ *    - should return thread if no id match
+ *
+ */
+
 import { describe, expect, it } from 'vitest'
 import threadReducer, { IThread } from './reducer'
 

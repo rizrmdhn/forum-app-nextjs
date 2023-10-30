@@ -1,3 +1,13 @@
+/**
+ *
+ * test scenario for filterThreadByCategory reducer
+ *
+ * - filterThreadByCategoryReducer reducer function
+ *  - should return the initial state
+ *  - should handle SET_FILTER_THREAD_BY_CATEGORY
+ *
+ */
+
 import { describe, expect, it } from 'vitest'
 import filterThreadByCategoryReducer from './reducer'
 

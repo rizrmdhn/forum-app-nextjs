@@ -1,3 +1,12 @@
+/**
+ *
+ * test scenario for filterThreadByCategory action
+ *
+ * - setFilterThreadByCategoryActionCreator function
+ *  - should return action with type SET_FILTER_THREAD_BY_CATEGORY and payload filterThreadByCategory
+ *
+ */
+
 import { describe, it, expect } from 'vitest'
 import { setFilterThreadByCategoryActionCreator } from './action'
 

@@ -1,3 +1,30 @@
+/**
+ *
+ * test scenario for detailThread reducer
+ *
+ * - detailThread reducer
+ *  - should return default state
+ *  - should return state when given by RECEIVE_THREADS_DETAIL action
+ *  - should return null when given by UP_VOTE_THREAD_DETAIL action is null
+ *  - should return state when given by UP_VOTE_THREAD_DETAIL action
+ *  - should return null when given by DOWN_VOTE_THREAD_DETAIL action is null
+ *  - should return state when given by DOWN_VOTE_THREAD_DETAIL action
+ *  - should return null when given by NEUTRAL_VOTE_THREAD_DETAIL action is null
+ *  - should return state when given by NEUTRAL_VOTE_THREAD_DETAIL action
+ *  - should return null when given by CREATE_COMMENT_THREAD_DETAIL action is null
+ *  - should return state when given by CREATE_COMMENT_THREAD_DETAIL action
+ *  - should return null when given by UP_VOTE_COMMENT_THREAD_DETAIL action is null
+ *  - should return state when given by UP_VOTE_COMMENT_THREAD_DETAIL action
+ *  - should return comment when UP_VOTE_COMMENT_THREAD_DETAIL id is not found
+ *  - should return null when given by DOWN_VOTE_COMMENT_THREAD_DETAIL action is null
+ *  - should return comment when DOWN_VOTE_COMMENT_THREAD_DETAIL id is not found
+ *  - should return state when given by DOWN_VOTE_COMMENT_THREAD_DETAIL action
+ *  - should return comment when NEUTRAL_VOTE_COMMENT_THREAD_DETAIL id is not found
+ *  - should return null when given by NEUTRAL_VOTE_COMMENT_THREAD_DETAIL action is null
+ *  - should return state when given by NEUTRAL_VOTE_COMMENT_THREAD_DETAIL action
+ *
+ */
+
 import { describe, expect, it } from 'vitest'
 import threadDetailReducer from './reducer'
 import { IThreadComment, IThreadDetail } from './action'

@@ -1,3 +1,13 @@
+/**
+ *
+ * test scenario for filterThreadByTitle reducer
+ *
+ * - filterThreadByTitleReducer reducer function
+ *  - should return the initial state
+ *  - should handle SET_FILTER_THREAD_BY_TITLE
+ *
+ */
+
 import { describe, expect, it } from 'vitest'
 import filterThreadByTitleReducer from './reducer'
 
