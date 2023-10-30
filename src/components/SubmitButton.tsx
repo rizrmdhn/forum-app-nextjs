@@ -7,6 +7,7 @@ type SubmitButtonProps = {
 export default function SubmitButton({ onSubmitComment }: SubmitButtonProps) {
   return (
     <button
+      data-testid='submit-comment'
       className='submit-btn group h-10 w-full rounded border-2 bg-defaultLightHeaders duration-200 hover:bg-black dark:bg-dark
     dark:hover:bg-white dark:hover:text-black
     '
