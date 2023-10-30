@@ -1,5 +1,6 @@
 import axios from 'axios'
 import { IComment, IThread, IUser } from '../../types'
+import { IThreadDetail } from '@/states/detailThread/action'
 
 const api = (() => {
   const baseUrl = 'https://forum-api.dicoding.dev/v1'
@@ -127,7 +128,7 @@ const api = (() => {
     return threads
   }
 
-  async function getThreadById(threadId: string): Promise<IThread> {
+  async function getThreadById(threadId: string): Promise<IThreadDetail> {
     const response = await axios(`${baseUrl}/threads/${threadId}`)
 
     const { status, message } = response.data

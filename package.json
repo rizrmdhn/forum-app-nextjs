@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "test": "vitest --no-watch",
+    "test:watch": "vitest --watch"
   },
   "dependencies": {
     "@material-tailwind/react": "^2.0.6",
@@ -37,6 +39,7 @@
   },
   "devDependencies": {
     "prettier": "^3.0.0",
-    "prettier-plugin-tailwindcss": "^0.4.1"
+    "prettier-plugin-tailwindcss": "^0.4.1",
+    "vitest": "^0.34.6"
   }
 }
