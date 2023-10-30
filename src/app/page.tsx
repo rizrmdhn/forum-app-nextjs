@@ -20,7 +20,9 @@ export default function Home() {
     } else {
       router.push('/thread')
     }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch])
 
-  return <main className='h-screen bg-light'></main>
+  return <main data-testid='home-page' className='h-screen bg-light'></main>
 }

@@ -33,6 +33,8 @@ export default function LoginPage() {
         <form className='input-login container flex flex-col items-center justify-center gap-4' onSubmit={onSubmit}>
           <div className='email-container w-72'>
             <input
+              data-testid='email'
+              data-cy='email'
               type='text'
               placeholder={textEmail}
               className='w-full border-2 border-black bg-transparent px-2 py-2 text-black duration-200 focus:outline-none dark:border-white dark:text-white dark:placeholder:text-white'
@@ -42,6 +44,8 @@ export default function LoginPage() {
           </div>
           <div className='password-container w-72'>
             <input
+              data-testid='password'
+              data-cy='password'
               type='password'
               placeholder={textPassword}
               className='w-full border-2 border-black bg-transparent px-2 py-2 text-black duration-200 focus:outline-none dark:border-white dark:text-white dark:placeholder:text-white'
@@ -50,6 +54,8 @@ export default function LoginPage() {
             />
           </div>
           <button
+            data-testid='login-btn'
+            data-cy='login-btn'
             type='submit'
             className='login-btn flex w-72 flex-auto items-center justify-center gap-3 border-2 border-black bg-black px-2 py-2 font-bold text-white duration-200
             hover:bg-white hover:text-black dark:bg-white dark:text-black
@@ -60,9 +66,13 @@ export default function LoginPage() {
           </button>
         </form>
         <div className='had-an-account flex-rows container flex items-center justify-center'>
-          <p className='text-xs font-normal text-black duration-200 dark:text-white 2xl:text-xl'>
+          <p
+            data-testid='need-account'
+            className='text-xs font-normal text-black duration-200 dark:text-white 2xl:text-xl'
+          >
             {textNeedAccount}{' '}
             <a
+              data-testid='register-here'
               href='/register'
               className='text-xs font-normal underline duration-200 hover:font-bold dark:text-white 2xl:text-xl'
             >

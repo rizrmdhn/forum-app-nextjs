@@ -39,7 +39,10 @@ export default function ThreadPage() {
     <>
       <HeaderThreadPage />
       {showCategory && <ThreadPageCategoryList category={categoryList} />}
-      <div className='flex h-leaderboardHeight 2xl:h-defaultDesktopHeight flex-col items-center gap-8 overflow-y-auto bg-light px-8 py-12 duration-200 dark:bg-dark'>
+      <div
+        data-testid='thread-page'
+        className='flex h-leaderboardHeight flex-col items-center gap-8 overflow-y-auto bg-light px-8 py-12 duration-200 dark:bg-dark 2xl:h-defaultDesktopHeight'
+      >
         {isLoading ? (
           <>
             <MobileThreadCardLoading />

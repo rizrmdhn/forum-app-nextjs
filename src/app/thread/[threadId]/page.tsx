@@ -48,6 +48,8 @@ export default function DetailThread() {
     dispatch(asyncSetIsPreload())
     setThreadIdHandler(threadDetail?.id)
     dispatch(asyncGetThreadsDetail(threadId))
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch, threadDetail?.id, threadId])
 
   const isUpVoted = threadDetail?.upVotesBy.includes(authUser?.id)
