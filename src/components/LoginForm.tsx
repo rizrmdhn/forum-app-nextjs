@@ -5,7 +5,7 @@ import useLogin from '@/hooks/useLogin'
 import React from 'react'
 
 export default function LoginForm() {
-  const { textLogin, textEmail, textPassword, textNeedAccount, textRegisterHere } = useLocale()
+  const { textLogin, textEmail, textPassword } = useLocale()
 
   const [email, onChangeEmail, password, onChangePassword, onSubmit] = useLogin()
   return (

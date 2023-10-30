@@ -10,10 +10,14 @@ import { useEffect } from 'react'
 import { asyncSetIsPreload } from '@/states/isPreload/action'
 
 import { useDispatch } from 'react-redux'
-import { redirect, useRouter } from 'next/navigation'
+import { useRouter } from 'next/navigation'
 
 export default function LoginLayout({ children }: { children: React.ReactNode }) {
   const showMenu = useSelect('showMenu')
+  const authUser = useSelect('authUser')
+
+  const router = useRouter()
+  const dispatch = useDispatch()
 
   const [setLocaleData] = useGetLocale()
   const [setLocalTheme] = useGetLocalTheme()
@@ -23,18 +27,16 @@ export default function LoginLayout({ children }: { children: React.ReactNode })
     setLocalTheme()
   }, [setLocaleData, setLocalTheme])
 
-  const authUser = useSelect('authUser')
-
-  const router = useRouter()
-  const dispatch = useDispatch()
-
   useEffect(() => {
-    dispatch(asyncSetIsPreload())
-
     if (authUser) {
       router.push('/thread')
     }
-  }, [authUser, dispatch, router])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [authUser])
+
+  useEffect(() => {
+    dispatch(asyncSetIsPreload())
+  }, [dispatch])
 
   return (
     <>

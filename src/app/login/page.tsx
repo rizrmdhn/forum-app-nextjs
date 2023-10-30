@@ -1,5 +1,3 @@
-'use client'
-
 import HadAnAccount from '@/components/HadAnAccount'
 import LoginForm from '@/components/LoginForm'
 

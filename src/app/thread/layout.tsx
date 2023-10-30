@@ -10,7 +10,6 @@ import useGetLocalTheme from '@/hooks/useGetLocalTheme'
 import useGetLocale from '@/hooks/useGetLocale'
 import useSelect from '@/hooks/useSelect'
 import { asyncSetIsPreload } from '@/states/isPreload/action'
-import { openModalActionCreator } from '@/states/openModal/action'
 import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 
@@ -48,19 +47,20 @@ export default function ThreadPageLayout({ children }: { children: React.ReactNo
   ]
 
   useEffect(() => {
-    dispatch(asyncSetIsPreload())
     setLocaleData()
     setLocalTheme()
   }, [dispatch, setLocaleData, setLocalTheme])
 
- 
+  useEffect(() => {
+    dispatch(asyncSetIsPreload())
+  }, [dispatch])
 
   if (isPreload) {
     return (
-      <div className='flex h-screen w-screen items-center justify-center flex-col bg-light duration-200 dark:bg-dark'>
-      <Spinner />
-      <div className='text-title text-4xl font-normal duration-200 dark:text-white mt-2'>Loading...</div>
-    </div>
+      <div className='flex h-screen w-screen flex-col items-center justify-center bg-light duration-200 dark:bg-dark'>
+        <Spinner />
+        <div className='text-title mt-2 text-4xl font-normal duration-200 dark:text-white'>Loading...</div>
+      </div>
     )
   }
 
