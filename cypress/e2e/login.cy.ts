@@ -57,6 +57,8 @@ describe('Login spec', () => {
     cy.get('[data-testid="password"]').type('aze12345')
     cy.get('[data-testid="login-btn"]').click()
 
-    cy.get('[data-testid="thread-page"]').should('be.visible')
+    cy.wait(10000).then(() => {
+      cy.get('[data-testid="thread-page"]').should('be.visible')
+    })
   })
 })

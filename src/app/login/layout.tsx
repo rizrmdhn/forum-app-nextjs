@@ -7,6 +7,10 @@ import useGetLocalTheme from '@/hooks/useGetLocalTheme'
 import useGetLocale from '@/hooks/useGetLocale'
 import useSelect from '@/hooks/useSelect'
 import { useEffect } from 'react'
+import { asyncSetIsPreload } from '@/states/isPreload/action'
+
+import { useDispatch } from 'react-redux'
+import { redirect, useRouter } from 'next/navigation'
 
 export default function LoginLayout({ children }: { children: React.ReactNode }) {
   const showMenu = useSelect('showMenu')
@@ -18,6 +22,19 @@ export default function LoginLayout({ children }: { children: React.ReactNode })
     setLocaleData()
     setLocalTheme()
   }, [setLocaleData, setLocalTheme])
+
+  const authUser = useSelect('authUser')
+
+  const router = useRouter()
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(asyncSetIsPreload())
+
+    if (authUser) {
+      router.push('/thread')
+    }
+  }, [authUser, dispatch, router])
 
   return (
     <>
