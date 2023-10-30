@@ -231,9 +231,7 @@ function asyncGetThreadsDetail(threadId: any): any {
       })
     }
     dispatch(hideLoading())
-    setTimeout(() => {
-      dispatch(unsetIsLoadingActionCreator())
-    }, 1000)
+    dispatch(unsetIsLoadingActionCreator())
   }
 }
 
@@ -484,4 +482,12 @@ export {
   asyncUpVoteCommentThreadDetail,
   asyncDownVoteCommentThreadDetail,
   asyncNeutralVoteCommentThreadDetail,
+  receiveThreadsDetailActionCreator,
+  upVoteThreadDetailActionCreator,
+  downVoteThreadDetailActionCreator,
+  neutralVoteThreadDetailActionCreator,
+  createCommentThreadDetailActionCreator,
+  upVoteCommentThreadDetailActionCreator,
+  downVoteCommentThreadDetailActionCreator,
+  neutralVoteCommentThreadDetailActionCreator,
 }

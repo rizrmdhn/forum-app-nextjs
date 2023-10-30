@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { IComment, IThread, IUser } from '../../types'
+import { IComment, IThread, IUser } from '../types'
 import { IThreadDetail } from '@/states/detailThread/action'
 
 const api = (() => {

@@ -2,7 +2,7 @@ import { AnyAction } from 'redux'
 import { hideLoading, showLoading } from 'react-redux-loading-bar'
 import api from '../../utils/api'
 import myToast from '@/components/myToast'
-import { IUser } from '../../../types'
+import { IUser } from '../../types'
 
 enum ActionType {
   RECEIVE_AUTH_USER = 'RECEIVE_AUTH_USER',

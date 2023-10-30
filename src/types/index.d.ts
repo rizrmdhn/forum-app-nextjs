@@ -11,7 +11,7 @@ export interface IThread {
   body: string
   category: string
   createdAt: string
-  ownerId: IUser
+  ownerId: string
   upVotesBy: string[]
   downVotesBy: string[]
   totalComments: number

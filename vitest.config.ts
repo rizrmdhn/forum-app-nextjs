@@ -4,6 +4,9 @@ import path from 'path'
 export default defineConfig({
   test: {
     globals: true,
+    coverage: {
+      reporter: ['text', 'json', 'html'],
+    },
   },
   resolve: {
     alias: {
