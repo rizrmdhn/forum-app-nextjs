@@ -8,7 +8,7 @@
 
 describe('Home spec', () => {
   it('should display home page', () => {
-    cy.visit(Cypress.env('APP_URL') + '/')
+    cy.visit(Cypress.env('APP_URL'))
 
     cy.get('[data-testid="home-page"]').should('be.visible')
   })
